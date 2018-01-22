@@ -1,0 +1,136 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+#top-border {
+	background-color: white;
+	border-bottom: 1px solid #999;
+	box-shadow: 10px 0px 30px #888888;
+	font-size: 30px;
+	font-weight: bold;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	padding-left: 45px;
+	width: 100%;
+	color: #287190;
+	z-index: 3;
+	position:absolute;
+	top:0px;
+	left:0px;
+	height:80px;
+	right:0px;
+	overflow:hidden;
+}
+
+#bottom-border {
+	background-color: white;
+	border-top: 1px solid #888888;
+	box-shadow: 10px 0px 30px #888888;
+	padding: 30px;
+	width: 100%;
+	z-index: 3;
+	position:absolute;
+	bottom:0px;
+	height:80px;
+	left:0px;
+	right:0px;
+	overflow:hidden;
+}
+
+#content {
+	z-index: 0;
+	overflow:hidden;
+	position: absolute;
+	margin-top: 80px;
+	margin-bottom: 80px;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+#exploreBar {
+	border: 1px solid;
+	max-height: 100%;
+}
+
+#tripBar{
+	border: 1px solid;
+}
+
+#mapContainer {
+	max-width: 100%;
+	height: inherit;
+	background-color: black;
+}
+
+#overlay {
+	z-index: 1;
+	overflow:hidden;
+	position: absolute;
+	margin-top: 80px;
+	margin-bottom: 80px;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+
+	/*display: none;*/
+}
+
+#date-body {
+	text-align: center;
+	background-color: rgba(205, 209, 217, 0.80);
+	z-index: 1;
+}
+
+#welcome-title {
+	padding-top: 110px;
+	font-weight: bold;
+	color: #959799;
+}
+
+#visit-date {
+	padding-top: 80px;
+	color: #959799;
+
+}
+#event-date {
+	background-color: white;
+	width: 40%;
+	margin-top: 50px;
+	margin-right: auto;
+	margin-left: auto;
+	padding: 20px;
+	border-radius: 20px;
+	text-align: left;
+	color: #287190;
+	font-weight: bold;
+	font-size: 17px
+}
+
+.detail-date {
+	color: gray;
+}
+
+#calendar {
+	text-align: center;
+	width: auto;
+	margin: auto;
+}
+
+.btn-default {
+	margin-top: 60px;
+	margin-bottom: 150px;
+	font-size: 20px;
+	letter-spacing: 4px;
+	text-align: center;
+	background-color:#8AE5DF;
+	width: 100px;
+	height: 50px;
+}
