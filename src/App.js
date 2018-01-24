@@ -37,20 +37,20 @@ export class Date extends Component {
 
 	render () {
 		const datePage1 = (
-			<div class='container-fluid' id='date-body'>
+			<div className='container-fluid' id='date-body'>
 				<h1 id='welcome-title'>WELCOME TO THE<br/> ZOO PLANNER!</h1>
 				<p id='visit-date'>Date of Visit</p>
 				<form>
-					<div class='form-group'>
-						<input type='date' class='form-control' min='2017-01-01' max='2018-12-12' id='calendar' value={this.state.time} onChange={this.handleChange}/>
+					<div className='form-group'>
+						<input type='date' className='form-control' min='2017-01-01' max='2018-12-12' id='calendar' value={this.state.time} onChange={this.handleChange}/>
 					</div>
-					<button type='submit' class='btn btn-default' disabled={!this.state.formfilled} onClick={this.handleClick}>NEXT</button>
+					<button type='submit' className='btn btn-default' disabled={!this.state.formfilled} onClick={this.handleClick}>NEXT</button>
 				</form>
 			</div>
 		);
 
 		const datePage2 = (
-			<div class='container-fluid' id='date-body'>
+			<div className='container-fluid' id='date-body'>
 				<div className='date-scrn-2'>
 					<h1 id='welcome-title'>WELCOME TO THE<br/> ZOO PLANNER!</h1>
 					<div id='event-date'>
@@ -59,7 +59,7 @@ export class Date extends Component {
 						EVENTS:&nbsp;<span className='detail-date'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor </span><br/>
 						PLEASE NOTE:&nbsp;<span className='detail-date'>notes</span>
 					</div>
-					<button type='submit' class='btn btn-default' onClick={this.props.onClick}>START</button>
+					<button type='submit' className='btn btn-default' onClick={this.props.onClick}>START</button>
 				</div>
 			</div>
 		);
@@ -95,7 +95,7 @@ class Main extends Component {
 	renderOverlay() {
 		switch(this.state.overlay) {
 			case 'date': return <Date onClick={this.closeOverlay} />
-			case '': return
+			case '': return ''
 		}
 	}
 	render () {
@@ -111,17 +111,17 @@ class Main extends Component {
 			    </div>
 
 			    <div id="content">
-			    	<div class='container-fluid'>
-				    	<div class='row'>
-				    		<div class='col' id='exploreBar'>
+			    	<div className='container-fluid'>
+				    	<div className='row'>
+				    		<div className='col' id='exploreBar'>
 								<ExploreBar/>
 							</div>
 
-							<div class='col-7' id='mapContainer'>
+							<div className='col-7' id='mapContainer'>
 								<img src='https://www.citymetric.com/sites/default/files/styles/nodeimage/public/article_2016/08/gmaps_head.png?itok=MZsYvZFq' />
 							</div>
 
-							<div class='col' id='tripBar'>
+							<div className='col' id='tripBar'>
 								<TripBar/>
 							</div>
 				    	</div> 
