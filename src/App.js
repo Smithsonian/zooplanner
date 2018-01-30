@@ -4,25 +4,31 @@ import './index.css';
 import axios from 'axios'
 
 const HoursAPI = 'https://nationalzoo.si.edu/pyd/views/homepage_card?display_id=hours&date[value][date]='
+const EventsAPI = 'https://nationalzoo.si.edu/pyd/views/events?display_id=special_events'
 
 export class Date extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {time: '', hours: '', hourQueryFormat: '', formfilled: false, page1:true};
+		this.state = {time: '', hours: '', hourQueryFormat: '', events: ["No Events"], formfilled: false, page1:true};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleClick = this.handleClick.bind(this);
 		this.formatHours = this.formatHours.bind(this);
 	}
 
-	handleChange(event) {
+	handleChange(event) { // set the state.time
 		this.setState({time: event.target.value, formfilled: true});
 	}
 	handleClick(event) { //change page, set hourQueryFormat to get ready for API call, call API
 		this.setState({page1: false});
-		this.formatHours();
-		var API = HoursAPI + this.state.hourQueryFormat
+		console.log(this.state.hourQueryFormat);
+		var API = HoursAPI + this.formatHours();
+		console.log(API);
+		//request to get zoo hours
 		axios.get(API)
-			.then(response => console.log(response));
+			.then(response => console.log(response.data));
+		//request for events
+		axios.get('https://nationalzoo.si.edu/pyd/views/events?display_id=special_events&date[value][month]=5&date[value][day]=17&date[value][year]=2018')
+			.then(response => this.setState({events: response.data[0].title}));
 	}
 
 	formatHours() {
@@ -31,8 +37,10 @@ export class Date extends Component {
 		const month = timearr[1].replace(/^0+/, '');
 		const day = timearr[2]; 
 		var monthArr = ['none', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'May.', 'Jun.', 'Jul.', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
-		var string = monthArr[month] + "+" + day + "%2C+" + year;
 		this.setState({hourQueryFormat: string});
+		var string = monthArr[month] + "+" + day + "%2C+" + year;
+		return string;
+		
 	}
 
 	render () {
@@ -55,8 +63,8 @@ export class Date extends Component {
 					<h1 id='welcome-title'>WELCOME TO THE<br/> ZOO PLANNER!</h1>
 					<div id='event-date'>
 						TRIP DATE:&nbsp;<span className='detail-date'>{this.state.time}</span><br/>
-						ZOO HOURS:&nbsp;<span className='detail-date'>{HoursAPI + this.state.hourQueryFormat}</span><br/>
-						EVENTS:&nbsp;<span className='detail-date'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor </span><br/>
+						ZOO HOURS:&nbsp;<span className='detail-date'>{this.state.hours}</span><br/>
+						EVENTS:&nbsp;<span className='detail-date'>{this.state.events}</span><br/>
 						PLEASE NOTE:&nbsp;<span className='detail-date'>notes</span>
 					</div>
 					<button type='submit' className='btn btn-default' onClick={this.props.onClick}>START</button>

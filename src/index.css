@@ -22,7 +22,7 @@ html, body {
 	position:absolute;
 	top:0px;
 	left:0px;
-	height:80px;
+	height:70px;
 	right:0px;
 	overflow:hidden;
 }
@@ -36,7 +36,7 @@ html, body {
 	z-index: 3;
 	position:absolute;
 	bottom:0px;
-	height:80px;
+	height:70px;
 	left:0px;
 	right:0px;
 	overflow:hidden;
@@ -44,10 +44,10 @@ html, body {
 
 #content {
 	z-index: 0;
-	overflow:hidden;
+	overflow: auto;
 	position: absolute;
-	margin-top: 80px;
-	margin-bottom: 80px;
+	margin-top: 70px;
+	margin-bottom: 70px;
 	top: 0px;
 	bottom: 0px;
 	left: 0px;
@@ -71,15 +71,15 @@ html, body {
 
 #overlay {
 	z-index: 1;
-	overflow:hidden;
+	overflow: auto;
 	position: absolute;
-	margin-top: 80px;
-	margin-bottom: 80px;
+	margin-top: 70px;
+	margin-bottom: 70px;
 	top: 0px;
 	bottom: 0px;
 	left: 0px;
 	right: 0px;
-
+	max-width: 100%;
 	/*display: none;*/
 }
 
@@ -111,7 +111,8 @@ html, body {
 	text-align: left;
 	color: #287190;
 	font-weight: bold;
-	font-size: 17px
+	font-size: 17px;
+	overflow: auto;
 }
 
 .detail-date {
@@ -126,7 +127,7 @@ html, body {
 
 .btn-default {
 	margin-top: 60px;
-	margin-bottom: 150px;
+	margin-bottom: 129px;
 	font-size: 20px;
 	letter-spacing: 4px;
 	text-align: center;
