@@ -47,6 +47,7 @@ html, body {
 	z-index: 0;
 	overflow: auto;
 	position: absolute;
+	bottom: 0;
 /*	margin-top: 70px;
 	margin-bottom: 70px;*/
 	top: 0px;
@@ -56,25 +57,37 @@ html, body {
 }
 
 #exploreBar {
-	float: left;
+/*	float: left;*/
 	border: 1px solid #BAC4D6;
 	height: 100%;
 	top: 0;
 	left:0;
+	bottom: 0;
+/*	width: 20%;*/
 	max-width: 300px;
+	max-height: 100%
 }
 
 #tripBar{
-	float: right;
+/*	float: left;*/
 	border: 1px solid #BAC4D6;
-	height: 100%;
+	height: auto;
 	top: 0;
+	right:0;
+	bottom: 0;
+/*	width: 20%;*/
 	max-width: 300px;
+	max-height: 100%;
 }
 
 #mapContainer {
+	position: relative;
+/*	float: left;*/
+	height: auto;
+	top:0;
+	bottom: 0;
 	max-width: 100%;
-	height: inherit;
+	max-height: 100%;
 	background-color: #CDD7E7;
 }
 /*MAIN END*/
@@ -168,9 +181,10 @@ hr {
 }
 
 #filterlabel label {
-	font-size: 14px;
+	font-size: 1em;
 	font-family: sans-serif;
-	font-weight: normal;
+	font-weight: bold;
+	color: #6D6F71;
 
 }
 
@@ -184,5 +198,15 @@ hr {
 	overflow: auto;
 }
 .card-header {
-	padding: 0px;
+	padding: 0px;	
+	margin:0px;
+}
+.btn-link {
+	font-size: 14px;
+	color: #27708F;
+}
+
+
+#filter {
+	padding-bottom: 15px;
 }
