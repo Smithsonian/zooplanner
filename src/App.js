@@ -1,84 +1,135 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import './index.css';
-import axios from 'axios'
+import './Main.css';
+import axios from 'axios';
+import Date from './date.js'
 
-const HoursAPI = 'https://nationalzoo.si.edu/pyd/views/homepage_card?display_id=hours&date[value][date]='
-const EventsAPI = 'https://nationalzoo.si.edu/pyd/views/events?display_id=special_events'
-
-export class Date extends Component {
+class ExploreBar extends Component { //filters in order of exhibits, food, attractions, dailyprogs, ammenities, restrooms
 	constructor(props) {
 		super(props);
-		this.state = {time: '', hours: '', hourQueryFormat: '', events: ["No Events"], formfilled: false, page1:true};
-		this.handleChange = this.handleChange.bind(this);
-		this.handleClick = this.handleClick.bind(this);
-		this.formatHours = this.formatHours.bind(this);
+		this.state = {filters:[false, false, false, false, false, false], }
+		this.updateCheckbox = this.updateCheckbox.bind(this);
+		this.checkFilter = this.checkFilter.bind(this);
 	}
 
-	handleChange(event) { // set the state.time
-		this.setState({time: event.target.value, formfilled: true});
-	}
-	handleClick(event) { //change page, set hourQueryFormat to get ready for API call, call API
-		this.setState({page1: false});
-		console.log(this.state.hourQueryFormat);
-		var API = HoursAPI + this.formatHours();
-		console.log(API);
-		//request to get zoo hours
-		axios.get(API)
-			.then(response => console.log(response.data));
-		//request for events
-		axios.get('https://nationalzoo.si.edu/pyd/views/events?display_id=special_events&date[value][month]=5&date[value][day]=17&date[value][year]=2018')
-			.then(response => this.setState({events: response.data[0].title}));
+	updateCheckbox(filter) { //NEED TO EDIT THIS! DO NOT DIRECLY MUTATE STATE!!!
+		if (filter === "exhibits") {
+			this.state.filters[0] = !this.state.filters[0];
+		}
 	}
 
-	formatHours() {
-		var timearr = this.state.time.split("-");
-		const year = timearr[0];
-		const month = timearr[1].replace(/^0+/, '');
-		const day = timearr[2]; 
-		var monthArr = ['none', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'May.', 'Jun.', 'Jul.', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
-		this.setState({hourQueryFormat: string});
-		var string = monthArr[month] + "+" + day + "%2C+" + year;
-		return string;
-		
+	checkFilter(index) {
+		switch(index) {
+			case 0: return this.state.filters[0];
+		}
 	}
 
-	render () {
-		const datePage1 = (
-			<div className='container-fluid' id='date-body'>
-				<h1 id='welcome-title'>WELCOME TO THE<br/> ZOO PLANNER!</h1>
-				<p id='visit-date'>Date of Visit</p>
-				<form>
-					<div className='form-group'>
-						<input type='date' className='form-control' min='2017-01-01' max='2018-12-12' id='calendar' value={this.state.time} onChange={this.handleChange}/>
-					</div>
-					<button type='submit' className='btn btn-default' disabled={!this.state.formfilled} onClick={this.handleClick}>NEXT</button>
-				</form>
+	render() {
+		return (
+			<div>
+				<Filter updateCheckbox={this.updateCheckbox} checkFilter={this.checkFilter}/>
+				<Categories/>
 			</div>
 		);
-
-		const datePage2 = (
-			<div className='container-fluid' id='date-body'>
-				<div className='date-scrn-2'>
-					<h1 id='welcome-title'>WELCOME TO THE<br/> ZOO PLANNER!</h1>
-					<div id='event-date'>
-						TRIP DATE:&nbsp;<span className='detail-date'>{this.state.time}</span><br/>
-						ZOO HOURS:&nbsp;<span className='detail-date'>{this.state.hours}</span><br/>
-						EVENTS:&nbsp;<span className='detail-date'>{this.state.events}</span><br/>
-						PLEASE NOTE:&nbsp;<span className='detail-date'>notes</span>
-					</div>
-					<button type='submit' className='btn btn-default' onClick={this.props.onClick}>START</button>
-				</div>
-			</div>
-		);
-
-		return(this.state.page1 ? datePage1 : datePage2);
 	}
 }
 
-class ExploreBar extends Component {
+class Filter extends Component {
 	render() {
-		return <p>ExploreBar</p>
+		return (
+			<div>
+				<p class='title'>FILTER</p>
+				<hr/>
+				<form>
+					<div class="row">
+						<div className="col-6" id='filterlabel'>
+							<input type='checkbox' id='exhibits' name='filter' onChange={this.props.updateCheckbox("exhibits")} />
+							<label htmlFor='exhibits'>&nbsp;Exhibits</label>
+						</div>
+						<div className="col-6" id='filterlabel'>
+							<input type='checkbox' id='attractions' name='filter' onChange={this.props.updateCheckbox("attractions")} />
+							<label htmlFor='exhibits'>&nbsp;Attractions</label>
+						</div>
+					</div>
+					<div className="row">
+						<div className="col-6" id='filterlabel'>
+							<input type='checkbox' id='food' name='filter' onChange={this.props.updateCheckbox("food")} />
+							<label htmlFor='exhibits'>&nbsp;Food</label>
+						</div>
+						<div className="col-6" id='filterlabel'>
+							<input type='checkbox' id='dailyprogs' name='filter' onChange={this.props.updateCheckbox("dailyprogs")} />
+							<label htmlFor='exhibits'>&nbsp;Daily Programs</label>
+						</div>
+					</div>
+					<div className="row">
+						<div className="col-6" id='filterlabel'>
+							<input type='checkbox' id='restrooms' name='filter' onChange={this.props.updateCheckbox("restrooms")} />
+							<label htmlFor='exhibits'>&nbsp;Restrooms</label>
+						</div>
+						<div className="col-6" id='filterlabel'>
+							<input type='checkbox' id='ammenities' name='filter' onChange={this.props.updateCheckbox("ammenities")} />
+							<label htmlFor='exhibits'>&nbsp;Ammenities</label>
+						</div>
+					</div>
+				</form>
+			</div>
+		);
+	}
+}
+
+class Categories extends Component {
+	render() {
+		return (
+			<div id='categories'>
+				<p class='title'>A-Z LIST</p>
+				<hr/>
+				<div id="accordion">
+				  <div class="card">
+				    <div class="card-header" id="headingOne">
+				      <h5 class="mb-0">
+				        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+				          Animals
+				        </button>
+				      </h5>
+				    </div>
+
+				    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+				      <div class="card-body">
+				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
+				      </div>
+				    </div>
+				  </div>
+				  <div class="card">
+				    <div class="card-header" id="headingTwo">
+				      <h5 class="mb-0">
+				        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+				          Attractions
+				        </button>
+				      </h5>
+				    </div>
+				    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+				      <div class="card-body">
+				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
+				      </div>
+				    </div>
+				  </div>
+				  <div class="card">
+				    <div class="card-header" id="headingThree">
+				      <h5 class="mb-0">
+				        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+				          Ammenities
+				        </button>
+				      </h5>
+				    </div>
+				    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+				      <div class="card-body">
+				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			</div>
+		);
 	}
 }
 
@@ -90,22 +141,67 @@ class TripBar extends Component {
 }
 
 class Main extends Component {
+	render() {
+		return (
+			<div id="content">
+		    	<div className='container-fluid'>
+			    	<div className='row'>
+			    		<aside className='col' id='exploreBar'>
+							<ExploreBar/>
+						</aside>
+
+						<div className='col-7' id='mapContainer'>
+							Hiiiiiiiiiiiii
+						</div>
+
+						<aside className='col' id='tripBar'>
+							<TripBar/>
+						</aside>
+			    	</div> 
+			    </div>
+		    </div> 
+		);
+
+	}
+}
+
+class App extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {overlay:'date'};
+		this.state = {overlay:'', tripDate:'', zooHours:''};
 		this.closeOverlay = this.closeOverlay.bind(this);
+		this.setDate = this.setDate.bind(this);
+		this.setHours = this.setHours.bind(this);
+		this.getDate = this.getDate.bind(this);
+		this.getHours = this.getHours.bind(this);
 	}
 
 	closeOverlay() {
 		this.setState({overlay:''})
 	}
 
-	renderOverlay() {
+	renderOverlay() { //later change this so it passes in a parameter ie: date, searchbyanimal, preplan... then use it for the switch statement
 		switch(this.state.overlay) {
-			case 'date': return <Date onClick={this.closeOverlay} />
-			case '': return ''
+			case 'date': return <Date setDate={this.setDate} setHours = {this.setHours} getDate = {this.getDate} getHours = {this.getHours} onClick={this.closeOverlay} />
+			case '': return <Main/>
 		}
 	}
+
+	setDate(date) {
+		this.setState({tripDate: date});
+	}
+	getDate() {
+		return this.state.tripDate;
+	}
+
+	setHours(hours) {
+		this.setState({zooHours: hours});
+	}
+
+	getHours() {
+		return this.state.zooHours;
+	}
+
 	render () {
 
 		return (
@@ -118,24 +214,6 @@ class Main extends Component {
 					{this.renderOverlay()}
 			    </div>
 
-			    <div id="content">
-			    	<div className='container-fluid'>
-				    	<div className='row'>
-				    		<div className='col' id='exploreBar'>
-								<ExploreBar/>
-							</div>
-
-							<div className='col-7' id='mapContainer'>
-								<img src='https://www.citymetric.com/sites/default/files/styles/nodeimage/public/article_2016/08/gmaps_head.png?itok=MZsYvZFq' />
-							</div>
-
-							<div className='col' id='tripBar'>
-								<TripBar/>
-							</div>
-				    	</div> 
-				    </div>
-			    </div> 
-
 			    <div id="bottom-border"> 
 			    </div>
 			</div>
@@ -143,4 +221,4 @@ class Main extends Component {
 	}
 }
 
-export default Main;
+export default App;

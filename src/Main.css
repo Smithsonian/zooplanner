@@ -7,10 +7,11 @@ html, body {
     overflow-x: hidden;
 }
 
+/*MAIN*/
 #top-border {
 	background-color: white;
 	border-bottom: 1px solid #999;
-	box-shadow: 10px 0px 30px #888888;
+	box-shadow: 10px 0px 10px #888888;
 	font-size: 30px;
 	font-weight: bold;
 	padding-top: 15px;
@@ -30,7 +31,7 @@ html, body {
 #bottom-border {
 	background-color: white;
 	border-top: 1px solid #888888;
-	box-shadow: 10px 0px 30px #888888;
+	box-shadow: 10px 0px 10px #888888;
 	padding: 30px;
 	width: 100%;
 	z-index: 3;
@@ -46,8 +47,8 @@ html, body {
 	z-index: 0;
 	overflow: auto;
 	position: absolute;
-	margin-top: 70px;
-	margin-bottom: 70px;
+/*	margin-top: 70px;
+	margin-bottom: 70px;*/
 	top: 0px;
 	bottom: 0px;
 	left: 0px;
@@ -55,19 +56,29 @@ html, body {
 }
 
 #exploreBar {
-	border: 1px solid;
-	max-height: 100%;
+	float: left;
+	border: 1px solid #BAC4D6;
+	height: 100%;
+	top: 0;
+	left:0;
+	max-width: 300px;
 }
 
 #tripBar{
-	border: 1px solid;
+	float: right;
+	border: 1px solid #BAC4D6;
+	height: 100%;
+	top: 0;
+	max-width: 300px;
 }
 
 #mapContainer {
 	max-width: 100%;
 	height: inherit;
-	background-color: black;
+	background-color: #CDD7E7;
 }
+/*MAIN END*/
+
 
 #overlay {
 	z-index: 1;
@@ -83,6 +94,7 @@ html, body {
 	/*display: none;*/
 }
 
+/*DATE OVERLAY*/
 #date-body {
 	text-align: center;
 	background-color: rgba(205, 209, 217, 0.80);
@@ -96,14 +108,16 @@ html, body {
 }
 
 #visit-date {
-	padding-top: 80px;
+	padding-top: 60px;
 	color: #959799;
 
 }
 #event-date {
 	background-color: white;
 	width: 40%;
-	margin-top: 50px;
+	height: 204px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 	margin-right: auto;
 	margin-left: auto;
 	padding: 20px;
@@ -122,16 +136,53 @@ html, body {
 #calendar {
 	text-align: center;
 	width: auto;
-	margin: auto;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	margin-bottom: 70px;
 }
 
 .btn-default {
-	margin-top: 60px;
-	margin-bottom: 129px;
+	margin-bottom: 133px;
 	font-size: 20px;
 	letter-spacing: 4px;
 	text-align: center;
 	background-color:#8AE5DF;
 	width: 100px;
 	height: 50px;
+}
+
+/*DATE OVERLAY END*/
+
+.title {
+	margin-top: 5px;
+	font-size: 17px;
+	color: #27708F;
+}
+
+hr {
+	margin-top: -10px;
+	margin-bottom: 0.5em;
+	border-width: 2px;
+	border-color: #27708F;
+}
+
+#filterlabel label {
+	font-size: 14px;
+	font-family: sans-serif;
+	font-weight: normal;
+
+}
+
+
+/*CATEGORY ACCORDION*/
+.card {
+	width: inherit;
+}
+.card-body {
+	max-height: 500px;
+	overflow: auto;
+}
+.card-header {
+	padding: 0px;
 }
