@@ -92,7 +92,7 @@ html, body {
 	right:0;
 	bottom: 0;
 	padding: 7px;
-/*	width: 20%;*/
+	background-color: #FAF8F3;
 	max-width: 300px;
 	max-height: 100%;
 }
@@ -129,10 +129,11 @@ html, body {
 	text-align: center;
 	background-color: rgba(205, 209, 217, 0.80);
 	z-index: 1;
+	min-height: 100vh;
 }
 
 #welcome-title {
-	padding-top: 110px;
+	padding-top: 15%;
 	font-weight: bold;
 	color: #959799;
 }
@@ -144,7 +145,7 @@ html, body {
 }
 #event-date {
 	background-color: white;
-	width: 40%;
+	width: 500px;
 	height: 204px;
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -181,7 +182,6 @@ html, body {
 	width: 100px;
 	height: 50px;
 }
-
 /*DATE OVERLAY END*/
 
 .title {
@@ -197,12 +197,19 @@ hr {
 	border-color: #27708F;
 }
 
+/*FILTER BOX*/
 #filterlabel label {
 	font-size: 1em;
 	font-family: sans-serif;
 	color: #6D6F71;
+	padding-right: 0px;
 
 }
+#filter {
+	border-bottom: 1px solid #BAC4D6;
+}
+/*FILTER BOX END*/
+
 
 
 /*CATEGORY ACCORDION*/
@@ -226,15 +233,12 @@ hr {
 	padding-bottom: 0px;
 }
 
-#filter {
-	padding-bottom: 15px;
-}
 
 input[type="checkbox"] { 
     position: absolute;
     padding-left: 1.4em;
 }
 input[type="checkbox"] ~ label { 
-    padding-left:1.4em;
+    padding-left: 1.1em;
     display:inline-block;
 }

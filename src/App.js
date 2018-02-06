@@ -7,7 +7,7 @@ import Date from './date.js'
 class ExploreBar extends Component { //filters in order of ammenities, attractions, daily programs, exhibits, food, restrooms
 	constructor(props) {
 		super(props);
-		this.state = {filters:[false, false, false, false, false, false], animals:[], exhibits:[]}
+		this.state = {filters:[], animals:[], exhibits:[]}
 		this.updateCheckbox = this.updateCheckbox.bind(this);
 		this.checkFilter = this.checkFilter.bind(this);
 	}
@@ -17,10 +17,15 @@ class ExploreBar extends Component { //filters in order of ammenities, attractio
 			.then(response => console.log(response));
 	}
 
-	updateCheckbox(filter) { //NEED TO EDIT THIS! DO NOT DIRECLY MUTATE STATE!!!
-		if (filter === "exhibits") {
-			this.state.filters[0] = !this.state.filters[0];
+	updateCheckbox(e) { //appends string of item checked into filters
+		const filters = this.state.filters
+		if(e.target.checked) {
+			filters.push(e.target.value)
+		} else {
+			const index = filters.indexOf(e.target.value)
+			filters.splice(index, 1)
 		}
+		this.setState({filters: filters})
 	}
 
 	checkFilter(index) {
@@ -34,13 +39,12 @@ class ExploreBar extends Component { //filters in order of ammenities, attractio
 		return (
 			<div>
 				<p id='zooplanner'> ZOO PLANNER </p>
-				<Filter updateCheckbox={this.updateCheckbox} checkFilter={this.checkFilter}/>
+				<Filter updateCheckbox={this.updateCheckbox}/>
 				{this.queryAnimals()}
-				<hr/>
 				<p className='title'>SEARCH BOX HERE</p>
-				<br/>
-				<br/>
 				<hr/>
+				<br/>
+				<br/>
 				<Categories/>
 			</div>
 		);
@@ -56,32 +60,33 @@ class Filter extends Component {
 				<form>
 					<div className="row">
 						<div className="col-6" id='filterlabel'>
-							<input type='checkbox' id='ammenities' name='filter' onChange={this.props.updateCheckbox("ammenities")} />
+							<input type='checkbox' id='ammenities' name='filter' value='ammenities' onClick={this.props.updateCheckbox} />
 							<label htmlFor='ammenities'>AMMENITIES</label>
 						</div>
 						<div className="col-6" id='filterlabel'>
-							<input type='checkbox' id='exhibits' name='filter' onChange={this.props.updateCheckbox("exhibits")} />
+							<input type='checkbox' id='exhibits' name='filter' value='exhibits' onClick={this.props.updateCheckbox} />
 							<label htmlFor='exhibits'>EXHIBITS</label>
 						</div>
 					</div>
+
 					<div className="row">
 						<div className="col-6" id='filterlabel'>
-							<input type='checkbox' id='attractions' name='filter' onChange={this.props.updateCheckbox("attractions")} />
+							<input type='checkbox' id='attractions' name='filter' value='attractions' onClick={this.props.updateCheckbox} />
 							<label htmlFor='attractions'>ATTRACTIONS</label>
 						</div>
 						<div className="col-6" id='filterlabel'>
-							<input type='checkbox' id='food' name='filter' onChange={this.props.updateCheckbox("food")} />
+							<input type='checkbox' id='food' name='filter' value='food' onClick={this.props.updateCheckbox} />
 							<label htmlFor='food'>FOOD</label>
 						</div>
-						
+				
 					</div>
 					<div className="row">
 						<div className="col-6" id='filterlabel'>
-							<input type='checkbox' id='dailyprogs' name='filter' onChange={this.props.updateCheckbox("dailyprogs")} />
-							<label htmlFor='dailyprogs'>DAILY PROGRAMS</label>
+							<input type='checkbox' id='dailyprogs' name='filter' value='dailyprogs' onClick={this.props.updateCheckbox} />
+							<label htmlFor='dailyprogs'>DAILY&nbsp;PROGRAMS</label>
 						</div>
 						<div className="col-6" id='filterlabel'>
-							<input type='checkbox' id='restrooms' name='filter' onChange={this.props.updateCheckbox("restrooms")} />
+							<input type='checkbox' id='restrooms' name='filter' value='restrooms' onClick={this.props.updateCheckbox} />
 							<label htmlFor='restrooms'>RESTROOMS</label>
 						</div>
 						
@@ -109,12 +114,6 @@ class Categories extends Component {
 				    </div>
 				    <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 				      <div className="card-body">
-				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
-				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
-				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
-				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
-				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
-				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
 				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
 				      </div>
 				    </div>
