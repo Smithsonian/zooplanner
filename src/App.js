@@ -41,10 +41,12 @@ class ExploreBar extends Component { //filters in order of ammenities, attractio
 				<p id='zooplanner'> ZOO PLANNER </p>
 				<Filter updateCheckbox={this.updateCheckbox}/>
 				{this.queryAnimals()}
-				<p className='title'>SEARCH BOX HERE</p>
-				<hr/>
-				<br/>
-				<br/>
+				<div id='searchBox'>
+					<p className='title'>SEARCH BOX HERE</p>
+					<hr/>
+					<br/>
+					<br/>
+				</div>
 				<Categories/>
 			</div>
 		);
