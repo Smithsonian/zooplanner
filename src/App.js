@@ -4,7 +4,7 @@ import './Main.css';
 import axios from 'axios';
 import Date from './date.js'
 
-class ExploreBar extends Component { //filters in order of exhibits, food, attractions, dailyprogs, ammenities, restrooms
+class ExploreBar extends Component { //filters in order of ammenities, attractions, daily programs, exhibits, food, restrooms
 	constructor(props) {
 		super(props);
 		this.state = {filters:[false, false, false, false, false, false], animals:[], exhibits:[]}
@@ -14,7 +14,7 @@ class ExploreBar extends Component { //filters in order of exhibits, food, attra
 
 	queryAnimals() {
 		axios.get('https://nationalzoo.si.edu/pyd/views/animals?display_id=list') //CORS ERROR AGAIN!
-			.then(response => console.log(response[0]));
+			.then(response => console.log(response));
 	}
 
 	updateCheckbox(filter) { //NEED TO EDIT THIS! DO NOT DIRECLY MUTATE STATE!!!
@@ -33,6 +33,7 @@ class ExploreBar extends Component { //filters in order of exhibits, food, attra
 		//CHECK IF THERE IS A FILTER IN PLACE, IF SO DO NOT RENDER CATEGORIES BUT RENDER THE FILTERED ASPECTS!
 		return (
 			<div>
+				<p id='zooplanner'> ZOO PLANNER </p>
 				<Filter updateCheckbox={this.updateCheckbox} checkFilter={this.checkFilter}/>
 				{this.queryAnimals()}
 				<hr/>
@@ -41,8 +42,6 @@ class ExploreBar extends Component { //filters in order of exhibits, food, attra
 				<br/>
 				<hr/>
 				<Categories/>
-				<br/>
-				<br/>
 			</div>
 		);
 	}
@@ -57,33 +56,35 @@ class Filter extends Component {
 				<form>
 					<div className="row">
 						<div className="col-6" id='filterlabel'>
-							<input type='checkbox' id='exhibits' name='filter' onChange={this.props.updateCheckbox("exhibits")} />
-							<label htmlFor='exhibits'>&nbsp;Exhibits</label>
+							<input type='checkbox' id='ammenities' name='filter' onChange={this.props.updateCheckbox("ammenities")} />
+							<label htmlFor='ammenities'>AMMENITIES</label>
 						</div>
+						<div className="col-6" id='filterlabel'>
+							<input type='checkbox' id='exhibits' name='filter' onChange={this.props.updateCheckbox("exhibits")} />
+							<label htmlFor='exhibits'>EXHIBITS</label>
+						</div>
+					</div>
+					<div className="row">
 						<div className="col-6" id='filterlabel'>
 							<input type='checkbox' id='attractions' name='filter' onChange={this.props.updateCheckbox("attractions")} />
-							<label htmlFor='exhibits'>&nbsp;Attractions</label>
+							<label htmlFor='attractions'>ATTRACTIONS</label>
 						</div>
-					</div>
-					<div className="row">
 						<div className="col-6" id='filterlabel'>
 							<input type='checkbox' id='food' name='filter' onChange={this.props.updateCheckbox("food")} />
-							<label htmlFor='exhibits'>&nbsp;Food</label>
+							<label htmlFor='food'>FOOD</label>
 						</div>
-						<div className="col-6" id='filterlabel'>
-							<input type='checkbox' id='dailyprogs' name='filter' onChange={this.props.updateCheckbox("dailyprogs")} />
-							<label htmlFor='exhibits'>&nbsp;Daily Programs</label>
-						</div>
+						
 					</div>
 					<div className="row">
 						<div className="col-6" id='filterlabel'>
-							<input type='checkbox' id='restrooms' name='filter' onChange={this.props.updateCheckbox("restrooms")} />
-							<label htmlFor='exhibits'>&nbsp;Restrooms</label>
+							<input type='checkbox' id='dailyprogs' name='filter' onChange={this.props.updateCheckbox("dailyprogs")} />
+							<label htmlFor='dailyprogs'>DAILY PROGRAMS</label>
 						</div>
 						<div className="col-6" id='filterlabel'>
-							<input type='checkbox' id='ammenities' name='filter' onChange={this.props.updateCheckbox("ammenities")} />
-							<label htmlFor='exhibits'>&nbsp;Ammenities</label>
+							<input type='checkbox' id='restrooms' name='filter' onChange={this.props.updateCheckbox("restrooms")} />
+							<label htmlFor='restrooms'>RESTROOMS</label>
 						</div>
+						
 					</div>
 				</form>
 			</div>
@@ -106,18 +107,24 @@ class Categories extends Component {
 				        </button>
 				      </p>
 				    </div>
-
 				    <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 				      <div className="card-body">
+				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
+				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
+				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
+				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
+				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
+				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
 				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
 				      </div>
 				    </div>
 				  </div>
+
 				  <div className="card">
 				    <div className="card-header" id="headingTwo">
 				      <p className="mb-0">
 				        <button className="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-				          ATTRACTIONS
+				          AMMENITIES
 				        </button>
 				      </p>
 				    </div>
@@ -127,15 +134,75 @@ class Categories extends Component {
 				      </div>
 				    </div>
 				  </div>
+
 				  <div className="card">
 				    <div className="card-header" id="headingThree">
 				      <p className="mb-0">
 				        <button className="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-				          AMMENITIES
+				          ATTRACTIONS
 				        </button>
 				      </p>
 				    </div>
 				    <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+				      <div className="card-body">
+				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
+				      </div>
+				    </div>
+				  </div>
+
+				  <div className="card">
+				    <div className="card-header" id="headingFour">
+				      <p className="mb-0">
+				        <button className="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+				          DAILY PROGRAMS
+				        </button>
+				      </p>
+				    </div>
+				    <div id="collapseFour" className="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+				      <div className="card-body">
+				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
+				      </div>
+				    </div>
+				  </div>
+
+				  <div className="card">
+				    <div className="card-header" id="headingFive">
+				      <p className="mb-0">
+				        <button className="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+				          EXHIBITS
+				        </button>
+				      </p>
+				    </div>
+				    <div id="collapseFive" className="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+				      <div className="card-body">
+				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
+				      </div>
+				    </div>
+				  </div>
+				  
+				  <div className="card">
+				    <div className="card-header" id="headingSix">
+				      <p className="mb-0">
+				        <button className="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+				          FOOD
+				        </button>
+				      </p>
+				    </div>
+				    <div id="collapseSix" className="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+				      <div className="card-body">
+				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
+				      </div>
+				    </div>
+				  </div>
+				  <div className="card">
+				    <div className="card-header" id="headingSeven">
+				      <p className="mb-0">
+				        <button className="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+				          RESTROOMS
+				        </button>
+				      </p>
+				    </div>
+				    <div id="collapseSeven" className="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
 				      <div className="card-body">
 				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
 				      </div>
@@ -182,7 +249,7 @@ class Main extends Component {
 class App extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {overlay:'date', tripDate:'', zooHours:''};
+		this.state = {overlay:'', tripDate:'', zooHours:''};
 		this.closeOverlay = this.closeOverlay.bind(this);
 		this.setDate = this.setDate.bind(this);
 		this.setHours = this.setHours.bind(this);
@@ -220,15 +287,8 @@ class App extends Component {
 
 		return (
 			<div className='App'>
-				<div id="top-border">
-					Zoo Planner 
-			    </div> 
-
 			    <div id='overlay'>
 					{this.renderOverlay()}
-			    </div>
-
-			    <div id="bottom-border"> 
 			    </div>
 			</div>
 		);

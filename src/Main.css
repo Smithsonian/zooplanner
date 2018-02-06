@@ -4,11 +4,12 @@
 
 html, body {
     max-width: 100%;
+    max-height: 100%;
     overflow-x: hidden;
 }
 
 /*MAIN*/
-#top-border {
+/*#top-border {
 	background-color: white;
 	border-bottom: 1px solid #999;
 	box-shadow: 10px 0px 10px #888888;
@@ -41,15 +42,26 @@ html, body {
 	left:0px;
 	right:0px;
 	overflow:hidden;
+}*/
+
+#zooplanner {
+	font-size: 30px;
+	font-weight: bold;
+	color: #287190;
+	padding-left: 5px;
+	padding-top: 3px;
+	padding-bottom: 5px;
+	border-bottom: 2px solid #BAC4D6;
 }
 
 #content {
+/*	float: left;*/
 	z-index: 0;
 	overflow: auto;
 	position: absolute;
 	bottom: 0;
-/*	margin-top: 70px;
-	margin-bottom: 70px;*/
+	max-height: 100%;
+	min-height: 100%;
 	top: 0px;
 	bottom: 0px;
 	left: 0px;
@@ -57,37 +69,42 @@ html, body {
 }
 
 #exploreBar {
-/*	float: left;*/
+	float: left;
 	border: 1px solid #BAC4D6;
 	height: 100%;
 	top: 0;
 	left:0;
 	bottom: 0;
+	padding: 7px;
+	padding-bottom: 3px;
 /*	width: 20%;*/
+	min-height: 100vh;
 	max-width: 300px;
-	max-height: 100%
+	max-height: 100vh;
+	overflow: auto;
 }
 
 #tripBar{
-/*	float: left;*/
+	float: right;
 	border: 1px solid #BAC4D6;
 	height: auto;
 	top: 0;
 	right:0;
 	bottom: 0;
+	padding: 7px;
 /*	width: 20%;*/
 	max-width: 300px;
 	max-height: 100%;
 }
 
 #mapContainer {
-	position: relative;
-/*	float: left;*/
+	float: left;
 	height: auto;
 	top:0;
 	bottom: 0;
 	max-width: 100%;
 	max-height: 100%;
+	min-height: 100%;
 	background-color: #CDD7E7;
 }
 /*MAIN END*/
@@ -97,8 +114,8 @@ html, body {
 	z-index: 1;
 	overflow: auto;
 	position: absolute;
-	margin-top: 70px;
-	margin-bottom: 70px;
+/*	margin-top: 70px;
+	margin-bottom: 70px;*/
 	top: 0px;
 	bottom: 0px;
 	left: 0px;
@@ -183,7 +200,6 @@ hr {
 #filterlabel label {
 	font-size: 1em;
 	font-family: sans-serif;
-	font-weight: bold;
 	color: #6D6F71;
 
 }
@@ -192,9 +208,10 @@ hr {
 /*CATEGORY ACCORDION*/
 .card {
 	width: inherit;
+	padding-bottom: 0px;
 }
 .card-body {
-	max-height: 500px;
+	max-height: 250px;
 	overflow: auto;
 }
 .card-header {
@@ -203,10 +220,21 @@ hr {
 }
 .btn-link {
 	font-size: 14px;
+	font-style: bold;
 	color: #27708F;
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
-
 
 #filter {
 	padding-bottom: 15px;
+}
+
+input[type="checkbox"] { 
+    position: absolute;
+    padding-left: 1.4em;
+}
+input[type="checkbox"] ~ label { 
+    padding-left:1.4em;
+    display:inline-block;
 }
