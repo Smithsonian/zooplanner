@@ -10,15 +10,23 @@ class ExploreBar extends Component { //filters in order of ammenities, attractio
 		this.state = {filters:[], animals:[], exhibits:[]}
 		this.updateCheckbox = this.updateCheckbox.bind(this);
 		this.checkFilter = this.checkFilter.bind(this);
+		this.queryAnimals = this.queryAnimals.bind(this);
 	}
 
 	queryAnimals() {
+		const animalArray = [];
 		axios.get('https://nationalzoo.si.edu/pyd/views/animals?display_id=list') //CORS ERROR AGAIN!
-			.then(response => console.log(response));
+			.then((response) => {
+				animalArray.push(response['data'])
+				this.setState({animals: response['data']})
+				console.log(response['data'])
+			});
+		return animalArray
+			// .then(response => this.setState({animals: response['data']}));
 	}
 
 	updateCheckbox(e) { //appends string of item checked into filters
-		const filters = this.state.filters
+		const filters = this.state.filters;
 		if(e.target.checked) {
 			filters.push(e.target.value)
 		} else {
@@ -35,23 +43,25 @@ class ExploreBar extends Component { //filters in order of ammenities, attractio
 	}
 
 	render() {
+		this.queryAnimals;
+		console.log(this.state.animals);
 		//CHECK IF THERE IS A FILTER IN PLACE, IF SO DO NOT RENDER CATEGORIES BUT RENDER THE FILTERED ASPECTS!
 		return (
 			<div>
 				<p id='zooplanner'> ZOO PLANNER </p>
 				<Filter updateCheckbox={this.updateCheckbox}/>
-				{this.queryAnimals()}
 				<div id='searchBox'>
 					<p className='title'>SEARCH BOX HERE</p>
 					<hr/>
 					<br/>
 					<br/>
 				</div>
-				<Categories/>
+				<Categories queryAnimals={this.queryAnimals()}/>
 			</div>
 		);
 	}
 }
+
 
 class Filter extends Component {
 	render() {
@@ -99,7 +109,59 @@ class Filter extends Component {
 	}
 }
 
-class Categories extends Component {
+class SimpleItemsList extends Component { //called in categories
+	constructor(props) {
+		super(props);
+		this.state = {}
+	}
+
+	convertToArray(object) {
+		var result = Object.keys(object).map(function(key) {
+			return [Number(key), object[key]];
+		});
+		return result;
+	}
+
+	render() {
+		let passedList = this.convertToArray(this.props.query);
+		const listItem = passedList.map((item) => {
+			return (
+				<SimpleItem
+					name={item.node_title}
+					img={item.image}
+					location={item.exhibit}
+					type={this.props.type}/>
+			);
+		});
+		return (
+			<div className='SimpleItemsList'>
+				<ul>
+					{listItem}
+				</ul>
+			</div>
+		);
+	}
+}
+
+class SimpleItem extends Component { //called in simpleitemslist
+	render() {
+		return (
+			<div className='simpleItem'>
+				<p>{this.props.name}</p>
+			</div>
+		);
+	}
+
+}
+
+class Categories extends Component { //called in explorebar
+
+	constructor(props) {
+	super(props);
+	this.state = {}
+	}
+
+
 	render() {
 		return (
 			<div id='categories'>
@@ -116,7 +178,7 @@ class Categories extends Component {
 				    </div>
 				    <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 				      <div className="card-body">
-				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
+				        <SimpleItemsList query={this.props.queryAnimals} type="animal"/>
 				      </div>
 				    </div>
 				  </div>
