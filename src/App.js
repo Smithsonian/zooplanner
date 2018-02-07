@@ -312,7 +312,7 @@ class Main extends Component {
 class App extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {overlay:'', tripDate:'', zooHours:''};
+		this.state = {overlay:'date', tripDate:'', zooHours:''};
 		this.closeOverlay = this.closeOverlay.bind(this);
 		this.setDate = this.setDate.bind(this);
 		this.setHours = this.setHours.bind(this);
