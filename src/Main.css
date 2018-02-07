@@ -82,7 +82,8 @@ html, body {
 	min-height: 100vh;
 	max-width: 300px;
 	max-height: 100vh;
-	overflow: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
 	background-color: #F4F5F4;
 }
 
