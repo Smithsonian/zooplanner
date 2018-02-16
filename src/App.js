@@ -7,22 +7,42 @@ import Date from './date.js'
 class ExploreBar extends Component { //filters in order of ammenities, attractions, daily programs, exhibits, food, restrooms
 	constructor(props) {
 		super(props);
-		this.state = {filters:[], animals:[], exhibits:[]}
+		this.state = {filters:[], animals:[], exhibits:[], expandItem:false}
 		this.updateCheckbox = this.updateCheckbox.bind(this);
-		this.checkFilter = this.checkFilter.bind(this);
+		// this.checkFilter = this.checkFilter.bind(this);
 		this.queryAnimals = this.queryAnimals.bind(this);
+		this.getAnimals = this.getAnimals.bind(this);
+		this.expandItem = this.expandItem.bind(this);
+		this.unexpandItem = this.unexpandItem.bind(this);
 	}
 
 	queryAnimals() {
-		const animalArray = [];
-		axios.get('https://nationalzoo.si.edu/pyd/views/animals?display_id=list') //CORS ERROR AGAIN!
+		axios.get('https://nationalzoo.si.edu/pyd/views/animals?display_id=list')
 			.then((response) => {
-				animalArray.push(response['data'])
 				this.setState({animals: response['data']})
-				console.log(response['data'])
 			});
-		return animalArray
-			// .then(response => this.setState({animals: response['data']}));
+	}
+	getAnimals() {
+		this.queryAnimals();
+		return this.state.animals;
+	}
+
+	queryExhibits() { //CORS ERROR
+		// axios.get('https://nationalzoo.si.edu/pyd/views/exhibit_list?display_id=exhibits')
+		// 	.then((response) => {
+				
+		// 	})
+	}
+
+	getExhibits() {
+		this.queryExhibits();
+		return this.state.exhibits;
+	}
+	expandItem() {
+		this.setState({expandItem: true});
+	}
+	unexpandItem() {
+		this.setState({expandItem: false});
 	}
 
 	updateCheckbox(e) { //appends string of item checked into filters
@@ -36,15 +56,19 @@ class ExploreBar extends Component { //filters in order of ammenities, attractio
 		this.setState({filters: filters})
 	}
 
-	checkFilter(index) {
-		switch(index) {
-			case 0: return this.state.filters[0];
+	// checkFilter(index) {
+	// 	switch(index) {
+	// 		case 0: return this.state.filters[0];
+	// 	}
+	// }
+	renderDisplay() {
+		switch(this.state.expandItem) {
+			case false: return <Categories queryAnimals={this.getAnimals()} queryExhibits={this.getExhibits()} expandItem={this.expandItem}/>
+			case true: return <ExpandedItem unexpandItem={this.unexpandItem}/>
 		}
 	}
 
 	render() {
-		this.queryAnimals;
-		console.log(this.state.animals);
 		//CHECK IF THERE IS A FILTER IN PLACE, IF SO DO NOT RENDER CATEGORIES BUT RENDER THE FILTERED ASPECTS!
 		return (
 			<div>
@@ -56,111 +80,17 @@ class ExploreBar extends Component { //filters in order of ammenities, attractio
 					<br/>
 					<br/>
 				</div>
-				<Categories queryAnimals={this.queryAnimals()}/>
+				{this.renderDisplay()}
 			</div>
 		);
 	}
 }
 
-
-class Filter extends Component {
-	render() {
-		return (
-			<div id='filter'>
-				<p className='title'>FILTER</p>
-				<hr/>
-				<form>
-					<div className="row">
-						<div className="col-6" id='filterlabel'>
-							<input type='checkbox' id='ammenities' name='filter' value='ammenities' onClick={this.props.updateCheckbox} />
-							<label htmlFor='ammenities'>AMMENITIES</label>
-						</div>
-						<div className="col-6" id='filterlabel'>
-							<input type='checkbox' id='exhibits' name='filter' value='exhibits' onClick={this.props.updateCheckbox} />
-							<label htmlFor='exhibits'>EXHIBITS</label>
-						</div>
-					</div>
-
-					<div className="row">
-						<div className="col-6" id='filterlabel'>
-							<input type='checkbox' id='attractions' name='filter' value='attractions' onClick={this.props.updateCheckbox} />
-							<label htmlFor='attractions'>ATTRACTIONS</label>
-						</div>
-						<div className="col-6" id='filterlabel'>
-							<input type='checkbox' id='food' name='filter' value='food' onClick={this.props.updateCheckbox} />
-							<label htmlFor='food'>FOOD</label>
-						</div>
-				
-					</div>
-					<div className="row">
-						<div className="col-6" id='filterlabel'>
-							<input type='checkbox' id='dailyprogs' name='filter' value='dailyprogs' onClick={this.props.updateCheckbox} />
-							<label htmlFor='dailyprogs'>DAILY&nbsp;PROGRAMS</label>
-						</div>
-						<div className="col-6" id='filterlabel'>
-							<input type='checkbox' id='restrooms' name='filter' value='restrooms' onClick={this.props.updateCheckbox} />
-							<label htmlFor='restrooms'>RESTROOMS</label>
-						</div>
-						
-					</div>
-				</form>
-			</div>
-		);
-	}
-}
-
-class SimpleItemsList extends Component { //called in categories
+class Categories extends Component { //called in explorebar
 	constructor(props) {
 		super(props);
 		this.state = {}
 	}
-
-	convertToArray(object) {
-		var result = Object.keys(object).map(function(key) {
-			return [Number(key), object[key]];
-		});
-		return result;
-	}
-
-	render() {
-		let passedList = this.convertToArray(this.props.query);
-		const listItem = passedList.map((item) => {
-			return (
-				<SimpleItem
-					name={item.node_title}
-					img={item.image}
-					location={item.exhibit}
-					type={this.props.type}/>
-			);
-		});
-		return (
-			<div className='SimpleItemsList'>
-				<ul>
-					{listItem}
-				</ul>
-			</div>
-		);
-	}
-}
-
-class SimpleItem extends Component { //called in simpleitemslist
-	render() {
-		return (
-			<div className='simpleItem'>
-				<p>{this.props.name}</p>
-			</div>
-		);
-	}
-
-}
-
-class Categories extends Component { //called in explorebar
-
-	constructor(props) {
-	super(props);
-	this.state = {}
-	}
-
 
 	render() {
 		return (
@@ -178,7 +108,7 @@ class Categories extends Component { //called in explorebar
 				    </div>
 				    <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 				      <div className="card-body">
-				        <SimpleItemsList query={this.props.queryAnimals} type="animal"/>
+				        <SimpleItemsList query={this.props.queryAnimals} type="animal" expandItem={this.props.expandItem}/>
 				      </div>
 				    </div>
 				  </div>
@@ -238,7 +168,7 @@ class Categories extends Component { //called in explorebar
 				    </div>
 				    <div id="collapseFive" className="collapse" aria-labelledby="headingFive" data-parent="#accordion">
 				      <div className="card-body">
-				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
+				        <SimpleItemsList query={this.props.queryExhibits} type="exhibit" expandItem={this.props.expandItem}/>
 				      </div>
 				    </div>
 				  </div>
@@ -277,14 +207,158 @@ class Categories extends Component { //called in explorebar
 	}
 }
 
+class SimpleItemsList extends Component { //called in categories
+	constructor(props) {
+		super(props);
+		this.state = {}
+	}
 
-class TripBar extends Component {
+	convertToArray(object) {
+		var result = Object.keys(object).map(function(key) {
+			return [Number(key), object[key]];
+		});
+		return result;
+	}
+
 	render() {
-		return <p>TripBar</p>
+		let passedList = this.convertToArray(this.props.query);
+		var listItem = <p>hi</p>
+		if (this.props.type == 'animal') {
+			listItem = passedList.map((item) => {
+				return (
+					<SimpleItem
+						name={item[1].node_title}
+						img={item[1].image}
+						location={item[1].exhibit}
+						type={this.props.type}
+						expandItem={this.props.expandItem}
+						element={item[1]}/>
+				);
+			});
+		} if (this.props.type == 'exhibit') {
+			listItem = passedList.map((item) => {
+				return (
+					<SimpleItem
+						name={item[1].node_title}
+						img={item[1].image}
+						location={item[1].exhibit}
+						type={this.props.type}
+						expandItem={this.props.expandItem}
+						element={item[1]}/>
+				);
+			});
+		} else {
+			const listItem = <p>hi</p>
+		}
+		return (
+			<div className='SimpleItemsList'>
+				{listItem}
+			</div>
+		);
 	}
 }
 
-class Main extends Component {
+class SimpleItem extends Component { //called in simpleitemslist
+	render() {
+		const htmlImg = this.props.img;
+		const urlRegex = /(https?:\/\/.+?(?="))/g;
+		const imgUrl = htmlImg.match(urlRegex)
+		return (
+			<div className='simpleItem'>
+				<div className="row">
+					<div className="col-3" id="itemImage">
+						<a href="#" alt={this.props.name} onClick={this.props.expandItem}><img src={imgUrl}/></a>
+					</div>
+					<div className='col-8' id="itemInfo">
+						<a id='itemName' alt={this.props.name} href="#" title={this.props.name} onClick={this.props.expandItem}>{this.props.name}</a>
+						<p id="itemLocation">{this.props.location}</p>
+					</div>
+				</div>
+			</div>
+		);
+	}
+
+}
+
+class ExpandedItem extends Component { //called in explorebar
+	render() {
+		return (
+			<div className="expandedItem">
+				<button onClick={this.props.unexpandItem}>x</button>
+			</div>
+		);
+	}
+}
+
+class Filter extends Component {
+	render() {
+		return (
+			<div id='filter'>
+				<p className='title'>FILTER</p>
+				<hr/>
+				<form>
+					<div className="row">
+						<div className="col-6" id='filterlabel'>
+							<input type='checkbox' id='ammenities' name='filter' value='ammenities' onClick={this.props.updateCheckbox} />
+							<label htmlFor='ammenities'>AMMENITIES</label>
+						</div>
+						<div className="col-6" id='filterlabel'>
+							<input type='checkbox' id='exhibits' name='filter' value='exhibits' onClick={this.props.updateCheckbox} />
+							<label htmlFor='exhibits'>EXHIBITS</label>
+						</div>
+					</div>
+
+					<div className="row">
+						<div className="col-6" id='filterlabel'>
+							<input type='checkbox' id='attractions' name='filter' value='attractions' onClick={this.props.updateCheckbox} />
+							<label htmlFor='attractions'>ATTRACTIONS</label>
+						</div>
+						<div className="col-6" id='filterlabel'>
+							<input type='checkbox' id='food' name='filter' value='food' onClick={this.props.updateCheckbox} />
+							<label htmlFor='food'>FOOD</label>
+						</div>
+				
+					</div>
+					<div className="row">
+						<div className="col-6" id='filterlabel'>
+							<input type='checkbox' id='dailyprogs' name='filter' value='dailyprogs' onClick={this.props.updateCheckbox} />
+							<label htmlFor='dailyprogs'>DAILY&nbsp;PROGRAMS</label>
+						</div>
+						<div className="col-6" id='filterlabel'>
+							<input type='checkbox' id='restrooms' name='filter' value='restrooms' onClick={this.props.updateCheckbox} />
+							<label htmlFor='restrooms'>RESTROOMS</label>
+						</div>
+						
+					</div>
+				</form>
+			</div>
+		);
+	}
+}
+
+
+class TripBar extends Component { //called in Main
+	render() {
+		const emptyTrip = <p id='emptyTripText'>You have not added anything yet <br/><br/><br/> Need help planning?<br/> See pre-planned trips</p>
+		return (
+			<div>
+				<p className='title'>YOUR TRIP</p>
+				<hr/>
+				<div className='row' id='dateHoursBar'>
+					<p id='dateHoursText'>VISIT DATE: {this.props.getDate}<br/> ZOO HOURS: {this.props.getHours}</p>
+				</div>
+				<div className='row' id='emptyTripContainer'>
+					{emptyTrip}
+				</div>
+				<div className='row' id='finishTripBar'>
+					<button type='submit' className='btn btn-default' id='finishButton'>FINISH</button>
+				</div>
+			</div>
+		);
+	}
+} 
+
+class Main extends Component { //called in App
 	render() {
 		return (
 			<div id="content">
@@ -299,7 +373,7 @@ class Main extends Component {
 						</div>
 
 						<aside className='col' id='tripBar'>
-							<TripBar/>
+							<TripBar getDate={this.props.getDate} getHours={this.props.getHours}/>
 						</aside>
 			    	</div> 
 			    </div>
@@ -327,7 +401,7 @@ class App extends Component {
 	renderOverlay() { //later change this so it passes in a parameter ie: date, searchbyanimal, preplan... then use it for the switch statement
 		switch(this.state.overlay) {
 			case 'date': return <Date setDate={this.setDate} setHours = {this.setHours} getDate = {this.getDate} getHours = {this.getHours} onClick={this.closeOverlay} />
-			case '': return <Main/>
+			case '': return <Main getDate={this.getDate()} getHours={this.getHours()}/>
 		}
 	}
 

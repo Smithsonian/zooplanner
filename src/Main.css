@@ -94,7 +94,7 @@ html, body {
 	top: 0;
 	right:0;
 	bottom: 0;
-	padding: 7px;
+	padding: 3px;
 	background-color: #F4F5F4;
 	max-width: 300px;
 	max-height: 100%;
@@ -178,7 +178,7 @@ html, body {
 
 .btn-default {
 	margin-bottom: 133px;
-	font-size: 20px;
+	font-size: 18px;
 	letter-spacing: 4px;
 	text-align: center;
 	background-color:#8AE5DF;
@@ -239,6 +239,7 @@ hr {
 .card-body {
 	max-height: 250px;
 	overflow: auto;
+	padding: 4px;
 }
 .card-header {
 	padding: 0px;	
@@ -252,6 +253,8 @@ hr {
 	padding-bottom: 0px;
 }
 
+/*CATEGORY ACCORDIAN END*/
+
 
 input[type="checkbox"] { 
     position: absolute;
@@ -260,4 +263,93 @@ input[type="checkbox"] {
 input[type="checkbox"] ~ label { 
     padding-left: 1.1em;
     display:inline-block;
+}
+
+/*SIMPLE ITEM*/
+.simpleItem {
+	border: 1px solid #BAC4D6;
+	height: 80px;
+	margin-bottom: 5px;
+	box-shadow: 3px 0px 6px #888888;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#itemImage {
+	overflow: hidden;
+	height: 65px;
+	display: flex;
+	justify-content: center;
+	margin: 0 auto;
+	left: 8px;
+	top:6px;
+/*	border: 1px solid #BAC4D6;*/
+}
+#itemImage img {
+	width: 153%;
+	height: 100%;
+	position: absolute;
+	left: -25px;
+	display: inline-block;
+}
+#itemInfo {
+	padding:5px;
+	padding-right: 10px;
+}
+#itemName {
+	font-size: 1em;
+	font-weight: bold;
+	display: inline;
+	white-space:nowrap;
+	text-overflow: ellipsis;
+
+}
+#itemLocation {
+	font-size: 0.9em;
+	color:#616666;
+}
+/*SIMPLE ITEM END*/
+
+/*EXPANDED ITEM*/
+.expandedItem {
+	background-color: white;
+	margin: 5px;
+	padding: 2px;
+	border-radius: 5px;
+	padding-bottom: 5px;
+	height: 475px;
+	max-height: 500px;
+}
+
+#dateHoursBar {
+	background-color: white;
+	margin: 5px;
+	padding: 2px;
+	border-radius: 5px;
+	padding-bottom: 5px;
+	height: 70px;
+	max-height: 500px;
+}
+#dateHoursText {
+	color: #27708F;
+	font-weight: bold;
+	margin: auto;
+	text-align: center;
+}
+#emptyTripContainer {
+	padding-top: 200px;
+	padding-bottom: 275px;
+}
+#emptyTripText{
+	margin:auto;
+	text-align: center;
+}
+#finishTripBar {
+	margin:auto;
+	text-align: center;
+	border-top: 1px solid #BAC4D6;
+	padding-top: 4px;
+}
+#finishButton {
+	margin:auto;
 }
