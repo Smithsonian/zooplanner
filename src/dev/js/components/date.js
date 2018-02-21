@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import './Main.css';
+import '../../css/Main.css';
 import axios from 'axios';
 import moment from 'moment';
 
