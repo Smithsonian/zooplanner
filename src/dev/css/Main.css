@@ -286,7 +286,7 @@ input[type="checkbox"] ~ label {
 /*	border: 1px solid #BAC4D6;*/
 }
 #itemImage img {
-	width: 153%;
+	width: 150%;
 	height: 100%;
 	position: absolute;
 	left: -25px;
@@ -318,7 +318,32 @@ input[type="checkbox"] ~ label {
 	border-radius: 5px;
 	padding-bottom: 5px;
 	height: 475px;
-	max-height: 500px;
+	max-height: 475px;
+	overflow-y: scroll;
+}
+/* #expandedItemImage {
+	overflow: hidden;
+	height: 65px;
+	display: flex;
+	justify-content: center;
+	margin: 0 auto;
+	left: 8px;
+	top:6px;
+}
+#expandedItemImage img {
+	width: 60%;
+	height: 20%;
+	position: absolute;
+	left: -25px;
+	display: inline-block;
+} */
+#expandedItemImage {
+	size: inherit;
+	display: block;
+	padding: 1px;
+}
+#expandedItemImage img {
+	width: 80%;
 }
 
 #dateHoursBar {

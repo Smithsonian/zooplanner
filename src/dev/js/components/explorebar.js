@@ -16,41 +16,7 @@ class ExploreBar extends Component { //filters in order of ammenities, attractio
 		super(props);
 		this.state = {filters:[], animals:[], exhibits:[], expandItem:false}
 		this.updateCheckbox = this.updateCheckbox.bind(this);
-		// this.checkFilter = this.checkFilter.bind(this);
-		// this.queryAnimals = this.queryAnimals.bind(this);
-		// this.getAnimals = this.getAnimals.bind(this);
-		// this.expandItem = this.expandItem.bind(this);
-		// this.unexpandItem = this.unexpandItem.bind(this);
 	}
-
-	// queryAnimals() {
-	// 	axios.get('https://nationalzoo.si.edu/pyd/views/animals?display_id=list')
-	// 		.then((response) => {
-	// 			this.setState({animals: response['data']})
-	// 		});
-	// }
-	// getAnimals() {
-	// 	this.queryAnimals();
-	// 	return this.state.animals;
-	// }
-
-	// queryExhibits() { //CORS ERROR
-	// 	axios.get('https://nationalzoo.si.edu/pyd/views/exhibit_list?display_id=exhibits')
-	// 		.then((response) => {
-				
-	// 		})
-	// }
-
-	// getExhibits() {
-	// 	this.queryExhibits();
-	// 	return this.state.exhibits;
-	// }
-	// expandItem() {
-	// 	this.setState({expandItem: true});
-	// }
-	// unexpandItem() {
-	// 	this.setState({expandItem: false});
-	// }
 
 	updateCheckbox(e) { //appends string of item checked into filters
 		const filters = this.state.filters;

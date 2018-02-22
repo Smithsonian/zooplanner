@@ -12,7 +12,7 @@ export function fetchAnimals() {
 export function expandAnimal(animal) {
     return {
         type: "EXPAND_ANIMAL",
-        payload: animal
+        payload: animal[1]
     }
 }
 
