@@ -3,7 +3,8 @@ const initialState = {
     fetched: false,
     animals: [],
     error: null,
-    type: "animal"
+    type: "animal",
+    expandAnimal: null,
 }
 
 export default function(state=initialState, action) {
@@ -16,6 +17,12 @@ export default function(state=initialState, action) {
         }
         case "FETCH_ANIMALS_FULFILLED": {
             return {...state, fetching: false, fetched: true, animals: action.payload.data}
+        }
+        case "EXPAND_ANIMAL": {
+            return {...state, expandAnimal: action.payload}
+        }
+        case "UNEXPAND_ANIMAL": {
+            return {...state, expandAnimal: action.payload}
         }
     }
     return state

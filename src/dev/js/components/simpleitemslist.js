@@ -5,14 +5,8 @@ import SimpleItem from './simpleitem.js'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-import {fetchAnimals} from "../actions/animalActions"
-
 
 class SimpleItemsList extends Component { //called in categories
-	// constructor(props) {
-	// 	super(props);
-	// 	this.state = {}
-	// }
 
 	convertToArray(object) {
 		var result = Object.keys(object).map(function(key) {
@@ -21,43 +15,45 @@ class SimpleItemsList extends Component { //called in categories
 		return result;
 	}
 
-	componentWillMount() {
-		this.props.dispatch(fetchAnimals())
-	}
-
 	render() {
-		if (this.props.animalsFetched == false) {
-			var listItem = <p>loading...</p>
+		var listItem;
+		if (this.props.type === 'animal') {
+			if (this.props.animalsFetched === false) {
+				listItem = <p>loading...</p>
+			} else {
+				let passedList = this.convertToArray(this.props.animals);
+				listItem = passedList.map((item) => {
+					return (
+						<SimpleItem
+							key = {item[1].node_title}
+							name={item[1].node_title}
+							img={item[1].image}
+							location={item[1].exhibit}
+							type={this.props.type}
+							item={item}/>
+					);
+				});
+			}
+		} else if (this.props.type === 'exhibit') {
+			if (this.props.exhibitsFetched === false) {
+				listItem = <p>loading...</p>
+			} else {
+				let passedList = this.convertToArray(this.props.exhibits);
+				listItem = passedList.map((item) => {
+					return (
+						<SimpleItem
+							key = {item[1].title}
+							name={item[1].title}
+							img={item[1].image}
+							location={null}
+							type={this.props.type}
+							item={item}/>
+					);
+				});
+			}
 		} else {
-			let passedList = this.convertToArray(this.props.animals);
-			var listItem = passedList.map((item) => {
-				return (
-					<SimpleItem
-						name={item[1].node_title}
-						img={item[1].image}
-						location={item[1].exhibit}
-						type={this.props.type}
-						expandItem={this.props.expandItem}
-						element={item[1]}/>
-				);
-			});
+			listItem = <p>ERROR</p>
 		}
-		
-		// if (this.props.type === 'exhibit') {
-		// 	listItem = passedList.map((item) => {
-		// 		return (
-		// 			<SimpleItem
-		// 				name={item[1].node_title}
-		// 				img={item[1].image}
-		// 				location={item[1].exhibit}
-		// 				type={this.props.type}
-		// 				expandItem={this.props.expandItem}
-		// 				element={item[1]}/>
-		// 		);
-		// 	});
-		// } else {
-		// 	const listItem = <p>hi</p>
-		// }
 		return (
 			<div className='SimpleItemsList'>
 				{listItem}
@@ -70,6 +66,8 @@ function mapStateToProps(state) {
 	return {
 		animals: state.animals.animals,
 		animalsFetched: state.animals.fetched,
+		exhibits: state.exhibits.exhibits,
+		exhibitsFetched: state.exhibits.fetched,
 	};
 }
 export default connect(mapStateToProps)(SimpleItemsList);

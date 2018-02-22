@@ -8,3 +8,17 @@ export function fetchAnimals() {
         })
     }
 }
+
+export function expandAnimal(animal) {
+    return {
+        type: "EXPAND_ANIMAL",
+        payload: animal
+    }
+}
+
+export function unexpandAnimal() {
+    return {
+        type: "UNEXPAND_ANIMAL",
+        payload: null
+    }
+}

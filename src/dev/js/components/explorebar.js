@@ -8,7 +8,8 @@ import Filter from './filter';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-import {fetchAnimals} from "../actions/animalActions"
+import {fetchAnimals} from "../actions/animalActions";
+import {fetchExhibits} from '../actions/exhibitActions';
 
 class ExploreBar extends Component { //filters in order of ammenities, attractions, daily programs, exhibits, food, restrooms
 	constructor(props) {
@@ -16,40 +17,40 @@ class ExploreBar extends Component { //filters in order of ammenities, attractio
 		this.state = {filters:[], animals:[], exhibits:[], expandItem:false}
 		this.updateCheckbox = this.updateCheckbox.bind(this);
 		// this.checkFilter = this.checkFilter.bind(this);
-		this.queryAnimals = this.queryAnimals.bind(this);
-		this.getAnimals = this.getAnimals.bind(this);
-		this.expandItem = this.expandItem.bind(this);
-		this.unexpandItem = this.unexpandItem.bind(this);
+		// this.queryAnimals = this.queryAnimals.bind(this);
+		// this.getAnimals = this.getAnimals.bind(this);
+		// this.expandItem = this.expandItem.bind(this);
+		// this.unexpandItem = this.unexpandItem.bind(this);
 	}
 
-	queryAnimals() {
-		axios.get('https://nationalzoo.si.edu/pyd/views/animals?display_id=list')
-			.then((response) => {
-				this.setState({animals: response['data']})
-			});
-	}
-	getAnimals() {
-		this.queryAnimals();
-		return this.state.animals;
-	}
+	// queryAnimals() {
+	// 	axios.get('https://nationalzoo.si.edu/pyd/views/animals?display_id=list')
+	// 		.then((response) => {
+	// 			this.setState({animals: response['data']})
+	// 		});
+	// }
+	// getAnimals() {
+	// 	this.queryAnimals();
+	// 	return this.state.animals;
+	// }
 
-	queryExhibits() { //CORS ERROR
-		axios.get('https://nationalzoo.si.edu/pyd/views/exhibit_list?display_id=exhibits')
-			.then((response) => {
+	// queryExhibits() { //CORS ERROR
+	// 	axios.get('https://nationalzoo.si.edu/pyd/views/exhibit_list?display_id=exhibits')
+	// 		.then((response) => {
 				
-			})
-	}
+	// 		})
+	// }
 
-	getExhibits() {
-		this.queryExhibits();
-		return this.state.exhibits;
-	}
-	expandItem() {
-		this.setState({expandItem: true});
-	}
-	unexpandItem() {
-		this.setState({expandItem: false});
-	}
+	// getExhibits() {
+	// 	this.queryExhibits();
+	// 	return this.state.exhibits;
+	// }
+	// expandItem() {
+	// 	this.setState({expandItem: true});
+	// }
+	// unexpandItem() {
+	// 	this.setState({expandItem: false});
+	// }
 
 	updateCheckbox(e) { //appends string of item checked into filters
 		const filters = this.state.filters;
@@ -68,14 +69,18 @@ class ExploreBar extends Component { //filters in order of ammenities, attractio
 	// 	}
 	// }
 	renderDisplay() {
-		switch(this.state.expandItem) {
-			case false: return <Categories queryAnimals={this.getAnimals()} queryExhibits={this.getExhibits()} expandItem={this.expandItem}/>
-			case true: return <ExpandedItem unexpandItem={this.unexpandItem}/>
+		switch(this.props.animalExpanded) {
+			case null: return <Categories/>
+			default: return <ExpandedItem/>
 		}
 	}
 
+	componentDidMount() {
+		this.props.dispatch(fetchAnimals())
+		this.props.dispatch(fetchExhibits())
+	}
+
 	render() {
-		console.log(this.props)
 		return (
 			<div>
 				<p id='zooplanner'> ZOO PLANNER </p>
@@ -96,6 +101,7 @@ function mapStateToProps(state) {
 	return {
 		animals: state.animals.animals,
 		animalsFetched: state.animals.fetched,
+		animalExpanded: state.animals.expandAnimal,
 	};
 }
 
