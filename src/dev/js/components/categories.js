@@ -26,7 +26,7 @@ class Categories extends Component { //called in explorebar
 				    </div>
 				    <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 				      <div className="card-body">
-				        <SimpleItemsList query={this.props.queryAnimals} type="animal" expandItem={this.props.expandItem}/>
+				        <SimpleItemsList type="animal"/>
 				      </div>
 				    </div>
 				  </div>

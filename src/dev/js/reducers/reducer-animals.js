@@ -3,6 +3,7 @@ const initialState = {
     fetched: false,
     animals: [],
     error: null,
+    type: "animal"
 }
 
 export default function(state=initialState, action) {

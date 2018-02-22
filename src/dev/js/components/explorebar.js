@@ -6,6 +6,9 @@ import Categories from './categories.js';
 import ExpandedItem from './expandeditem.js';
 import Filter from './filter';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+
+import {fetchAnimals} from "../actions/animalActions"
 
 class ExploreBar extends Component { //filters in order of ammenities, attractions, daily programs, exhibits, food, restrooms
 	constructor(props) {
@@ -33,7 +36,7 @@ class ExploreBar extends Component { //filters in order of ammenities, attractio
 	queryExhibits() { //CORS ERROR
 		axios.get('https://nationalzoo.si.edu/pyd/views/exhibit_list?display_id=exhibits')
 			.then((response) => {
-				console.log(response);
+				
 			})
 	}
 
@@ -72,7 +75,7 @@ class ExploreBar extends Component { //filters in order of ammenities, attractio
 	}
 
 	render() {
-		//CHECK IF THERE IS A FILTER IN PLACE, IF SO DO NOT RENDER CATEGORIES BUT RENDER THE FILTERED ASPECTS!
+		console.log(this.props)
 		return (
 			<div>
 				<p id='zooplanner'> ZOO PLANNER </p>
@@ -89,4 +92,11 @@ class ExploreBar extends Component { //filters in order of ammenities, attractio
 	}
 }
 
-export default ExploreBar;
+function mapStateToProps(state) {
+	return {
+		animals: state.animals.animals,
+		animalsFetched: state.animals.fetched,
+	};
+}
+
+export default connect(mapStateToProps)(ExploreBar);
