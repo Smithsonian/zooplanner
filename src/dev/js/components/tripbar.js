@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../../css/Main.css';
+import {connect} from 'react-redux';
 
 class TripBar extends Component { //called in Main
 	render() {
@@ -10,7 +11,7 @@ class TripBar extends Component { //called in Main
 				<p className='title'>YOUR TRIP</p>
 				<hr/>
 				<div className='row' id='dateHoursBar'>
-					<p id='dateHoursText'>VISIT DATE: {this.props.getDate}<br/> ZOO HOURS: {this.props.getHours}</p>
+					<p id='dateHoursText'>VISIT DATE: {this.props.date}<br/> ZOO HOURS: {this.props.hours[2].time}</p>
 				</div>
 				<div className='row' id='emptyTripContainer'>
 					{emptyTrip}
@@ -23,4 +24,11 @@ class TripBar extends Component { //called in Main
 	}
 } 
 
-export default TripBar;
+function mapStateToProps(state) {
+	return {
+		date: state.date.date,
+		hours: state.date.hours,
+	};
+}
+
+export default connect(mapStateToProps)(TripBar);

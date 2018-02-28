@@ -25,10 +25,10 @@ class SimpleItemsList extends Component { //called in categories
 				listItem = passedList.map((item) => {
 					return (
 						<SimpleItem
-							key = {item[1].node_title}
-							name={item[1].node_title}
+							key = {item[1].title}
+							name={item[1].title}
 							img={item[1].image}
-							location={item[1].exhibit}
+							location={item[1].exhibit_name}
 							type={this.props.type}
 							item={item}/>
 					);

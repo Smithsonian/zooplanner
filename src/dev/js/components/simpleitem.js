@@ -12,7 +12,7 @@ class SimpleItem extends Component { //called in simpleitemslist
 		}
 	}
 
-	render() {
+	render() { //props here are normal react props grabbed from simpleitemslist
 		const htmlImg = "https://nationalzoo.si.edu" + this.props.img;
 		return (
 			<div className='simpleItem'>

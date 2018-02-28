@@ -155,6 +155,7 @@ html, body {
 	margin-right: auto;
 	margin-left: auto;
 	padding: 20px;
+	padding-top: 10px;
 	border-radius: 20px;
 	text-align: left;
 	color: #287190;
@@ -162,9 +163,13 @@ html, body {
 	font-size: 17px;
 	overflow: auto;
 }
+#event-date-details{
+	padding-left: 30px;
+}
 
 .detail-date {
 	color: gray;
+	font-weight: normal;
 }
 
 #calendar {

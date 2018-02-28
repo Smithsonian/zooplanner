@@ -17,11 +17,11 @@ class ExpandedItem extends Component { //called in explorebar
 		return (
 			<div className="expandedItem">
 				<button onClick={() => {this.unexpand()}}>x</button>
-				<h5>{this.props.animal.node_title}</h5>
+				<h5>{this.props.animal.title}</h5>
 				<div id='expandedItemImage'>
 					<img src={htmlImg}/>
 				</div>
-				<p>{this.props.animal.exhibit}</p>
+				<p>{this.props.animal.exhibit_name}</p>
 				<p>{this.props.animal.description}</p>
 			</div>
 		);
