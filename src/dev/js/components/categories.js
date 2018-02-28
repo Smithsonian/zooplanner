@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../../css/Main.css';
 import SimpleItemsList from './simpleitemslist.js'
-import {connect} from 'react-redux';
 
 class Categories extends Component { //called in explorebar
 	constructor(props) {

@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../../css/Main.css';
 import SimpleItem from './simpleitem.js'
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
 
 
 class SimpleItemsList extends Component { //called in categories

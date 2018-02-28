@@ -80,7 +80,6 @@ export class Date extends Component {
 		}
 		else {
 			var notes = ""
-			var diningNotes, exhibitNotes, zooNotes;
 			if (this.props.notes[0].note == null && this.props.notes[1].note == null && this.props.notes[2].note == null) {
 				notes = "No Notes"
 			} else {

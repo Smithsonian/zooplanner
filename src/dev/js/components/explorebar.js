@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../../css/Main.css';
-import axios from 'axios';
 import Categories from './categories.js';
 import ExpandedItem from './expandeditem.js';
 import Filter from './filter';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
 
 import {fetchAnimals} from "../actions/animalActions";
 import {fetchExhibits} from '../actions/exhibitActions';
