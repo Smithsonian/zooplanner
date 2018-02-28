@@ -23,21 +23,6 @@ class App extends Component {
 		}
 	}
 
-	// setDate(date) {
-	// 	this.setState({tripDate: date});
-	// }
-	// getDate() {
-	// 	return this.state.tripDate;
-	// }
-
-	// setHours(hours) {
-	// 	this.setState({zooHours: hours});
-	// }
-
-	// getHours() {
-	// 	return this.state.zooHours;
-	// }
-
 	render () {
 
 		return (

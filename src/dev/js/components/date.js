@@ -99,12 +99,12 @@ export class Date extends Component {
 					<div className='date-scrn-2'>
 						<h1 id='welcome-title'>WELCOME TO THE<br/> ZOO PLANNER!</h1>
 						<div id='event-date'>
-							<button type="button" className="btn btn-link" onClick={() => this.setState({page1:true})}>&larr; BACK</button>
+							<button type="button" className="btn btn-link" onClick={() => this.setState({page1:true, formfilled: false})}>&larr; BACK</button>
 							<br/>
 							<div id="event-date-details">
 								TRIP DATE:&nbsp;<span className='detail-date'>{this.props.date}</span><br/>
 								ZOO HOURS:&nbsp;<span className='detail-date'>{this.props.hours[2].time}</span><br/>
-								EVENTS:&nbsp;<span className='detail-date'><a target="_blank" href={eventURL}>{this.props.event[0].title} (click to open)</a></span><br/>
+								EVENTS:&nbsp;<span className='detail-date'><a target="_blank" href={eventURL}>{this.props.event[0].title} <i className="glyphicon glyphicon-new-window"></i></a></span><br/>
 								PLEASE NOTE:&nbsp;<span className='detail-date'>{notes}</span>
 							</div>
 						</div>

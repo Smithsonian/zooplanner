@@ -59,7 +59,8 @@ html, body {
 /*	float: left;*/
 	z-index: 0;
 	overflow: auto;
-	position: absolute;
+	overflow-x: hidden;
+	/* position: absolute; */
 	bottom: 0;
 	max-height: 100%;
 	min-height: 100%;
@@ -190,6 +191,22 @@ html, body {
 	width: 100px;
 	height: 50px;
 }
+
+.btn-add {
+	float: right;
+	margin-right: 15px;
+	width: 16px;
+	height: 16px;
+	text-align: center;
+	padding: 2px;
+	font-size: 7px;
+	line-height: 1.428571429;
+	border-radius: 8px;
+	background-color: #28bda9;
+	color: #FFFFFF;
+	box-shadow: 3px 0px 6px #888888;
+	
+}
 /*DATE OVERLAY END*/
 
 .title {
@@ -312,6 +329,7 @@ input[type="checkbox"] ~ label {
 #itemLocation {
 	font-size: 0.9em;
 	color:#616666;
+	text-overflow: ellipsis;
 }
 /*SIMPLE ITEM END*/
 
