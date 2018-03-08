@@ -23,13 +23,14 @@ class SimpleItem extends Component { //called in simpleitemslist
 			<div className='simpleItem'>
 				<div className="row">
 					<div className="col-3" id="itemImage">
-						<a href="#" alt={this.props.name} onClick={() => {this.expandItem(this.props.type, this.props.item)}}><img src={htmlImg}/></a>
+						<a href="#" alt={this.props.name} onClick={() => {this.expandItem(this.props.type, this.props.item)}}><img src={this.props.img}/></a>
 					</div>
 					<div className='col-8' id="itemInfo">
+						<button type="button" title='ADD TO TRIP' className="btn btn-add" onClick={() => this.addToTrip(this.props.item)}><i className="glyphicon glyphicon-plus"></i></button>
 						<a id='itemName' alt={this.props.name} href="#" title={this.props.name} onClick={() => {this.expandItem(this.props.type, this.props.item)}}>{this.props.name}</a>
 						<br/>
 						<p id="itemLocation">{this.props.location}</p>
-						<button type="button" title='ADD TO TRIP' className="btn btn-add" onClick={() => this.addToTrip(this.props.item)}><i className="glyphicon glyphicon-plus"></i></button>
+						<p id="itemLocation">{this.props.cost}</p>
 					</div>
 				</div>
 			</div>

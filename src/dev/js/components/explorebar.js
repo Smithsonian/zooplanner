@@ -8,6 +8,8 @@ import {connect} from 'react-redux';
 
 import {fetchAnimals} from "../actions/animalActions";
 import {fetchExhibits} from '../actions/exhibitActions';
+import {fetchAttractions} from '../actions/attractionActions';
+
 
 class ExploreBar extends Component { //filters in order of ammenities, attractions, daily programs, exhibits, food, restrooms
 	constructor(props) {
@@ -40,8 +42,9 @@ class ExploreBar extends Component { //filters in order of ammenities, attractio
 	}
 
 	componentDidMount() {
-		this.props.dispatch(fetchAnimals())
-		this.props.dispatch(fetchExhibits())
+		this.props.dispatch(fetchAnimals());
+		this.props.dispatch(fetchExhibits());
+		this.props.dispatch(fetchAttractions());
 	}
 
 	render() {

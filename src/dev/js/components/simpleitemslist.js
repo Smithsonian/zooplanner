@@ -16,7 +16,7 @@ class SimpleItemsList extends Component { //called in categories
 
 	render() {
 		var listItem;
-		if (this.props.type === 'animal') {
+		if (this.props.type === "animal") {
 			if (this.props.animalsFetched === false) {
 				listItem = <p>loading...</p>
 			} else {
@@ -33,7 +33,7 @@ class SimpleItemsList extends Component { //called in categories
 					);
 				});
 			}
-		} else if (this.props.type === 'exhibit') {
+		} else if (this.props.type === "exhibit") {
 			if (this.props.exhibitsFetched === false) {
 				listItem = <p>loading...</p>
 			} else {
@@ -45,12 +45,35 @@ class SimpleItemsList extends Component { //called in categories
 							name={item[1].title}
 							img={item[1].image}
 							location={null}
+							coordinates={item[1].coordinates}
 							type={this.props.type}
 							item={item}/>
 					);
 				});
 			}
-		} else {
+		} else if (this.props.type === "attraction") {
+			if (this.props.attractionsFetched === false) {
+				listItem = <p>loading...</p>
+			} else {
+				let passedList = this.convertToArray(this.props.attractions);
+				listItem = passedList.map((item) => {
+					return (
+						<SimpleItem
+							key = {item[1].title}
+							name={item[1].title}
+							img={item[1].image}
+							location={null}
+							cost={item[1].cost}
+							coordinates={item[1].coordinates}
+							type={this.props.type}
+							item={item}/>
+					)
+
+				});
+			}
+		}
+		
+		else {
 			listItem = <p>ERROR</p>
 		}
 		return (
@@ -67,6 +90,8 @@ function mapStateToProps(state) {
 		animalsFetched: state.animals.fetched,
 		exhibits: state.exhibits.exhibits,
 		exhibitsFetched: state.exhibits.fetched,
+		attractions: state.attractions.attractions,
+		attractionsFetched: state.attractions.fetched,
 	};
 }
 export default connect(mapStateToProps)(SimpleItemsList);

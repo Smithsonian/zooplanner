@@ -4,6 +4,7 @@ import '../../css/Main.css';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux'
 import {expandAnimal} from '../actions/animalActions'
+import {removeFromTrip} from '../actions/tripActions'
 
 class Trip extends Component {
 
@@ -12,6 +13,9 @@ class Trip extends Component {
 			return [Number(key), object[key]];
 		});
 		return result;
+    }
+    removeFromTrip(item) {
+        this.props.removeFromTrip(item);
     }
     
     render() {
@@ -27,16 +31,16 @@ class Trip extends Component {
         } else {
             let passedList = this.convertToArray(this.props.trip);
             listItem = passedList.map((item) => {
-                item = item[1]
-                const htmlImg = "https://nationalzoo.si.edu" + item.image;
-                console.log(item)
+                item = item[1];
+                // const htmlImg = "https://nationalzoo.si.edu" + item.image;
                 return (
                     <div className='simpleItem'>
                         <div className="row">
                             <div className="col-3" id="itemImage">
-                                <a href="#" alt={item.title}><img src={htmlImg}/></a>
+                                <a href="#" alt={item.title}><img src={item.image}/></a>
                             </div>
                             <div className='col-8' id="itemInfo">
+                                <button type="button" title='REMOVE' className="btn btn-remove" onClick={() => this.removeFromTrip(item)}><i className="glyphicon glyphicon-remove"></i></button>
                                 <a id='itemName' alt={item.title} href="#" title={item.title}>{item.title}</a>
                                 <br/>
                                 <p id="itemLocation">{item.exhibit_name}</p>
@@ -47,7 +51,7 @@ class Trip extends Component {
             });
         }
         return (
-            <div>
+            <div id="tripList">
                 {listItem}
             </div>
             
@@ -60,9 +64,10 @@ function mapStateToProps(state) {
         trip: state.trip.trip
     }
 }
-// function matchDispatchToProps(dispatch) {
-// 	return bindActionCreators({
-// 		expandAnimal: expandAnimal,
-// 	}, dispatch);
-// }
-export default connect(mapStateToProps)(Trip);
+function matchDispatchToProps(dispatch) {
+	return bindActionCreators({
+        // expandAnimal: expandAnimal,
+        removeFromTrip: removeFromTrip
+	}, dispatch);
+}
+export default connect(mapStateToProps, matchDispatchToProps)(Trip);

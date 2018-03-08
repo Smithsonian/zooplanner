@@ -5,7 +5,8 @@
 html, body {
     max-width: 100%;
     max-height: 100%;
-    overflow-x: hidden;
+	/* overflow-x: hidden;
+	margin-left: 20px; */
 }
 
 /*MAIN*/
@@ -79,7 +80,6 @@ html, body {
 	bottom: 0;
 	padding: 0px;
 	padding-bottom: 3px;
-/*	width: 20%;*/
 	min-height: 100vh;
 	max-width: 300px;
 	max-height: 100vh;
@@ -99,6 +99,14 @@ html, body {
 	background-color: #F4F5F4;
 	max-width: 300px;
 	max-height: 100%;
+}
+
+#clearTrip {
+	font-size: 0.6em;
+	color: red;
+	position: absolute;
+	right: 0px;
+	top: 14px;
 }
 
 #mapContainer {
@@ -207,6 +215,21 @@ html, body {
 	box-shadow: 3px 0px 6px #888888;
 	
 }
+
+.btn-remove {
+	float: right;
+	margin-right: 15px;
+	width: 16px;
+	height: 16px;
+	text-align: center;
+	padding: 2px;
+	font-size: 7px;
+	line-height: 1.428571429;
+	border-radius: 8px;
+	background-color: #FE8300;
+	color: #FFFFFF;
+	box-shadow: 3px 0px 6px #888888;
+}
 /*DATE OVERLAY END*/
 
 .title {
@@ -295,6 +318,8 @@ input[type="checkbox"] ~ label {
 	box-shadow: 3px 0px 6px #888888;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	color: #FFFFFF;
+	background-color: #FFFFFF;
 }
 
 #itemImage {
@@ -316,7 +341,7 @@ input[type="checkbox"] ~ label {
 }
 #itemInfo {
 	padding:5px;
-	padding-right: 10px;
+	padding-right: 7px;
 }
 #itemName {
 	font-size: 1em;
@@ -343,32 +368,38 @@ input[type="checkbox"] ~ label {
 	height: 475px;
 	max-height: 475px;
 	overflow-y: scroll;
+	overflow-x: hidden;
 }
-/* #expandedItemImage {
+#expandedItemImage {
 	overflow: hidden;
-	height: 65px;
-	display: flex;
-	justify-content: center;
-	margin: 0 auto;
-	left: 8px;
-	top:6px;
+	height: 100px;
+	width: 100px;
+	margin: 0;
+	padding-left: 20px;
 }
 #expandedItemImage img {
-	width: 60%;
-	height: 20%;
+	width: 90%;
+	height: 100%;
 	position: absolute;
-	left: -25px;
-	display: inline-block;
-} */
-#expandedItemImage {
-	size: inherit;
+	margin: 0 0px;
 	display: block;
-	padding: 1px;
+}
+#expandedItemTitle {
+	font-weight: normal;
+	font-size: 1.2em;
+	padding-left: 40px;
+	/* margin: auto; */
+}
+/* #expandedItemImage {
+	display: block;
+	margin:auto;
 }
 #expandedItemImage img {
 	width: 80%;
+} */
+#expandedItemDetails {
+	padding: 0px
 }
-
 #dateHoursBar {
 	background-color: white;
 	margin: 5px;
@@ -391,6 +422,9 @@ input[type="checkbox"] ~ label {
 #emptyTripText{
 	margin:auto;
 	text-align: center;
+}
+#tripList {
+	height: 76vh;
 }
 #finishTripBar {
 	margin:auto;

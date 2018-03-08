@@ -4,3 +4,16 @@ export function addToTrip(item) {
         payload: item
     }
 }
+
+export function clearTrip() {
+    return {
+        type: "CLEAR_TRIP",
+        payload: null
+    }
+}
+export function removeFromTrip(item) {
+    return {
+        type: "REMOVE_FROM_TRIP",
+        payload: item
+    }
+}

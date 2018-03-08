@@ -13,16 +13,25 @@ class ExpandedItem extends Component { //called in explorebar
 
 	render() {
 		console.log(this.props.animal)
-		const htmlImg = "https://nationalzoo.si.edu" + this.props.animal.image
+		// const htmlImg = "https://nationalzoo.si.edu" + this.props.animal.image
 		return (
 			<div className="expandedItem">
 				<button onClick={() => {this.unexpand()}}>x</button>
-				<h5>{this.props.animal.title}</h5>
-				<div id='expandedItemImage'>
-					<img src={htmlImg}/>
+				<div className="row">
+					<p id="expandedItemTitle">{this.props.animal.title}</p>
+					<hr/>
 				</div>
-				<p>{this.props.animal.exhibit_name}</p>
-				<p>{this.props.animal.description}</p>
+				<div className="row">
+					<div className="col-6" id='expandedItemImage'>
+						<img src={this.props.animal.image}/>
+					</div>
+					<div className="col-6" id='expandedItemDetails'>
+						<p>{this.props.animal.exhibit_name}</p>
+					</div>
+				</div>
+				<div className="row">
+					<p>{this.props.animal.description}</p>
+				</div>
 			</div>
 		);
 	}
