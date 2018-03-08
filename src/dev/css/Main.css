@@ -216,6 +216,23 @@ html, body {
 	
 }
 
+.btn-add-lrg {
+	margin-right: 15px;
+	width: 100px;
+	height: 28px;
+	text-align: center;
+	padding: 3px;
+	font-size: 10px;
+	line-height: 1.428571429;
+	border-radius: 12px;
+	background-color: #28bda9;
+	color: #FFFFFF;
+	box-shadow: 3px 0px 6px #888888;
+}
+#btn-add-lrgContainer {
+	padding-left: 85px;
+}
+
 .btn-remove {
 	float: right;
 	margin-right: 15px;
@@ -229,6 +246,22 @@ html, body {
 	background-color: #FE8300;
 	color: #FFFFFF;
 	box-shadow: 3px 0px 6px #888888;
+}
+.btn-remove-lrg {
+	margin-right: 15px;
+	width: 120px;
+	height: 28px;
+	text-align: center;
+	padding: 3px;
+	font-size: 10px;
+	line-height: 1.428571429;
+	border-radius: 12px;
+	background-color: #FE8300;
+	color: #FFFFFF;
+	box-shadow: 3px 0px 6px #888888;
+}
+#btn-remove-lrgContainer {
+	padding-left: 85px;
 }
 /*DATE OVERLAY END*/
 
@@ -362,7 +395,7 @@ input[type="checkbox"] ~ label {
 .expandedItem {
 	background-color: white;
 	margin: 5px;
-	padding: 2px;
+	padding: 5px 5px 5px 5px;
 	border-radius: 5px;
 	padding-bottom: 5px;
 	height: 475px;
@@ -371,35 +404,71 @@ input[type="checkbox"] ~ label {
 	overflow-x: hidden;
 }
 #expandedItemImage {
-	overflow: hidden;
-	height: 100px;
-	width: 100px;
-	margin: 0;
+	/* overflow: hidden; */
+	height: 180px;
+	float:left;
 	padding-left: 20px;
 }
 #expandedItemImage img {
-	width: 90%;
-	height: 100%;
-	position: absolute;
+	height: 90%;
 	margin: 0 0px;
 	display: block;
 }
+
+.smallImage {
+	overflow: hidden;
+	position: relative;
+	width: 90px;
+	height: 90px;
+	/* display: flex; */
+	float: left;
+	margin: 0 auto;
+	border-radius: 45px;
+}
+.smallImage img {
+	height: 100%;
+	display: inline-block;
+}
+.smallImageTitle {
+	position: absolute;
+	top: 10px;
+	bottom: 0;
+	left: 5px;
+	right: 0;
+	padding:8px;
+	text-align: center;
+	margin: auto;
+	background: rgba(48, 165, 238, 0.72);
+	font-size: 1em;
+	color: rgb(255, 255, 255);
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity .2s, visibility .4s;
+}
+.smallImageTitle:hover {
+	color: white;
+}
+
+.smallImage:hover .smallImageTitle {
+	visibility: visible;
+	opacity: 1;
+}
+
 #expandedItemTitle {
 	font-weight: normal;
 	font-size: 1.2em;
-	padding-left: 40px;
-	/* margin: auto; */
+	margin: auto;
 }
-/* #expandedItemImage {
-	display: block;
-	margin:auto;
-}
-#expandedItemImage img {
-	width: 80%;
-} */
+
 #expandedItemDetails {
-	padding: 0px
+	margin: auto;
+	padding-bottom: 3px;
+	border-bottom: 1px solid #BAC4D6; 
 }
+#expandedItemDescription {
+	padding: 20px;
+}
+
 #dateHoursBar {
 	background-color: white;
 	margin: 5px;

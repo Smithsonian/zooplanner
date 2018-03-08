@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../../css/Main.css';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux'
-import {expandAnimal} from '../actions/animalActions'
 import {removeFromTrip} from '../actions/tripActions'
 
 class Trip extends Component {
@@ -20,8 +19,7 @@ class Trip extends Component {
     
     render() {
         var listItem = <p></p>
-        console.log(this.props.trip.length, "trip Length")
-        console.log(this.props.trip, "trip item")
+        console.log(this.props.trip, "MY TRIP")
         if (this.props.trip.length === 0) {
             listItem= (
                 <div className='row' id='emptyTripContainer'>
@@ -32,7 +30,6 @@ class Trip extends Component {
             let passedList = this.convertToArray(this.props.trip);
             listItem = passedList.map((item) => {
                 item = item[1];
-                // const htmlImg = "https://nationalzoo.si.edu" + item.image;
                 return (
                     <div className='simpleItem'>
                         <div className="row">

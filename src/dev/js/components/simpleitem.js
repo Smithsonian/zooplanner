@@ -3,36 +3,58 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../../css/Main.css';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {expandAnimal} from '../actions/animalActions';
-import {addToTrip} from '../actions/tripActions';
+import {addToTrip, removeFromTrip} from '../actions/tripActions';
 import {expandItem} from '../actions/exploreBarActions';
+import {fetchAnimalsInExhibit} from "../actions/exhibitActions";
 
 class SimpleItem extends Component { //called in simpleitemslist
 	expandItem(item) {
-		// if (type === 'animal') {
-		// 	this.props.expandAnimal(item);
-		// }
+		console.log(item)
 		this.props.expandItem(item);
+		if (item.type === "Exhibit") {
+			this.props.fetchAnimalsInExhibit(item.nid);
+		} else if (item.type === "Animal") {
+			var nid = item.exhibit_nid;
+			if (nid.length > 4) {
+				nid = nid.substring(0,4);
+			}
+			this.props.fetchAnimalsInExhibit(nid)
+		}
 	}
 
 	addToTrip(item){
 		this.props.addToTrip(item);
 	}
 
+	removeFromTrip(item) {
+        this.props.removeFromTrip(item);
+    }
+
 	render() { //props here are normal react props grabbed from simpleitemslist
-		const htmlImg = "https://nationalzoo.si.edu" + this.props.img;
+		var details;
+		if (this.props.type === "attraction") {
+			details = <p id="itemLocation">Cost: {this.props.cost}</p>
+		} else if (this.props.type === "animal") {
+			details = <p id="itemLocation">{this.props.location}</p>
+		}
+
+		var addOrRemoveBtn;
+		if (this.props.trip.includes(this.props.item[1])) {
+			addOrRemoveBtn = <button type="button" title='REMOVE' className="btn btn-remove" onClick={() => this.removeFromTrip(this.props.item[1])}><i className="glyphicon glyphicon-remove"></i></button>
+		} else {
+			addOrRemoveBtn = <button type="button" title='ADD TO TRIP' className="btn btn-add" onClick={() => this.addToTrip(this.props.item[1])}><i className="glyphicon glyphicon-plus"></i></button>
+		}
 		return (
 			<div className='simpleItem'>
 				<div className="row">
 					<div className="col-3" id="itemImage">
-						<a href="#" alt={this.props.name} onClick={() => {this.expandItem(this.props.item)}}><img src={this.props.img}/></a>
+						<a href="#" alt={this.props.name} onClick={() => {this.expandItem(this.props.item[1])}}><img src={this.props.img}/></a>
 					</div>
 					<div className='col-8' id="itemInfo">
-						<button type="button" title='ADD TO TRIP' className="btn btn-add" onClick={() => this.addToTrip(this.props.item)}><i className="glyphicon glyphicon-plus"></i></button>
-						<a id='itemName' alt={this.props.name} href="#" title={this.props.name} onClick={() => {this.expandItem(this.props.item)}}>{this.props.name}</a>
+						{addOrRemoveBtn}
+						<a id='itemName' alt={this.props.name} href="#" title={this.props.name} onClick={() => {this.expandItem(this.props.item[1])}}>{this.props.name}</a>
 						<br/>
-						<p id="itemLocation">{this.props.location}</p>
-						<p id="itemLocation">{this.props.cost}</p>
+						{details}
 					</div>
 				</div>
 			</div>
@@ -41,12 +63,19 @@ class SimpleItem extends Component { //called in simpleitemslist
 
 }
 
+function mapStatesToProps(state) {
+	return {
+		trip: state.trip.trip
+	}
+}
+
 function matchDispatchToProps(dispatch) {
 	return bindActionCreators({
-		expandAnimal: expandAnimal,
 		addToTrip: addToTrip,
+		removeFromTrip: removeFromTrip,
 		expandItem: expandItem,
+		fetchAnimalsInExhibit: fetchAnimalsInExhibit,
 	}, dispatch);
 }
 
-export default connect(null, matchDispatchToProps)(SimpleItem);
+export default connect(mapStatesToProps, matchDispatchToProps)(SimpleItem);

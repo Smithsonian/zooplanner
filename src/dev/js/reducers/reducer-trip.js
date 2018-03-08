@@ -6,7 +6,7 @@ const initialState = {
 export default function(state=initialState, action) {
     switch(action.type) {
         case "ADD_TO_TRIP": {
-            return {...state, trip: [...state.trip, action.payload[1]]}
+            return {...state, trip: [...state.trip, action.payload]}
         }
         case "CLEAR_TRIP": {
             return {...state, trip: []}

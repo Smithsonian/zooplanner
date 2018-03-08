@@ -73,7 +73,7 @@ export class Date extends Component {
 						<div id='event-date'>
 							loading...
 						</div>
-						<button type='button' className='btn btn-default' onClick={this.props.onClick}>START</button>
+						<button type='button' className='btn btn-default' disabled={!this.props.hoursFetched || !this.props.eventFetched} onClick={this.props.onClick}>START</button>
 					</div>
 				</div>
 			)

@@ -2,7 +2,7 @@
 export function expandItem(item) {
     return {
         type: "EXPAND",
-        payload: item[1]
+        payload: item
     }
 }
 
