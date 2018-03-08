@@ -39,14 +39,13 @@ class SimpleItemsList extends Component { //called in categories
 			} else {
 				let passedList = this.convertToArray(this.props.exhibits);
 				listItem = passedList.map((item) => {
-					item = item[1]
 					return (
 						<SimpleItem
-							key = {item.title}
-							name={item.title}
-							img={item.image}
+							key = {item[1].title}
+							name={item[1].title}
+							img={item[1].image}
 							location={null}
-							coordinates={item.coordinates}
+							coordinates={item[1].coordinates}
 							type={this.props.type}
 							item={item}/>
 					);
@@ -58,15 +57,14 @@ class SimpleItemsList extends Component { //called in categories
 			} else {
 				let passedList = this.convertToArray(this.props.attractions);
 				listItem = passedList.map((item) => {
-					item = item[1]
 					return (
 						<SimpleItem
-							key = {item.title}
-							name={item.title}
-							img={item.image}
+							key = {item[1].title}
+							name={item[1].title}
+							img={item[1].image}
 							location={null}
-							cost={item.cost}
-							coordinates={item.coordinates}
+							cost={item[1].cost}
+							coordinates={item[1].coordinates}
 							type={this.props.type}
 							item={item}/>
 					)

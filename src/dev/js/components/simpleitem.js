@@ -9,7 +9,6 @@ import {fetchAnimalsInExhibit} from "../actions/exhibitActions";
 
 class SimpleItem extends Component { //called in simpleitemslist
 	expandItem(item) {
-		console.log(item)
 		this.props.expandItem(item);
 		if (item.type === "Exhibit") {
 			this.props.fetchAnimalsInExhibit(item.nid);
@@ -55,6 +54,7 @@ class SimpleItem extends Component { //called in simpleitemslist
 						<a id='itemName' alt={this.props.name} href="#" title={this.props.name} onClick={() => {this.expandItem(this.props.item[1])}}>{this.props.name}</a>
 						<br/>
 						{details}
+						<p>{this.props.type}</p>
 					</div>
 				</div>
 			</div>

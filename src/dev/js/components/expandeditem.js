@@ -28,7 +28,7 @@ class ExpandedItem extends Component { //called in explorebar
 	}
 
 	addToTrip(item){
-		this.props.addToTrip(item[1]);
+		this.props.addToTrip(item);
 	}
 
 	removeFromTrip(item) {
