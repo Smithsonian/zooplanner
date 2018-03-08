@@ -9,6 +9,7 @@ import {connect} from 'react-redux';
 import {fetchAnimals} from "../actions/animalActions";
 import {fetchExhibits} from '../actions/exhibitActions';
 import {fetchAttractions} from '../actions/attractionActions';
+// import {expandItem} from '../actions/exploreBarActions';
 
 
 class ExploreBar extends Component { //filters in order of ammenities, attractions, daily programs, exhibits, food, restrooms
@@ -35,9 +36,10 @@ class ExploreBar extends Component { //filters in order of ammenities, attractio
 	// 	}
 	// }
 	renderDisplay() {
-		switch(this.props.animalExpanded) {
-			case null: return <Categories/>
-			default: return <ExpandedItem/>
+		if (this.props.itemInFocus) {
+			return <ExpandedItem/>
+		} else {
+			return <Categories/>
 		}
 	}
 
@@ -69,6 +71,7 @@ function mapStateToProps(state) {
 		animals: state.animals.animals,
 		animalsFetched: state.animals.fetched,
 		animalExpanded: state.animals.expandAnimal,
+		itemInFocus: state.exploreBar.expanded,
 	};
 }
 
