@@ -25,6 +25,7 @@ class SimpleItemsList extends Component { //called in categories
 					return (
 						<SimpleItem
 							key = {item[1].title}
+							origin="exploreBar"
 							name={item[1].title}
 							img={item[1].image}
 							location={item[1].exhibit_name}

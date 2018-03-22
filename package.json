@@ -11,6 +11,7 @@
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.2.0",
     "react-dropdowns-datepicker": "^1.0.3",
+    "react-google-maps": "^9.4.5",
     "react-redux": "^5.0.7",
     "react-scripts": "1.0.17",
     "redux": "^3.7.2",

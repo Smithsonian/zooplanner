@@ -43,20 +43,41 @@ class SimpleItem extends Component { //called in simpleitemslist
 		} else {
 			addOrRemoveBtn = <button type="button" title='ADD TO TRIP' className="btn btn-add" onClick={() => this.addToTrip(this.props.item[1])}><i className="glyphicon glyphicon-plus"></i></button>
 		}
-		return (
-			<div className='simpleItem'>
-				<div className="row">
-					<div className="col-3" id="itemImage">
-						<a href="#" alt={this.props.name} onClick={() => {this.expandItem(this.props.item[1])}}><img src={this.props.img}/></a>
-					</div>
-					<div className='col-8' id="itemInfo">
-						{addOrRemoveBtn}
-						<a id='itemName' alt={this.props.name} href="#" title={this.props.name} onClick={() => {this.expandItem(this.props.item[1])}}>{this.props.name}</a>
-						<br/>
-						{details}
-						<p>{this.props.type}</p>
+
+		var element;
+		if (this.props.origin === "exploreBar") {
+			element = 
+				<div className='simpleItem'>
+					<div className="row">
+						<div className="col-3" id="itemImage">
+							<a href="#" alt={this.props.name} onClick={() => {this.expandItem(this.props.item[1])}}><img src={this.props.img}/></a>
+						</div>
+						<div className='col-8' id="itemInfo">
+							{addOrRemoveBtn}
+							<a id='itemName' alt={this.props.name} href="#" title={this.props.name} onClick={() => {this.expandItem(this.props.item[1])}}>{this.props.name}</a>
+							<br/>
+							{details}
+							<p>{this.props.type}</p>
+						</div>
 					</div>
 				</div>
+		} else {
+			element = 
+				<div>
+					<div className="row" id="mapItemName">
+						<a alt={this.props.name} href="#" title={this.props.name} onClick={() => {this.expandItem(this.props.item[1])}}>{this.props.name}</a>
+						&nbsp; &nbsp; &nbsp;
+						{addOrRemoveBtn}
+					</div>
+					<div className="row" id="mapItemImage">
+						<a href="#" alt={this.props.name} onClick={() => {this.expandItem(this.props.item[1])}}><img src={this.props.img}/></a>
+					</div>
+					
+				</div>
+		}
+		return (
+			<div>
+				{element}
 			</div>
 		);
 	}

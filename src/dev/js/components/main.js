@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../../css/Main.css';
 import ExploreBar from './explorebar.js'
 import TripBar from './tripbar.js'
+import MyMapComponent from './map.js'
 
 class Main extends Component { //called in App
 	render() {
@@ -15,7 +16,7 @@ class Main extends Component { //called in App
 						</aside>
 
 						<div className='col-7' id='mapContainer'>
-							Hiiiiiiiiiiiii
+							<MyMapComponent />
 						</div>
 
 						<aside className='col' id='tripBar'>

@@ -118,6 +118,7 @@ html, body {
 	max-height: 100%;
 	min-height: 100%;
 	background-color: #CDD7E7;
+	padding: 0px;
 }
 /*MAIN END*/
 
@@ -381,8 +382,31 @@ input[type="checkbox"] ~ label {
 	font-weight: bold;
 	display: inline;
 	white-space:nowrap;
-	text-overflow: ellipsis;
-
+	
+}
+#mapItemImage {
+	overflow: hidden;
+	position: relative;
+	width: 150px;
+	height: 90px;
+	/* display: flex; */
+	float: left;
+	margin: 0 auto;
+	left: 22px;
+}
+#mapItemImage img {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: -25px;
+	display: inline-block;
+}
+#mapItemName {
+	font-size: 1em;
+	font-weight: bold;
+	display: inline;
+	white-space:nowrap;
+	margin: 0px 0px 0px 0px;
 }
 #itemLocation {
 	font-size: 0.9em;
