@@ -285,6 +285,7 @@ hr {
 	font-family: sans-serif;
 	color: #6D6F71;
 	padding-right: 0px;
+	white-space:nowrap;
 
 }
 #filter {
