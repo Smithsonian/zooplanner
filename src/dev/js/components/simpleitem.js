@@ -50,7 +50,7 @@ class SimpleItem extends Component { //called in simpleitemslist
 				<div className='simpleItem'>
 					<div className="row">
 						<div className="col-3" id="itemImage">
-							<a href="#" alt={this.props.name} onClick={() => {this.expandItem(this.props.item[1])}}><img src={this.props.img}/></a>
+							<a href="#" alt={this.props.name} onClick={() => {this.expandItem(this.props.item[1])}}><img alt={this.props.name} src={this.props.img}/></a>
 						</div>
 						<div className='col-8' id="itemInfo">
 							{addOrRemoveBtn}
@@ -70,7 +70,7 @@ class SimpleItem extends Component { //called in simpleitemslist
 						{addOrRemoveBtn}
 					</div>
 					<div className="row" id="mapItemImage">
-						<a href="#" alt={this.props.name} onClick={() => {this.expandItem(this.props.item[1])}}><img src={this.props.img}/></a>
+						<a href="#" alt={this.props.name} onClick={() => {this.expandItem(this.props.item[1])}}><img alt={this.props.name} src={this.props.img}/></a>
 					</div>
 					
 				</div>

@@ -19,7 +19,7 @@ export default function(state=initialState, action) {
         case "FETCH_HOURS_FULFILLED": {
             return {...state, hoursFetched: true, hours: action.payload.data, notes: action.payload.data}
         }
+        default: return state;
     }
-    return state
 }
 

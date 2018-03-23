@@ -14,7 +14,6 @@ class ExpandedItem extends Component { //called in explorebar
 	}
 
 	expandItem(item) {
-		this.props.unexpandItem();
 		this.props.expandItem(item);
 		if (item.type === "Exhibit") {
 			this.props.fetchAnimalsInExhibit(item.nid);
@@ -42,6 +41,7 @@ class ExpandedItem extends Component { //called in explorebar
 		return result;
 	}
 
+
 	render() {
 		var animals = <p></p>
 		var relatedAnimals = <p></p>
@@ -58,9 +58,9 @@ class ExpandedItem extends Component { //called in explorebar
 				animals = passedList.map((item) => {
 					item = item[1]
 					return (
-						<div>
+						<div key={item.title}>
 							<div className="smallImage">
-								<img src={item.image}/>
+								<img alt={item.title} src={item.image}/>
 								<a href="#" title={item.title} alt={item.title} className="smallImageTitle" onClick={() => this.expandItem(item)}>{item.title}</a>
 							</div>
 						</div>
@@ -84,7 +84,7 @@ class ExpandedItem extends Component { //called in explorebar
 				<br/>
 				<div className="row">
 					<div className="col-6" id="expandedItemImage">
-						<img src={this.props.item.image}/>
+						<img alt={this.props.item.title} src={this.props.item.image}/>
 					</div>
 				</div>
 				<div id="btn-add-lrgContainer">

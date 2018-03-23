@@ -57,7 +57,7 @@ export class Date extends Component {
 				<p id='visit-date'>Date of Visit</p>
 				<form>
 					<div className='form-group'>
-						<input type='date' className='form-control' min= {this.minDate()} max='2018-12-12' id='calendar' value={this.props.date} onChange={this.handleChange}/>
+						<input type='date' className='form-control' min= {this.minDate()} max='2018-12-12' id='calendar' onChange={this.handleChange}/>
 					</div>
 					<button type='button' className='btn btn-default' disabled={!this.state.formfilled} onClick={this.handleClick}>NEXT</button>
 				</form>

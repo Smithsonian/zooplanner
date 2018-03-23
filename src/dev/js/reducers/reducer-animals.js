@@ -24,6 +24,6 @@ export default function(state=initialState, action) {
         case "UNEXPAND_ANIMAL": {
             return {...state, expandAnimal: action.payload}
         }
+        default: return state
     }
-    return state
 }

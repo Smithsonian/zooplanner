@@ -31,10 +31,10 @@ class Trip extends Component {
             listItem = passedList.map((item) => {
                 item = item[1];
                 return (
-                    <div className='simpleItem'>
+                    <div className='simpleItem' key={item.title}>
                         <div className="row">
                             <div className="col-3" id="itemImage">
-                                <a href="#" alt={item.title}><img src={item.image}/></a>
+                                <a href="#" alt={item.title}><img alt={item.title} src={item.image}/></a>
                             </div>
                             <div className='col-8' id="itemInfo">
                                 <button type="button" title='REMOVE' className="btn btn-remove" onClick={() => this.removeFromTrip(item)}><i className="glyphicon glyphicon-remove"></i></button>

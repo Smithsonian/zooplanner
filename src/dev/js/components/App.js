@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../../css/Main.css';
 import Date from './date.js'
 import Main from './main.js'
-import {connect} from 'react-redux';
 
 class App extends Component {
 	constructor(props) {

@@ -140,6 +140,11 @@ html, body {
 /*DATE OVERLAY*/
 #date-body {
 	text-align: center;
+	background-image: url('/../background.jpg');
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 	background-color: rgba(205, 209, 217, 0.80);
 	z-index: 1;
 	min-height: 100vh;
