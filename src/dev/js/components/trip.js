@@ -23,6 +23,10 @@ class Trip extends Component {
         this.props.updateTrip(newTrip);
         console.log(this.props.trip);
     }
+
+    dragAlert() {
+        alert("you can now drag to move around")
+    }
     
     render() {
         var listItem = <p></p>
@@ -54,6 +58,9 @@ class Trip extends Component {
                 )
             });
         } else {
+            // if (this.props.trip.length == 2) {
+            //     this.dragAlert();
+            // }
             let passedList = this.convertToArray(this.props.trip);
             listItem = <Reorder
                             reorderId="my-list" 
@@ -70,7 +77,7 @@ class Trip extends Component {
                             {passedList.map((item) => {
                                 item = item[1];
                                 return (
-                                    <div className='simpleItem' key={item.title}>
+                                    <div className='simpleItemTrip' key={item.title}>
                                         <div className="row">
                                             <div className="col-3" id="itemImage">
                                                 <a href="#" alt={item.title}><img alt={item.title} src={item.image}/></a>

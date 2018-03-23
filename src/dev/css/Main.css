@@ -362,6 +362,16 @@ input[type="checkbox"] ~ label {
 	text-overflow: ellipsis;
 	color: #FFFFFF;
 	background-color: #FFFFFF;
+}
+.simpleItemTrip {
+	border: 1px solid #BAC4D6;
+	height: 80px;
+	margin-bottom: 5px;
+	box-shadow: 3px 0px 6px #888888;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: #FFFFFF;
+	background-color: #FFFFFF;
 	cursor: move;
 }
 
