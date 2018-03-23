@@ -61,7 +61,7 @@ class ExpandedItem extends Component { //called in explorebar
 						<div key={item.title}>
 							<div className="smallImage">
 								<img alt={item.title} src={item.image}/>
-								<a href="#" title={item.title} alt={item.title} className="smallImageTitle" onClick={() => this.expandItem(item)}>{item.title}</a>
+								<a href="#topper" title={item.title} alt={item.title} className="smallImageTitle" onClick={() => this.expandItem(item)}>{item.title}</a>
 							</div>
 						</div>
 					)
@@ -72,6 +72,7 @@ class ExpandedItem extends Component { //called in explorebar
 		}
 		return (
 			<div className="expandedItem">
+  				<p id="topper"></p>
 				<button className="btn btn-link" onClick={() => {this.unexpand()}}> &larr; BACK</button>
 				<br/>
 				<br/>
@@ -95,6 +96,8 @@ class ExpandedItem extends Component { //called in explorebar
 				</div>
 				{relatedAnimals}
 				{animals}
+				<br/>
+				
 			</div>
 		);
 	}

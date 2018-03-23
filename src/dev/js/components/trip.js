@@ -4,7 +4,7 @@ import '../../css/Main.css';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux'
 import {removeFromTrip, updateTrip} from '../actions/tripActions'
-import Reorder, { reorder, reorderImmutable, reorderFromTo, reorderFromToImmutable } from 'react-reorder';
+import Reorder, { reorder } from 'react-reorder';
 
 class Trip extends Component {
 

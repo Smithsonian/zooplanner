@@ -59,6 +59,7 @@ class ExploreBar extends Component { //filters in order of ammenities, attractio
 					<hr/>
 					<br/>
 					<br/>
+					<br/>
 				</div>
 				{this.renderDisplay()}
 			</div>

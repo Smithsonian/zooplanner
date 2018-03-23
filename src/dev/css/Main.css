@@ -362,7 +362,9 @@ input[type="checkbox"] ~ label {
 	text-overflow: ellipsis;
 	color: #FFFFFF;
 	background-color: #FFFFFF;
+	cursor: move;
 }
+
 .simpleItemShadow {
 	height: 80px;
 	margin-bottom: 5px;
@@ -511,6 +513,11 @@ input[type="checkbox"] ~ label {
 }
 #expandedItemDescription {
 	padding: 20px;
+}
+#scrollTop {
+	position: absolute;
+	bottom: 0px;
+	padding-left: 110px;
 }
 
 #dateHoursBar {
