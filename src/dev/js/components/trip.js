@@ -62,6 +62,9 @@ class Trip extends Component {
                             lock="horizontal"
                             onReorder={this.onReorder.bind(this)} // Callback when an item is dropped (you will need this to update your state)
                             autoScroll={true}
+                            placeholder={
+                                <div className="simpleItemShadow" /> // Custom placeholder element (optional), defaults to clone of dragged element
+                              }
                         >
                             
                             {passedList.map((item) => {

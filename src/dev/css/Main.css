@@ -363,6 +363,18 @@ input[type="checkbox"] ~ label {
 	color: #FFFFFF;
 	background-color: #FFFFFF;
 }
+.simpleItemShadow {
+	height: 80px;
+	margin-bottom: 5px;
+	box-shadow: 3px 0px 6px #888888;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: #FFFFFF;
+	background-color: rgb(177, 194, 206);
+}
+.dragged {
+	background: #89E5DE;
+}
 
 #itemImage {
 	overflow: hidden;
