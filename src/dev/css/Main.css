@@ -4,7 +4,9 @@
 
 html, body {
     max-width: 100%;
-    max-height: 100%;
+	max-height: 100%;
+	-webkit-font-smoothing: antialiased !important;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
 	/* overflow-x: hidden;
 	margin-left: 20px; */
 }
@@ -153,12 +155,12 @@ html, body {
 #welcome-title {
 	padding-top: 15%;
 	font-weight: bold;
-	color: #959799;
+	color: #27708F;
 }
 
 #visit-date {
 	padding-top: 60px;
-	color: #959799;
+	color: #4a4b4d;
 
 }
 #event-date {
@@ -280,7 +282,7 @@ html, body {
 hr {
 	margin-top: -10px;
 	margin-bottom: 0.5em;
-	border-width: 2px;
+	border-width: 1px;
 	border-color: #27708F;
 }
 
@@ -523,7 +525,9 @@ input[type="checkbox"] ~ label {
 	text-align: center;
 }
 #tripList {
-	height: 76vh;
+	height: 77vh;
+	max-width: 77vh;
+	overflow: scroll;
 }
 #finishTripBar {
 	margin:auto;

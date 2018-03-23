@@ -14,6 +14,9 @@ export default function(state=initialState, action) {
         case "REMOVE_FROM_TRIP": {
             return {...state, trip: state.trip.filter(item => item !== action.payload)}
         }
+        case "UPDATE_TRIP": {
+            return {...state, trip: action.payload}
+        }
         default: {
             return state
         }

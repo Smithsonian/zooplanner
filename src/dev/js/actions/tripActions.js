@@ -17,3 +17,10 @@ export function removeFromTrip(item) {
         payload: item
     }
 }
+
+export function updateTrip(newTrip) {
+    return {
+        type: "UPDATE_TRIP",
+        payload: newTrip
+    }
+}
