@@ -13,6 +13,7 @@
     "react-dropdowns-datepicker": "^1.0.3",
     "react-google-maps": "^9.4.5",
     "react-redux": "^5.0.7",
+    "react-reorder": "^3.0.0-alpha.6",
     "react-scripts": "1.0.17",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
