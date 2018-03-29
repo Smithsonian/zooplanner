@@ -26,7 +26,7 @@ class SimpleItem extends Component { //called in simpleitemslist
 	}
 
 	removeFromTrip(item) {
-        this.props.removeFromTrip(item);
+		this.props.removeFromTrip(item);
     }
 
 	render() { //props here are normal react props grabbed from simpleitemslist

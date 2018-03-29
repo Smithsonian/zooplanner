@@ -7,4 +7,6 @@ import promise from 'redux-promise-middleware';
 const middleware = applyMiddleware(promise(), thunk, createLogger())
 const store = createStore(allReducers, middleware);
 
+console.log(store.getState())
 export default store;
+

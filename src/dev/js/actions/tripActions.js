@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export function addToTrip(item) {
     return {
         type: "ADD_TO_TRIP",
