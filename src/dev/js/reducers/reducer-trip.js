@@ -16,7 +16,7 @@ function fillTrip() {
             if (hash === "") {
                 return []
             } else {
-                hash = hash.split("&")
+                hash = hash.split("&&")
                 for (var i = 1; i < hash.length - 1; i++) {
                     currTrip[i-1] = hash[i].replace(/%20/g, " ")
                 }
@@ -31,10 +31,10 @@ function fillTrip() {
 }
 
 function stateToString(newTrip) {
-    var str = "!trip=&"
+    var str = "!trip=&&"
     for (var i = 0; i < newTrip.length; i++) {
         str += newTrip[i].title
-        str += "&"
+        str += "&&"
     }
     window.location.hash = str
 }

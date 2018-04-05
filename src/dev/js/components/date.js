@@ -25,11 +25,14 @@ export class Date extends Component {
 
 	handleClick(event) { //change page, adds date parameters to HoursAPI url, call HoursAPI
 		const HoursAPI = 'https://nationalzoo.si.edu/pyd/views/homepage_card?display_id=hours&date[value][date]='
-		const EventsAPI = 'https://nationalzoo.si.edu/pyd/views/events?display_id=special_events'
+		const EventsAPI = 'https://nationalzoo.si.edu/pyd/views/events?display_id=special_events&date[value][date]='
 		this.setState({page1: false});
-		var completeHoursAPI = HoursAPI + this.formatDateForQuery();
+		const dateForQuery = this.formatDateForQuery();
+		var completeHoursAPI = HoursAPI + dateForQuery;
+		var completeEventsAPI = EventsAPI + dateForQuery;
+		console.log(completeEventsAPI);
 		this.props.fetchHours(completeHoursAPI);
-		this.props.fetchEvent('https://nationalzoo.si.edu/pyd/views/events?display_id=special_events&date[value][month]=5&date[value][day]=17&date[value][year]=2018')
+		this.props.fetchEvent(completeEventsAPI);
 		//request for events need to still add date parameters here!!!!!!
 		// axios.get('https://nationalzoo.si.edu/pyd/views/events?display_id=special_events&date[value][month]=05&date[value][day]=17&date[value][year]=2018')
 		// 	.then(response => this.setState({events: [response.data[0].title, response.data[0].description, response.data[0].image, response.data[0].path]}));
@@ -93,7 +96,11 @@ export class Date extends Component {
 					notes += ", " + this.props.notes[2].note
 				}
 			}
-			var eventURL = "https://nationalzoo.si.edu" + this.props.event[0].path
+			var eventTag = <span className="detail-date">No event scheduled</span>
+			if (this.props.event[0] != null) {
+				const eventURL = "https://nationalzoo.si.edu" + this.props.event[0].path;
+				eventTag = <span className='detail-date'><a target="_blank" href={eventURL}>{this.props.event[0].title} <i className="glyphicon glyphicon-new-window"></i></a></span>
+			}
 			datePage2 = (
 				<div className='container-fluid' id='date-body'>
 					<div className='date-scrn-2'>
@@ -104,7 +111,7 @@ export class Date extends Component {
 							<div id="event-date-details">
 								TRIP DATE:&nbsp;<span className='detail-date'>{this.props.date}</span><br/>
 								ZOO HOURS:&nbsp;<span className='detail-date'>{this.props.hours[2].time}</span><br/>
-								EVENTS:&nbsp;<span className='detail-date'><a target="_blank" href={eventURL}>{this.props.event[0].title} <i className="glyphicon glyphicon-new-window"></i></a></span><br/>
+								EVENTS:&nbsp;{eventTag}<br/>
 								PLEASE NOTE:&nbsp;<span className='detail-date'>{notes}</span>
 							</div>
 						</div>

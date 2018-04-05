@@ -54,7 +54,7 @@ class SimpleItem extends Component { //called in simpleitemslist
 						</div>
 						<div className='col-8' id="itemInfo">
 							{addOrRemoveBtn}
-							<a id='itemName' alt={this.props.name} href="#" title={this.props.name} onClick={() => {this.expandItem(this.props.item[1])}}>{this.props.name}</a>
+							<a id='itemName' alt={this.props.name} href="#" title={this.props.name} onClick={() => {this.expandItem(this.props.item[1])}}>{this.props.name.replace(/&#039;/g, "'")}</a>
 							<br/>
 							{details}
 							<p>{this.props.type}</p>

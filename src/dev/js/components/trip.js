@@ -84,7 +84,7 @@ class Trip extends Component {
                                             </div>
                                             <div className='col-8' id="itemInfo">
                                                 <button type="button" title='REMOVE' className="btn btn-remove" onClick={() => this.removeFromTrip(item)}><i className="glyphicon glyphicon-remove"></i></button>
-                                                <a id='itemName' alt={item.title} href="#" title={item.title}>{item.title}</a>
+                                                <a id='itemName' alt={item.title} href="#" title={item.title}>{item.title.replace(/&#039;/g, "'")}</a>
                                                 <br/>
                                                 <p id="itemLocation">{item.exhibit_name}</p>
                                             </div>

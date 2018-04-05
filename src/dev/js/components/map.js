@@ -3,12 +3,128 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "reac
 import {connect} from 'react-redux';
 import SimpleItem from './simpleitem.js'
 
+const style = [
+    {
+      "elementType": "geometry.fill",
+      "stylers": [
+        {
+          "visibility": "on"
+        }
+      ]
+    },
+    {
+      "featureType": "administrative",
+      "elementType": "geometry",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    },
+    {
+      "featureType": "landscape.man_made",
+      "elementType": "geometry.fill",
+      "stylers": [
+        {
+          "visibility": "simplified"
+        }
+      ]
+    },
+    {
+      "featureType": "landscape.natural.landcover",
+      "stylers": [
+        {
+          "visibility": "on"
+        }
+      ]
+    },
+    {
+      "featureType": "landscape.natural.terrain",
+      "elementType": "geometry.fill",
+      "stylers": [
+        {
+          "color": "#42ff22"
+        }
+      ]
+    },
+    {
+      "featureType": "poi",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    },
+    {
+      "featureType": "poi.attraction",
+      "stylers": [
+        {
+          "visibility": "on"
+        }
+      ]
+    },
+    {
+      "featureType": "poi.attraction",
+      "elementType": "geometry.fill",
+      "stylers": [
+        {
+          "color": "#b8ff9d"
+        }
+      ]
+    },
+    {
+      "featureType": "poi.attraction",
+      "elementType": "geometry.stroke",
+      "stylers": [
+        {
+          "visibility": "on"
+        }
+      ]
+    },
+    {
+      "featureType": "poi.attraction",
+      "elementType": "labels",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    },
+    {
+      "featureType": "poi.business",
+      "elementType": "labels",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    },
+    {
+      "featureType": "road",
+      "elementType": "labels.icon",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    },
+    {
+      "featureType": "transit",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    }
+  ];
+
 const GoogleMapsWrapper = withScriptjs(withGoogleMap(props => {
     const {onMapMounted, ...otherProps} = props;
     return (<GoogleMap 
             defaultZoom={17}
             defaultCenter={{ lat: 38.9296, lng: -77.0498 }}
-            ref={c => {onMapMounted && onMapMounted(c)}}>
+            ref={c => {onMapMounted && onMapMounted(c)}}
+            defaultOptions={{styles: style}}>
             {props.children}
             </GoogleMap>
     )
@@ -106,6 +222,17 @@ class MyMapComponent extends Component {
             );
         });
 
+        const restroomLocations = ["38.927994, -77.047984", "38.928090, -77.048108", "38.930439, -77.054447", "38.932158, -77.052187", "38.930270, -77.050949"];
+        const restroomMarker = restroomLocations.map((item) => {
+            return (
+                <Marker
+                    position={{lat: this.parseCoords(item)[0], lng: this.parseCoords(item)[1]}}
+                    icon='https://www.google.com.au/maps/vt/icon/name=assets/icons/spotlight/spotlight_pin_v2_shadow-1-small.png,assets/icons/spotlight/spotlight_pin_v2-1-small.png,assets/icons/spotlight/spotlight_pin_v2_dot-1-small.png,assets/icons/spotlight/spotlight_pin_v2_accent-1-small.png&highlight=93FF95,617D9B,3E5066,ffffff&color=93FF95?scale=0.7'
+                >
+                </Marker>
+            );
+        });
+
         //google maps link to use when in development https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places
         //actual APIkey: https://maps.googleapis.com/maps/api/js?key=AIzaSyC0DrCZRqF-G8hmIbh8_1Y6K71qub3uPhY
         return(
@@ -117,6 +244,7 @@ class MyMapComponent extends Component {
             >
                 {exhibitMarker}
                 {attractionMarker}
+                {restroomMarker}
             </GoogleMapsWrapper>
 
         )

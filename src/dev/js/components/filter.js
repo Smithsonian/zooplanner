@@ -35,8 +35,7 @@ class Filter extends Component {
 							<label htmlFor='dailyprogs'>DAILY&nbsp;PROGRAMS</label>
 						</div>
 						<div className="col-5" id='filterlabel'>
-							<input type='checkbox' id='restrooms' name='filter' value='restrooms' onClick={this.props.updateCheckbox} />
-							<label htmlFor='restrooms'>RESTROOMS</label>
+							<label><input type='checkbox' id='restrooms' name='filter' value='restrooms' onClick={this.props.updateCheckbox} />&nbsp;&nbsp;&nbsp;&nbsp;RESTROOMS <img alt="restroom pin" src="https://www.google.com.au/maps/vt/icon/name=assets/icons/spotlight/spotlight_pin_v2_shadow-1-small.png,assets/icons/spotlight/spotlight_pin_v2-1-small.png,assets/icons/spotlight/spotlight_pin_v2_dot-1-small.png,assets/icons/spotlight/spotlight_pin_v2_accent-1-small.png&highlight=93FF95,617D9B,3E5066,ffffff&color=93FF95?scale=0.5"/></label>
 						</div>
 						
 					</div>
