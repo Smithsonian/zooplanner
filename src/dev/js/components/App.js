@@ -5,33 +5,35 @@ import Date from './date.js'
 import Main from './main.js'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-// import {fillGlossary} from '../actions/tripActions'
+import {setPage} from '../actions/AppActions';
+import {importAnimals} from '../actions/tripActions';
 
 class App extends Component {
 	constructor(props) {
-		super(props);
-		this.state = {overlay:'date', };
+		super();
 		this.closeOverlay = this.closeOverlay.bind(this);
 	}
 
 	closeOverlay() {
-		this.setState({overlay:''})
+		this.props.setPage("main")
 	}
 
 	renderOverlay() { //later change this so it passes in a parameter ie: date, searchbyanimal, preplan... then use it for the switch statement
-		switch(this.state.overlay) {
+		switch(this.props.page) {
 			case 'date': return <Date onClick={this.closeOverlay} />
-			case '': return <Main />
+			case 'main': return <Main />
 			case null: return <div></div>
 		}
 	}
 
-	// componentWillMount() {
-	// 	fillGlossary()
-	// }
+	componentWillMount() {
+		if (this.props.tripHash !== "") {
+			this.props.importAnimals();
+		}
+	}
+
 
 	render () {
-
 		return (
 			<div className='App'>
 			    <div id='overlay'>
@@ -42,11 +44,18 @@ class App extends Component {
 	}
 }
 
-// function matchDispatchToProps(dispatch) {
-// 	return bindActionCreators({
-// 		fillGlossary: fillGlossary
-// 	}, dispatch);
-// }
+function mapStateToProps(state) {
+	return {
+		page: state.App.page,
+		tripHash: state.trip.tripHash,
+	};
+}
 
-// export default connect(null, matchDispatchToProps)(App);
-export default App;
+function matchDispatchToProps(dispatch) {
+	return bindActionCreators({
+		setPage: setPage,
+		importAnimals: importAnimals,
+	}, dispatch);
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(App);

@@ -27,14 +27,15 @@ class SimpleItem extends Component { //called in simpleitemslist
 
 	removeFromTrip(item) {
 		this.props.removeFromTrip(item);
-    }
+	}
+	
 
 	render() { //props here are normal react props grabbed from simpleitemslist
 		var details;
 		if (this.props.type === "attraction") {
 			details = <p id="itemLocation">Cost: {this.props.cost}</p>
 		} else if (this.props.type === "animal") {
-			details = <p id="itemLocation">{this.props.location}</p>
+			details = <p id="itemLocation">{this.props.location.replace(/&#039;/g, "'")}</p>
 		}
 
 		var addOrRemoveBtn;
@@ -86,7 +87,8 @@ class SimpleItem extends Component { //called in simpleitemslist
 
 function mapStatesToProps(state) {
 	return {
-		trip: state.trip.trip
+		trip: state.trip.trip,
+		currTripItems: state.trip.currTripItems,
 	}
 }
 

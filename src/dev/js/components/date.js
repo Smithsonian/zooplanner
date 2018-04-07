@@ -30,7 +30,6 @@ export class Date extends Component {
 		const dateForQuery = this.formatDateForQuery();
 		var completeHoursAPI = HoursAPI + dateForQuery;
 		var completeEventsAPI = EventsAPI + dateForQuery;
-		console.log(completeEventsAPI);
 		this.props.fetchHours(completeHoursAPI);
 		this.props.fetchEvent(completeEventsAPI);
 		//request for events need to still add date parameters here!!!!!!

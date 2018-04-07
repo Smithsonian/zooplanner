@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../../css/Main.css';
 import SimpleItem from './simpleitem.js'
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {addToTrip} from '../actions/tripActions'
 
 
 class SimpleItemsList extends Component { //called in categories
@@ -95,6 +97,12 @@ function mapStateToProps(state) {
 		exhibitsFetched: state.exhibits.fetched,
 		attractions: state.attractions.attractions,
 		attractionsFetched: state.attractions.fetched,
+		currTripItems: state.trip.currTripItems,
 	};
 }
-export default connect(mapStateToProps)(SimpleItemsList);
+function matchDispatchToProps(dispatch) {
+	return bindActionCreators({
+		addToTrip: addToTrip,
+	}, dispatch);
+}
+export default connect(mapStateToProps, matchDispatchToProps)(SimpleItemsList);

@@ -222,7 +222,7 @@ class MyMapComponent extends Component {
             );
         });
 
-        const restroomLocations = ["38.927994, -77.047984", "38.928090, -77.048108", "38.930439, -77.054447", "38.932158, -77.052187", "38.930270, -77.050949"];
+        const restroomLocations = ["38.927994, -77.047984", "38.928090, -77.048108", "38.930439, -77.054447", "38.932158, -77.052187", "38.930403, -77.050962"];
         const restroomMarker = restroomLocations.map((item) => {
             return (
                 <Marker

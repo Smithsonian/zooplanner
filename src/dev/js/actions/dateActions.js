@@ -24,6 +24,7 @@ export function fetchEvent(eventsAPI) {
         })
     }
 }
+
 // export function fetchNotes() {
 //     return function(dispatch) {
 //         dispatch({

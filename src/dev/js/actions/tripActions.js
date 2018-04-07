@@ -26,3 +26,12 @@ export function updateTrip(newTrip) {
         payload: newTrip
     }
 }
+
+export function importAnimals() {
+    return function(dispatch) {
+        dispatch ({
+            type: "IMPORT_ANIMALS",
+            payload: axios.get("https://nationalzoo.si.edu/pyd/views/animals?display_id=list")
+        });
+    }
+}
