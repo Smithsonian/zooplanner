@@ -11,15 +11,15 @@ class Main extends Component { //called in App
 			<div id="content">
 		    	<div className='container-fluid'>
 			    	<div className='row'>
-			    		<aside className='col' id='exploreBar'>
+			    		<aside className='col-sm' id='exploreBar'>
 							<ExploreBar/>
 						</aside>
 
-						<div className='col-7' id='mapContainer'>
+						<div className='col-sm-7' id='mapContainer'>
 							<MyMapComponent />
 						</div>
 
-						<aside className='col' id='tripBar'>
+						<aside className='col-sm' id='tripBar'>
 							<TripBar getDate={this.props.getDate} getHours={this.props.getHours}/>
 						</aside>
 			    	</div> 
