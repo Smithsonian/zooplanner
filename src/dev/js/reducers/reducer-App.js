@@ -3,7 +3,7 @@ const initialState = {
 }
 
 function checkHash() {
-    if (window.location.hash != "") {
+    if (window.location.hash !== "") {
         return "main"
     } else {
         return "date"

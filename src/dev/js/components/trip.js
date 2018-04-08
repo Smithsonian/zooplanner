@@ -27,22 +27,11 @@ class Trip extends Component {
         alert("you can now drag to move around")
     }
 
-    // componentWillMount() {
-    //     console.log("add animals to glossary")
-    // }
-
-    // componentDidMount() {
-    //     var hash = window.location.hash.substring(23);
-    //     if (hash !== "") {
-
-    //     }
-    // }
-    
     render() {
         var listItem = <p></p>
         console.log(this.props.trip ,this.props.trip.length, "MY TRIP")
         
-        if (this.props.importAnimalsPending == true) {
+        if (this.props.importAnimalsPending || this.props.importExhibitsPending) {
             listItem= (
                 <div className='row' id='emptyTripContainer'>
                     <p id='emptyTripText'>loading...</p>
@@ -60,17 +49,23 @@ class Trip extends Component {
                 let passedList = this.convertToArray(this.props.trip);
                 listItem = passedList.map((item) => {
                     item = item[1];
+                    var itemLocation;
+                    if (item.exhibit_name == null) {
+                        itemLocation = <p id="itemLocation"></p>
+                    } else {
+                        itemLocation = <p id="itemLocation">{item.exhibit_name.replace(/&#039;/g, "'")}</p>
+                    }
                     return (
                         <div className='simpleItem' key={item.title}>
                             <div className="row">
                                 <div className="col-3" id="itemImage">
-                                    <a href="#" alt={item.title}><img alt={item.title} src={item.image}/></a>
+                                    <a href={window.location.hash} alt={item.title}><img alt={item.title} src={item.image}/></a>
                                 </div>
                                 <div className='col-8' id="itemInfo">
                                     <button type="button" title='REMOVE' className="btn btn-remove" onClick={() => this.removeFromTrip(item)}><i className="glyphicon glyphicon-remove"></i></button>
-                                    <a id='itemName' alt={item.title} href="#" title={item.title}>{item.title.replace(/&#039;/g, "'")}</a>
+                                    <a id='itemName' alt={item.title} href={window.location.hash} title={item.title}>{item.title.replace(/&#039;/g, "'")}</a>
                                     <br/>
-                                    <p id="itemLocation">{item.exhibit_name.replace(/&#039;/g, "'")}</p>
+                                    {itemLocation}
                                 </div>
                             </div>
                         </div>
@@ -97,7 +92,7 @@ class Trip extends Component {
                                 {passedList.map((item) => {
                                     item = item[1];
                                     var itemLocation;
-                                    if (item.exhibit_name === null) {
+                                    if (item.exhibit_name == null) {
                                         itemLocation = <p id="itemLocation"></p>
                                     } else {
                                         itemLocation = <p id="itemLocation">{item.exhibit_name.replace(/&#039;/g, "'")}</p>
@@ -106,11 +101,11 @@ class Trip extends Component {
                                         <div className='simpleItemTrip' key={item.title}>
                                             <div className="row">
                                                 <div className="col-3" id="itemImage">
-                                                    <a href="#" alt={item.title}><img alt={item.title} src={item.image}/></a>
+                                                    <a href={window.location.hash} alt={item.title}><img alt={item.title} src={item.image}/></a>
                                                 </div>
                                                 <div className='col-8' id="itemInfo">
                                                     <button type="button" title='REMOVE' className="btn btn-remove" onClick={() => this.removeFromTrip(item)}><i className="glyphicon glyphicon-remove"></i></button>
-                                                    <a id='itemName' alt={item.title} href="#" title={item.title}>{item.title.replace(/&#039;/g, "'")}</a>
+                                                    <a id='itemName' alt={item.title} href={window.location.hash} title={item.title}>{item.title.replace(/&#039;/g, "'")}</a>
                                                     <br/>
                                                     {itemLocation}
                                                 </div>
@@ -133,6 +128,7 @@ function mapStateToProps(state) {
     return {
         trip: state.trip.trip,
         importAnimalsPending: state.trip.importAnimalsPending,
+        importExhibitsPending: state.trip.importExhibitsPending,
     }
 }
 function matchDispatchToProps(dispatch) {

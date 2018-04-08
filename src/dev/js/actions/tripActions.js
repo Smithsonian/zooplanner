@@ -35,3 +35,12 @@ export function importAnimals() {
         });
     }
 }
+
+export function importExhibits() {
+    return function(dispatch) {
+        dispatch({
+            type: "IMPORT_EXHIBITS",
+            payload: axios.get("https://nationalzoo.si.edu/pyd/views/exhibit_list?display_id=exhibits")
+        });
+    }
+}

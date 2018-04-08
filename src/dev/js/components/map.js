@@ -119,7 +119,8 @@ const style = [
   ];
 
 const GoogleMapsWrapper = withScriptjs(withGoogleMap(props => {
-    const {onMapMounted, ...otherProps} = props;
+    // const {onMapMounted, ...otherProps} = props;
+    const {onMapMounted} = props;
     return (<GoogleMap 
             defaultZoom={17}
             defaultCenter={{ lat: 38.9296, lng: -77.0498 }}

@@ -1,36 +1,13 @@
-import axios from 'axios';
 
 const initialState = {
     trip: [],
+    tripFromHash: stringToArr(),
     tripHash: window.location.hash.substring(23),
     importAnimalsPending: false,
     importAnimalsFulfilled: false,
+    importExhibitsPending: false,
+    importExhibitsFulfilled: false,
 }
-
-// function fillTrip() {
-//     var glossary = {}
-//     var currTrip = []
-//     axios.get("https://nationalzoo.si.edu/pyd/views/animals?display_id=list")
-//         .then((response) => {
-//             for (var i = 0; i < response.data.length; i++) {
-//                 glossary[response.data[i].title] = response.data[i]
-//             }
-//             var hash = window.location.hash.substring(23);
-//             if (hash === "") {
-//                 return []
-//             } else {
-//                 hash = hash.split("&&")
-//                 for (var i = 1; i < hash.length - 1; i++) {
-//                     currTrip[i-1] = hash[i].replace(/%20/g, " ")
-//                 }
-                
-//                 for (var j = 0; j < currTrip.length; j++) {
-//                     currTrip[j] = glossary[currTrip[j]]
-//                 }
-//             }
-//         })
-//     return currTrip;
-// }
 
 function stateToString(newTrip) {
     var str = window.location.hash.substring(0, 23) + "!trip=&&";
@@ -41,6 +18,16 @@ function stateToString(newTrip) {
     window.location.hash = str;
 }
 
+function stringToArr() {
+    var currTrip = [];
+    var hash = window.location.hash.substring(23);
+    console.log(hash, "HASHH");
+    hash = hash.split("&&");
+    for (var i = 1; i < hash.length - 1; i++) {
+        currTrip[i-1] = hash[i].replace(/%20/g, " ")
+    }
+    return currTrip;
+}
 
 export default function(state=initialState, action) {
     switch(action.type) {
@@ -54,10 +41,10 @@ export default function(state=initialState, action) {
             return {...state, trip: []}
         }
         case "REMOVE_FROM_TRIP": {
-            const newTrip = state.trip.filter(item => item !== action.payload);
-            var str = ""
+            const newTrip = state.trip.filter(item => item.title !== action.payload.title);
+            const newTripFromHash = state.tripFromHash.filter(item => item !== action.payload.title)
             stateToString(newTrip)
-            return {...state, trip: newTrip}
+            return {...state, trip: newTrip, tripFromHash: newTripFromHash}
         }
         case "UPDATE_TRIP": {
             const newTrip = action.payload
@@ -70,25 +57,51 @@ export default function(state=initialState, action) {
         case "IMPORT_ANIMALS_FULFILLED": {
             var glossary = {};
             var currTrip = [];
+            var tripFromHash = state.tripFromHash;
+            var hash = state.tripHash;
 
             for (var i = 0; i < action.payload.data.length; i++) {
-                glossary[action.payload.data[i].title] = action.payload.data[i]
+                if (action.payload.data[i].type === "Animal") {
+                    glossary[action.payload.data[i].title] = action.payload.data[i];
+                }
             }
-            var hash = window.location.hash.substring(23);
             if (hash === "") {
-                return []
+                return [];
             } else {
-                hash = hash.split("&&")
-                for (var i = 1; i < hash.length - 1; i++) {
-                    currTrip[i-1] = hash[i].replace(/%20/g, " ")
-                }
-                
-                for (var j = 0; j < currTrip.length; j++) {
-                    currTrip[j] = glossary[currTrip[j]]
+                for (var j = 0; j < tripFromHash.length; j++) {
+                    if (glossary[tripFromHash[j]] !== undefined) {
+                        currTrip[j] = glossary[tripFromHash[j]];
+                    }
                 }
             }
+            const updatedTrip = state.trip.concat(currTrip);
+            return {...state, trip: updatedTrip, tripFromHash: tripFromHash, importAnimalsPending: false, importAnimalsFulfilled: true}
+        }
+        case "IMPORT_EXHIBITS_PENDING": {
+            return {...state, importExhibitsPending: true}
+        }
+        case "IMPORT_EXHIBITS_FULFILLED": {
+            glossary = {};
+            currTrip = [];
+            tripFromHash = state.tripFromHash;
+            hash = state.tripHash;
 
-            return {...state, trip: currTrip, importAnimalsPending: false, importAnimalsFulfilled: true}
+            for (i = 0; i < action.payload.data.length; i++) {
+                if (action.payload.data[i].type === "Exhibit") {
+                    glossary[action.payload.data[i].title] = action.payload.data[i];
+                }
+            }
+            if (hash === "") {
+                return [];
+            } else {
+                for (j = 0; j < tripFromHash.length; j++) {
+                    if (glossary[tripFromHash[j]] !== undefined) {
+                        currTrip[j] = glossary[tripFromHash[j]];
+                    }
+                }
+            }
+            const updatedTrip = state.trip.concat(currTrip);
+            return {...state, trip: updatedTrip, tripFromHash: tripFromHash, importExhibitsPending: false, importExhibitsFulfilled: true}
         }
         default: {
             return state

@@ -6,7 +6,7 @@ import Main from './main.js'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {setPage} from '../actions/AppActions';
-import {importAnimals} from '../actions/tripActions';
+import {importAnimals, importExhibits} from '../actions/tripActions';
 
 class App extends Component {
 	constructor(props) {
@@ -22,13 +22,14 @@ class App extends Component {
 		switch(this.props.page) {
 			case 'date': return <Date onClick={this.closeOverlay} />
 			case 'main': return <Main />
-			case null: return <div></div>
+			default: return <div></div>
 		}
 	}
 
 	componentWillMount() {
 		if (this.props.tripHash !== "") {
 			this.props.importAnimals();
+			this.props.importExhibits();
 		}
 	}
 
@@ -55,6 +56,7 @@ function matchDispatchToProps(dispatch) {
 	return bindActionCreators({
 		setPage: setPage,
 		importAnimals: importAnimals,
+		importExhibits: importExhibits,
 	}, dispatch);
 }
 
