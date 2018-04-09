@@ -135,7 +135,7 @@ class MyMapComponent extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {exhibitWindowState: {}, attractionWindowState: {}}
+        this.state = {mapWindowState: {},}
     }
 
     parseCoords(coordString) {
@@ -151,26 +151,24 @@ class MyMapComponent extends Component {
 		});
 		return result;
     }
-    
-    showExhibitWindow(arr, key) {
+
+    showMapWindow(key) {
+      let arr = this.state.mapWindowState;
+      if (arr[key] === true) {
+        arr[key] = false;
+      } else {
+        Object.keys(arr).forEach(v => arr[v] = false);
         arr[key] = true;
-        this.setState({attractionWindowState: {}})
-        this.setState({exhibitWindowState: arr});
+      }
+      this.setState({mapWindowState: arr});
     }
-    showAttractionWindow(arr, key) {
-        arr[key] = true;
-        this.setState({exhibitWindowState: {}})
-        this.setState({attractionWindowState: arr});
-    }
+
 
     render() {
-        
-        let exhibitList = this.convertToArray(this.props.exhibits);
 
-        var exhibitWindow = {}
-        exhibitList.map((item) => {
-            exhibitWindow[item[1].title] = false
-        })
+        let exhibitList = this.convertToArray(this.props.exhibits);
+        let attractionsList = this.convertToArray(this.props.attractions);
+        let restroomsList = this.props.restrooms;
 
         const exhibitMarker = exhibitList.map((item) => {
             return (
@@ -178,9 +176,10 @@ class MyMapComponent extends Component {
                     key={item[1].title}
                     position={{lat: this.parseCoords(item[1].coordinates)[0], lng: this.parseCoords(item[1].coordinates)[1]}}
                     icon='https://www.google.com.au/maps/vt/icon/name=assets/icons/spotlight/spotlight_pin_v2_shadow-1-small.png,assets/icons/spotlight/spotlight_pin_v2-1-small.png,assets/icons/spotlight/spotlight_pin_v2_dot-1-small.png,assets/icons/spotlight/spotlight_pin_v2_accent-1-small.png&highlight=93FF95,C34D57,960a0a,ffffff&color=93FF95?scale=0.7'    
-                    onClick={() => this.showExhibitWindow(exhibitWindow, item[1].title)}
+                    onClick={() => this.showMapWindow(item[1].title)}
                 >
-                    {this.state.exhibitWindowState[item[1].title] && <InfoWindow>
+                    {this.state.mapWindowState[item[1].title] && 
+                      <InfoWindow onCloseClick={() => this.showMapWindow(item[1].title)}>
                         <div>
                             <SimpleItem
                                 key = {item[1].title}
@@ -188,27 +187,23 @@ class MyMapComponent extends Component {
                                 img={item[1].image}
                                 location={item[1].exhibit_name}
                                 type={this.props.type}
-                                item={item}/>
+                                item={item[1]}/>
                         </div>
                     </InfoWindow>}
                 </Marker>
             );
         });
 
-        let attractionsList = this.convertToArray(this.props.attractions);
-        var attractionWindow = {}
-        attractionsList.map((item) => {
-            attractionWindow[item[1].title] = false
-        })
         const attractionMarker = attractionsList.map((item) => {
             return (
                 <Marker
                     key={item[1].title}
                     position={{lat: this.parseCoords(item[1].coordinates)[0], lng: this.parseCoords(item[1].coordinates)[1]}}
                     icon='https://www.google.com.au/maps/vt/icon/name=assets/icons/spotlight/spotlight_pin_v2_shadow-1-small.png,assets/icons/spotlight/spotlight_pin_v2-1-small.png,assets/icons/spotlight/spotlight_pin_v2_dot-1-small.png,assets/icons/spotlight/spotlight_pin_v2_accent-1-small.png&highlight=93FF95,F18B30,960a0a,ffffff&color=93FF95?scale=0.7'
-                    onClick={() => this.showAttractionWindow(attractionWindow, item[1].title)}
+                    onClick={() => this.showMapWindow(item[1].title)}
                 >
-                    {this.state.attractionWindowState[item[1].title] && <InfoWindow>
+                    {this.state.mapWindowState[item[1].title] && 
+                      <InfoWindow onCloseClick={() => this.showMapWindow(item[1].title)}>
                         <div>
                             <SimpleItem
                                 key = {item[1].title}
@@ -216,20 +211,33 @@ class MyMapComponent extends Component {
                                 img={item[1].image}
                                 location={item[1].exhibit_name}
                                 type={this.props.type}
-                                item={item}/>
+                                item={item[1]}/>
                         </div>
                     </InfoWindow>}
                 </Marker>
             );
         });
 
-        const restroomLocations = ["38.927994, -77.047984", "38.928090, -77.048108", "38.930439, -77.054447", "38.932158, -77.052187", "38.930403, -77.050962"];
-        const restroomMarker = restroomLocations.map((item) => {
+        const restroomMarker = restroomsList.map((item) => {
             return (
                 <Marker
-                    position={{lat: this.parseCoords(item)[0], lng: this.parseCoords(item)[1]}}
+                    key={item.title}
+                    position={{lat: this.parseCoords(item.coordinates)[0], lng: this.parseCoords(item.coordinates)[1]}}
                     icon='https://www.google.com.au/maps/vt/icon/name=assets/icons/spotlight/spotlight_pin_v2_shadow-1-small.png,assets/icons/spotlight/spotlight_pin_v2-1-small.png,assets/icons/spotlight/spotlight_pin_v2_dot-1-small.png,assets/icons/spotlight/spotlight_pin_v2_accent-1-small.png&highlight=93FF95,617D9B,3E5066,ffffff&color=93FF95?scale=0.7'
+                    onClick={() => this.showMapWindow(item.title)}
                 >
+                  {this.state.mapWindowState[item.title] && 
+                    <InfoWindow onCloseClick={() => this.showMapWindow(item.title)}>
+                        <div>
+                            <SimpleItem
+                                key = {item.title}
+                                name={item.title}
+                                img={item.image}
+                                location={item.exhibit_name}
+                                type={this.props.type}
+                                item={item}/>
+                        </div>
+                    </InfoWindow>}
                 </Marker>
             );
         });
@@ -260,7 +268,8 @@ function mapStateToProps(state) {
 		exhibits: state.exhibits.exhibits,
 		exhibitsFetched: state.exhibits.fetched,
 		attractions: state.attractions.attractions,
-		attractionsFetched: state.attractions.fetched,
+    attractionsFetched: state.attractions.fetched,
+    restrooms: state.restrooms.restrooms,
 	};
 }
 

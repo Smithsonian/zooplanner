@@ -5,6 +5,7 @@ import SimpleItem from './simpleitem.js'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {addToTrip} from '../actions/tripActions'
+import simpleitem from './simpleitem.js';
 
 
 class SimpleItemsList extends Component { //called in categories
@@ -32,7 +33,7 @@ class SimpleItemsList extends Component { //called in categories
 							img={item[1].image}
 							location={item[1].exhibit_name}
 							type={this.props.type}
-							item={item}/>
+							item={item[1]}/>
 					);
 				});
 			}
@@ -51,7 +52,7 @@ class SimpleItemsList extends Component { //called in categories
 							location={null}
 							coordinates={item[1].coordinates}
 							type={this.props.type}
-							item={item}/>
+							item={item[1]}/>
 					);
 				});
 			}
@@ -71,11 +72,26 @@ class SimpleItemsList extends Component { //called in categories
 							cost={item[1].cost}
 							coordinates={item[1].coordinates}
 							type={this.props.type}
-							item={item}/>
+							item={item[1]}/>
 					)
 
 				});
 			}
+		} else if (this.props.type === "restroom") {
+			let passedList = this.props.restrooms;
+			listItem = passedList.map((item) => {
+				return(
+					<SimpleItem
+						key= {item.title}
+						origin="exploreBar"
+						name={item.title}
+						img={null}
+						location={item.location}
+						coordinates={item.coordinates}
+						type={this.props.type}
+						item={item}/>
+				);
+			});
 		}
 		
 		else {
@@ -98,6 +114,7 @@ function mapStateToProps(state) {
 		attractions: state.attractions.attractions,
 		attractionsFetched: state.attractions.fetched,
 		currTripItems: state.trip.currTripItems,
+		restrooms: state.restrooms.restrooms,
 	};
 }
 function matchDispatchToProps(dispatch) {

@@ -114,7 +114,7 @@ class Categories extends Component { //called in explorebar
 				    </div>
 				    <div id="collapseSeven" className="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
 				      <div className="card-body">
-				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus 
+								<SimpleItemsList type="restroom"/>
 				      </div>
 				    </div>
 				  </div>

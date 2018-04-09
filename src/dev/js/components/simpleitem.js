@@ -39,10 +39,10 @@ class SimpleItem extends Component { //called in simpleitemslist
 		}
 
 		var addOrRemoveBtn;
-		if (this.props.trip.includes(this.props.item[1]) || this.props.tripFromHash.includes(this.props.item[1].title)) {
-			addOrRemoveBtn = <button type="button" title='REMOVE' className="btn btn-remove" onClick={() => this.removeFromTrip(this.props.item[1])}><i className="glyphicon glyphicon-remove"></i></button>
+		if (this.props.trip.includes(this.props.item) || this.props.tripFromHash.includes(this.props.item.title)) {
+			addOrRemoveBtn = <button type="button" title='REMOVE' className="btn btn-remove" onClick={() => this.removeFromTrip(this.props.item)}><i className="glyphicon glyphicon-remove"></i></button>
 		} else {
-			addOrRemoveBtn = <button type="button" title='ADD TO TRIP' className="btn btn-add" onClick={() => this.addToTrip(this.props.item[1])}><i className="glyphicon glyphicon-plus"></i></button>
+			addOrRemoveBtn = <button type="button" title='ADD TO TRIP' className="btn btn-add" onClick={() => this.addToTrip(this.props.item)}><i className="glyphicon glyphicon-plus"></i></button>
 		}
 
 		var element;
@@ -51,11 +51,11 @@ class SimpleItem extends Component { //called in simpleitemslist
 				<div className='simpleItem'>
 					<div className="row">
 						<div className="col-3" id="itemImage">
-							<a href={window.location.hash} alt={this.props.name} onClick={() => {this.expandItem(this.props.item[1])}}><img alt={this.props.name} src={this.props.img}/></a>
+							<a href={window.location.hash} alt={this.props.name} onClick={() => {this.expandItem(this.props.item)}}><img alt={this.props.name} src={this.props.img}/></a>
 						</div>
 						<div className='col-8' id="itemInfo">
 							{addOrRemoveBtn}
-							<a id='itemName' alt={this.props.name} href={window.location.hash} title={this.props.name} onClick={() => {this.expandItem(this.props.item[1])}}>{this.props.name.replace(/&#039;/g, "'")}</a>
+							<a id='itemName' alt={this.props.name} href={window.location.hash} title={this.props.name} onClick={() => {this.expandItem(this.props.item)}}>{this.props.name.replace(/&#039;/g, "'")}</a>
 							<br/>
 							{details}
 							<p>{this.props.type}</p>
@@ -66,12 +66,12 @@ class SimpleItem extends Component { //called in simpleitemslist
 			element = 
 				<div>
 					<div className="row" id="mapItemName">
-						<a alt={this.props.name} href={window.location.hash} title={this.props.name} onClick={() => {this.expandItem(this.props.item[1])}}>{this.props.name}</a>
+						<a alt={this.props.name} href={window.location.hash} title={this.props.name} onClick={() => {this.expandItem(this.props.item)}}>{this.props.name}</a>
 						&nbsp; &nbsp; &nbsp;
 						{addOrRemoveBtn}
 					</div>
 					<div className="row" id="mapItemImage">
-						<a href={window.location.hash} alt={this.props.name} onClick={() => {this.expandItem(this.props.item[1])}}><img alt={this.props.name} src={this.props.img}/></a>
+						<a href={window.location.hash} alt={this.props.name} onClick={() => {this.expandItem(this.props.item)}}><img alt={this.props.name} src={this.props.img}/></a>
 					</div>
 					
 				</div>
