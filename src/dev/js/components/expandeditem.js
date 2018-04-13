@@ -46,6 +46,8 @@ class ExpandedItem extends Component { //called in explorebar
 		var animals = <p></p>
 		var relatedAnimals = <p></p>
 		var addOrRemoveBtn;
+		var description = <p></p>
+		var image = null;
 		if (this.props.trip.includes(this.props.item)) {
 			addOrRemoveBtn = <button type="button" title='REMOVE' className="btn btn-remove-lrg" onClick={() => this.removeFromTrip(this.props.item)}><i className="glyphicon glyphicon-remove"></i> REMOVE FROM TRIP</button>
 		} else {
@@ -61,7 +63,7 @@ class ExpandedItem extends Component { //called in explorebar
 						<div key={item.title}>
 							<div className="smallImage">
 								<img alt={item.title.replace(/&#039;/g, "'")} src={item.image_small}/>
-								<a href="#topper" title={item.title.replace(/&#039;/g, "'")} alt={item.title} className="smallImageTitle" onClick={() => this.expandItem(item)}>{item.title.replace(/&#039;/g, "'")}</a>
+								<a href="#topper" title={item.title.replace(/&#039;/g, "'").replace(/&#39;/g, "'")} alt={item.title} className="smallImageTitle" onClick={() => this.expandItem(item)}>{item.title.replace(/&#039;/g, "'").replace(/&#39;/g, "'")}</a>
 							</div>
 						</div>
 					)
@@ -70,6 +72,29 @@ class ExpandedItem extends Component { //called in explorebar
 				animals = <p>loading...</p>
 			}
 		}
+		if (this.props.item.description !== undefined) {
+			description = <div className="row" id="expandedItemDescription">
+							<p>{this.props.item.description.replace(/&#039;/g, "'").replace(/&#39;/g, "'")}</p>
+						</div>
+		}
+		switch (this.props.item.type) {
+			case "Exhibit": {
+				image = this.props.item.image
+				break;
+			} case "Attraction": {
+				image = this.props.item.image
+				break;
+			} case "Animal": {
+				image = this.props.item.image_large
+				break;
+			} case undefined: {
+				if (this.props.item.eventImage !== undefined){
+					image = this.props.item.eventImage.url
+				}
+				break;
+			} default: return
+		}
+
 		return (
 			<div className="expandedItem">
   				<p id="topper"></p>
@@ -77,7 +102,7 @@ class ExpandedItem extends Component { //called in explorebar
 				<br/>
 				<br/>
 				<div className="row">
-					<p id="expandedItemTitle">{this.props.item.title.replace(/&#039;/g, "'")}</p>
+					<p id="expandedItemTitle">{this.props.item.title.replace(/&#039;/g, "'").replace(/&#39;/g, "'")}</p>
 				</div>
 				<div className="row">
 					<p id="expandedItemDetails">{this.props.item.exhibit_name}</p>
@@ -85,15 +110,13 @@ class ExpandedItem extends Component { //called in explorebar
 				<br/>
 				<div className="row">
 					<div className="col-6" id="expandedItemImage">
-						<img alt={this.props.item.title.replace(/&#039;/g, "'")} src={this.props.item.image_large}/>
+						<img alt={this.props.item.title.replace(/&#039;/g, "'").replace(/&#39;/g, "'")} src={image}/>
 					</div>
 				</div>
 				<div id="btn-add-lrgContainer">
 					{addOrRemoveBtn}
 				</div>
-				<div className="row" id="expandedItemDescription">
-					<p>{this.props.item.description}</p>
-				</div>
+				{description}
 				{relatedAnimals}
 				{animals}
 				<br/>
