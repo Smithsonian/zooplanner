@@ -517,13 +517,18 @@ input[type="checkbox"] ~ label {
 	margin: auto;
 }
 
-#expandedItemDetails {
+#expandedItemExhibit {
 	margin: auto;
 	padding-bottom: 3px;
 	border-bottom: 1px solid #BAC4D6; 
 }
 #expandedItemDescription {
 	padding: 20px;
+}
+#expandedItemDetails {
+	padding: 20px 0px 0px 20px;
+	margin: auto;
+
 }
 #scrollTop {
 	position: absolute;

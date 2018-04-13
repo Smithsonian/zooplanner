@@ -48,7 +48,8 @@ class ExpandedItem extends Component { //called in explorebar
 		var addOrRemoveBtn;
 		var description = <p></p>
 		var image = null;
-		if (this.props.trip.includes(this.props.item)) {
+		var extraDetails;
+		if (this.props.trip.includes(this.props.item)) { //to change button type
 			addOrRemoveBtn = <button type="button" title='REMOVE' className="btn btn-remove-lrg" onClick={() => this.removeFromTrip(this.props.item)}><i className="glyphicon glyphicon-remove"></i> REMOVE FROM TRIP</button>
 		} else {
 			addOrRemoveBtn = <button type="button" title='ADD TO TRIP' className="btn btn-add-lrg" onClick={() => this.addToTrip(this.props.item)}><i className="glyphicon glyphicon-plus"></i> ADD TO TRIP </button>
@@ -77,7 +78,7 @@ class ExpandedItem extends Component { //called in explorebar
 							<p>{this.props.item.description.replace(/&#039;/g, "'").replace(/&#39;/g, "'")}</p>
 						</div>
 		}
-		switch (this.props.item.type) {
+		switch (this.props.item.type) { //to change image variable
 			case "Exhibit": {
 				image = this.props.item.image
 				break;
@@ -95,6 +96,19 @@ class ExpandedItem extends Component { //called in explorebar
 			} default: return
 		}
 
+		if (this.props.item.type === undefined) {
+			var time;
+			if (this.props.item.startDateTime === undefined) {
+				time = null;
+			} else {
+				time = this.props.item.startDateTime.substring(11,16) + " to " + this.props.item.endDateTime.substring(11,16);
+			}
+			extraDetails = <div className="row" id="expandedItemDetails">
+							<p>Program is at {time}.</p>
+							<p>More information and sign ups <a href={this.props.item.signUpUrl} target="_blank" >HERE!</a></p>
+						</div>
+		}
+
 		return (
 			<div className="expandedItem">
   				<p id="topper"></p>
@@ -105,7 +119,7 @@ class ExpandedItem extends Component { //called in explorebar
 					<p id="expandedItemTitle">{this.props.item.title.replace(/&#039;/g, "'").replace(/&#39;/g, "'")}</p>
 				</div>
 				<div className="row">
-					<p id="expandedItemDetails">{this.props.item.exhibit_name}</p>
+					<p id="expandedItemExhibit">{this.props.item.exhibit_name}</p>
 				</div>
 				<br/>
 				<div className="row">
@@ -116,6 +130,7 @@ class ExpandedItem extends Component { //called in explorebar
 				<div id="btn-add-lrgContainer">
 					{addOrRemoveBtn}
 				</div>
+				{extraDetails}
 				{description}
 				{relatedAnimals}
 				{animals}

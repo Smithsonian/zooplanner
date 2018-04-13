@@ -5,7 +5,6 @@ import SimpleItem from './simpleitem.js'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {addToTrip} from '../actions/tripActions'
-import simpleitem from './simpleitem.js';
 
 
 class SimpleItemsList extends Component { //called in categories
