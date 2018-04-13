@@ -60,7 +60,7 @@ class ExpandedItem extends Component { //called in explorebar
 					return (
 						<div key={item.title}>
 							<div className="smallImage">
-								<img alt={item.title.replace(/&#039;/g, "'")} src={item.image}/>
+								<img alt={item.title.replace(/&#039;/g, "'")} src={item.image_small}/>
 								<a href="#topper" title={item.title.replace(/&#039;/g, "'")} alt={item.title} className="smallImageTitle" onClick={() => this.expandItem(item)}>{item.title.replace(/&#039;/g, "'")}</a>
 							</div>
 						</div>
@@ -85,7 +85,7 @@ class ExpandedItem extends Component { //called in explorebar
 				<br/>
 				<div className="row">
 					<div className="col-6" id="expandedItemImage">
-						<img alt={this.props.item.title.replace(/&#039;/g, "'")} src={this.props.item.image}/>
+						<img alt={this.props.item.title.replace(/&#039;/g, "'")} src={this.props.item.image_large}/>
 					</div>
 				</div>
 				<div id="btn-add-lrgContainer">

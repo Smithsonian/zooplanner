@@ -7,6 +7,7 @@ import AttractionReducer from './reducer-attractions';
 import ExploreBarReducer from './reducer-exploreBar';
 import AppReducer from './reducer-App';
 import RestroomReducer from './reducer-restrooms';
+import DailyProgramsReducer from './reducer-dailyPrograms';
 
 const allReducers = combineReducers({
     animals: AnimalReducer, //data is now called animals pulled from reducer-animals.js
@@ -17,6 +18,7 @@ const allReducers = combineReducers({
     exploreBar: ExploreBarReducer,
     App: AppReducer,
     restrooms: RestroomReducer,
+    dailyPrograms: DailyProgramsReducer,
 });
 
 export default allReducers;

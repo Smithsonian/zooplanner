@@ -44,3 +44,10 @@ export function importExhibits() {
         });
     }
 }
+
+export function importRestrooms(restrooms) {
+    return {
+        type: "IMPORT_RESTROOMS",
+        payload: restrooms
+    }
+}

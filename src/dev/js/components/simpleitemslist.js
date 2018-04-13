@@ -30,7 +30,8 @@ class SimpleItemsList extends Component { //called in categories
 							key = {item[1].title}
 							origin="exploreBar"
 							name={item[1].title}
-							img={item[1].image}
+							img={item[1].image_small}
+							imgLrg={item[1].image_large}
 							location={item[1].exhibit_name}
 							type={this.props.type}
 							item={item[1]}/>
@@ -92,6 +93,38 @@ class SimpleItemsList extends Component { //called in categories
 						item={item}/>
 				);
 			});
+		} else if (this.props.type === "dailyProgram") {
+			if (this.props.dailyProgramsFetched === false) {
+				listItem = <p>loading...</p>
+			} else {
+				let passedList = this.convertToArray(this.props.dailyPrograms);
+				listItem = passedList.map((item) => {
+					var image;
+					if (item[1].eventImage === undefined) {
+						image = null;
+					} else {
+						image = item[1].eventImage.url;
+					}
+					var time;
+				 	if (item[1].startDateTime === undefined) {
+						time = null;
+					 } else {
+						time = item[1].startDateTime.substring(11,16) + " to " + item[1].endDateTime.substring(11,16);
+					 }
+					return (
+						<SimpleItem
+							key = {item[1].eventID}
+							origin="exploreBar"
+							name={item[1].title}
+							img={image}
+							location={item[1].location}
+							cost={time}
+							type="dailyProgram"
+							item={item[1]}/>
+					)
+
+				});
+			}
 		}
 		
 		else {
@@ -115,6 +148,8 @@ function mapStateToProps(state) {
 		attractionsFetched: state.attractions.fetched,
 		currTripItems: state.trip.currTripItems,
 		restrooms: state.restrooms.restrooms,
+		dailyPrograms: state.dailyPrograms.dailyPrograms,
+		dailyProgramsFetched: state.dailyPrograms.fetched,
 	};
 }
 function matchDispatchToProps(dispatch) {

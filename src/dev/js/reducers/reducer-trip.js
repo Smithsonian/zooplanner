@@ -103,6 +103,30 @@ export default function(state=initialState, action) {
             const updatedTrip = state.trip.concat(currTrip);
             return {...state, trip: updatedTrip, tripFromHash: tripFromHash, importExhibitsPending: false, importExhibitsFulfilled: true}
         }
+        case "IMPORT_RESTROOMS": {
+            glossary = {};
+            currTrip = [];
+            tripFromHash = state.tripFromHash;
+            hash = state.tripHash;
+
+            for (i = 0; i < action.payload.length; i++) {
+                if (action.payload[i].type === "Restroom") {
+                    glossary[action.payload[i].title] = action.payload[i];
+                }
+            }
+            if (hash === "") {
+                return [];
+            } else {
+                for (j = 0; j < tripFromHash.length; j++) {
+                    if (glossary[tripFromHash[j]] !== undefined) {
+                        currTrip[j] = glossary[tripFromHash[j]];
+                    }
+                }
+            }
+            const updatedTrip = state.trip.concat(currTrip);
+            return {...state, trip: updatedTrip, tripFromHash: tripFromHash}
+
+        }
         default: {
             return state
         }

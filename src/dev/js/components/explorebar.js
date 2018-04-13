@@ -9,6 +9,7 @@ import {connect} from 'react-redux';
 import {fetchAnimals} from "../actions/animalActions";
 import {fetchExhibits} from '../actions/exhibitActions';
 import {fetchAttractions} from '../actions/attractionActions';
+import { fetchDailyPrograms } from '../actions/dailyProgramActions';
 // import {expandItem} from '../actions/exploreBarActions';
 
 
@@ -43,10 +44,61 @@ class ExploreBar extends Component { //filters in order of ammenities, attractio
 		}
 	}
 
+	formatDate() {
+		const date = this.props.date;
+		var month = date.substring(0,3);
+		switch (month) {
+			case "Jan": {
+				month = 1
+				break;
+			}case "Feb": {
+				month = 2
+				break;
+			}case "Mar": {
+				month = 3
+				break;
+			}case "Apr": {
+				month = 4
+				break;
+			}case "May": {
+				month = 5
+				break;
+			}case "Jun": {
+				month = 6
+				break;
+			}case "Jul": {
+				month = 7
+				break;
+			}case "Aug": {
+				month = 8
+				break;
+			}case "Sep": {
+				month = 9
+				break;
+			}case "Oct": {
+				month = 10
+				break;
+			}case "Nov": {
+				month = 11
+				break;
+			}case "Dec": {
+				month = 12
+				break;
+			}default: return null
+		}
+		const day = date.substring(5,7);
+		const year = date.substring(9);
+		const string = year + month + day
+		return string
+
+	}
+
 	componentDidMount() {
 		this.props.dispatch(fetchAnimals());
 		this.props.dispatch(fetchExhibits());
 		this.props.dispatch(fetchAttractions());
+		console.log("date", this.props.date);
+		this.props.dispatch(fetchDailyPrograms(this.formatDate()));
 	}
 
 	render() {
@@ -73,6 +125,7 @@ function mapStateToProps(state) {
 		animalsFetched: state.animals.fetched,
 		animalExpanded: state.animals.expandAnimal,
 		itemInFocus: state.exploreBar.expanded,
+		date: state.date.date,
 	};
 }
 

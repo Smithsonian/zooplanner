@@ -6,7 +6,7 @@ import Main from './main.js'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {setPage} from '../actions/AppActions';
-import {importAnimals, importExhibits} from '../actions/tripActions';
+import {importAnimals, importExhibits, importRestrooms} from '../actions/tripActions';
 
 class App extends Component {
 	constructor(props) {
@@ -30,6 +30,7 @@ class App extends Component {
 		if (this.props.tripHash !== "") {
 			this.props.importAnimals();
 			this.props.importExhibits();
+			this.props.importRestrooms(this.props.restrooms);
 		}
 	}
 
@@ -49,6 +50,7 @@ function mapStateToProps(state) {
 	return {
 		page: state.App.page,
 		tripHash: state.trip.tripHash,
+		restrooms: state.restrooms.restrooms
 	};
 }
 
@@ -57,6 +59,7 @@ function matchDispatchToProps(dispatch) {
 		setPage: setPage,
 		importAnimals: importAnimals,
 		importExhibits: importExhibits,
+		importRestrooms: importRestrooms,
 	}, dispatch);
 }
 

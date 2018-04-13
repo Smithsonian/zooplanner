@@ -36,6 +36,8 @@ class SimpleItem extends Component { //called in simpleitemslist
 			details = <p id="itemLocation">Cost: {this.props.cost}</p>
 		} else if (this.props.type === "animal") {
 			details = <p id="itemLocation">{this.props.location.replace(/&#039;/g, "'")}</p>
+		} else if (this.props.type === "dailyProgram") {
+			details = <p id="itemLocation">Time: {this.props.cost}</p>
 		}
 
 		var addOrRemoveBtn;
@@ -55,7 +57,7 @@ class SimpleItem extends Component { //called in simpleitemslist
 						</div>
 						<div className='col-8' id="itemInfo">
 							{addOrRemoveBtn}
-							<a id='itemName' alt={this.props.name} href={window.location.hash} title={this.props.name} onClick={() => {this.expandItem(this.props.item)}}>{this.props.name.replace(/&#039;/g, "'")}</a>
+							<a id='itemName' alt={this.props.name} href={window.location.hash} title={this.props.name} onClick={() => {this.expandItem(this.props.item)}}>{this.props.name.replace(/&#039;/g, "'").replace(/&#39;/g, "'")}</a>
 							<br/>
 							{details}
 							<p>{this.props.type}</p>
