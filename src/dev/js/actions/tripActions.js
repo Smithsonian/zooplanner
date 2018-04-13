@@ -56,7 +56,7 @@ export function importDailyPrograms() {
     return function(dispatch) {
         dispatch({
             type: "IMPORT_DAILY_PROGRAMS",
-            payload: axios.get("http://www.trumba.com/calendars/national-zoo-daily-zoo-activities.json?startDateTime=")
+            payload: axios.get("https://www.trumba.com/calendars/national-zoo-daily-zoo-activities.json?startDateTime=")
         });
     }
 }
