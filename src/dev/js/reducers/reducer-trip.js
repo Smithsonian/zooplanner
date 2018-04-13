@@ -7,12 +7,20 @@ const initialState = {
     importAnimalsFulfilled: false,
     importExhibitsPending: false,
     importExhibitsFulfilled: false,
+    importDailyProgramsPending: false,
+    importDailyProgramsFulfilled: false,
+    importAttractionsPending: false,
+    importAttractionsFulfilled: false,
 }
 
 function stateToString(newTrip) {
     var str = window.location.hash.substring(0, 23) + "!trip=&&";
     for (var i = 0; i < newTrip.length; i++) {
-        str += newTrip[i].title
+        if (newTrip[i].type === undefined) {
+            str += newTrip[i].eventID
+        } else {
+            str += newTrip[i].title
+        }
         str += "&&"
     }
     window.location.hash = str;
@@ -127,6 +135,59 @@ export default function(state=initialState, action) {
             return {...state, trip: updatedTrip, tripFromHash: tripFromHash}
 
         }
+        case "IMPORT_DAILY_PROGRAMS_PENDING": {
+            return {...state, importDailyProgramsPending: true}
+        }
+        case "IMPORT_DAILY_PROGRAMS_FULFILLED": {
+            glossary = {};
+            currTrip = [];
+            tripFromHash = state.tripFromHash;
+            hash = state.tripHash;
+
+            for (i = 0; i < action.payload.data.length; i++) {
+                if (action.payload.data[i].type === undefined) {
+                    glossary[action.payload.data[i].eventID] = action.payload.data[i];
+                }
+            }
+            if (hash === "") {
+                return [];
+            } else {
+                for (j = 0; j < tripFromHash.length; j++) {
+                    if (glossary[tripFromHash[j]] !== undefined) {
+                        currTrip[j] = glossary[tripFromHash[j]];
+                    }
+                }
+            }
+            const updatedTrip = state.trip.concat(currTrip);
+            return {...state, trip: updatedTrip, tripFromHash: tripFromHash, importDailyProgramsPending: false, importDailyProgramsFulfilled: true}
+        }
+        case "IMPORT_ATTRACTIONS_PENDING": {
+            return {...state, importAttractionsPending: true}
+        }
+        case "IMPORT_ATTRACTIONS_FULFILLED": {
+            glossary = {};
+            currTrip = [];
+            tripFromHash = state.tripFromHash;
+            hash = state.tripHash;
+
+            for (i = 0; i < action.payload.data.length; i++) {
+                if (action.payload.data[i].type === "Attraction") {
+                    glossary[action.payload.data[i].title] = action.payload.data[i];
+                }
+            }
+            if (hash === "") {
+                return [];
+            } else {
+                for (j = 0; j < tripFromHash.length; j++) {
+                    if (glossary[tripFromHash[j]] !== undefined) {
+                        currTrip[j] = glossary[tripFromHash[j]];
+                    }
+                }
+            }
+            const updatedTrip = state.trip.concat(currTrip);
+            return {...state, trip: updatedTrip, tripFromHash: tripFromHash, importAttractionsPending: false, importAttractionsFulfilled: true}
+        }
+        
         default: {
             return state
         }

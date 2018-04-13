@@ -55,11 +55,29 @@ class Trip extends Component {
                     } else {
                         itemLocation = <p id="itemLocation">{item.exhibit_name.replace(/&#039;/g, "'")}</p>
                     }
+                    var image;
+                    switch (item.type) { //to change image variable
+                        case "Exhibit": {
+                            image = item.image
+                            break;
+                        } case "Attraction": {
+                            image = item.image
+                            break;
+                        } case "Animal": {
+                            image = item.image_small
+                            break;
+                        } case undefined: {
+                            if (item.eventImage !== undefined){
+                                image = item.eventImage.url
+                            }
+                            break;
+                        } default: break;
+                    }        
                     return (
                         <div className='simpleItem' key={item.title}>
                             <div className="row">
                                 <div className="col-3" id="itemImage">
-                                    <a href={window.location.hash} alt={item.title}><img alt={item.title} src={item.image}/></a>
+                                    <a href={window.location.hash} alt={item.title}><img alt={item.title} src={image}/></a>
                                 </div>
                                 <div className='col-8' id="itemInfo">
                                     <button type="button" title='REMOVE' className="btn btn-remove" onClick={() => this.removeFromTrip(item)}><i className="glyphicon glyphicon-remove"></i></button>
@@ -97,11 +115,30 @@ class Trip extends Component {
                                     } else {
                                         itemLocation = <p id="itemLocation">{item.exhibit_name.replace(/&#039;/g, "'")}</p>
                                     }
+                                    var image;
+                                    switch (item.type) { //to change image variable
+                                        case "Exhibit": {
+                                            image = item.image
+                                            break;
+                                        } case "Attraction": {
+                                            image = item.image
+                                            break;
+                                        } case "Animal": {
+                                            image = item.image_small
+                                            break;
+                                        } case undefined: {
+                                            if (item.eventImage !== undefined){
+                                                image = item.eventImage.url
+                                            }
+                                            break;
+                                        } default: break;
+                                    }
+                                    
                                     return (
                                         <div className='simpleItemTrip' key={item.title}>
                                             <div className="row">
                                                 <div className="col-3" id="itemImage">
-                                                    <a href={window.location.hash} alt={item.title}><img alt={item.title} src={item.image}/></a>
+                                                    <a href={window.location.hash} alt={item.title}><img alt={item.title} src={image}/></a>
                                                 </div>
                                                 <div className='col-8' id="itemInfo">
                                                     <button type="button" title='REMOVE' className="btn btn-remove" onClick={() => this.removeFromTrip(item)}><i className="glyphicon glyphicon-remove"></i></button>

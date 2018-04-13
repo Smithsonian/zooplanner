@@ -93,7 +93,7 @@ class ExpandedItem extends Component { //called in explorebar
 					image = this.props.item.eventImage.url
 				}
 				break;
-			} default: return
+			} default: break;
 		}
 
 		if (this.props.item.type === undefined) {

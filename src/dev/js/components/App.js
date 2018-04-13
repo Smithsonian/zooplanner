@@ -6,7 +6,7 @@ import Main from './main.js'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {setPage} from '../actions/AppActions';
-import {importAnimals, importExhibits, importRestrooms} from '../actions/tripActions';
+import {importAnimals, importExhibits, importRestrooms, importDailyPrograms, importAttractions} from '../actions/tripActions';
 
 class App extends Component {
 	constructor(props) {
@@ -31,6 +31,8 @@ class App extends Component {
 			this.props.importAnimals();
 			this.props.importExhibits();
 			this.props.importRestrooms(this.props.restrooms);
+			this.props.importDailyPrograms();
+			this.props.importAttractions();
 		}
 	}
 
@@ -60,6 +62,8 @@ function matchDispatchToProps(dispatch) {
 		importAnimals: importAnimals,
 		importExhibits: importExhibits,
 		importRestrooms: importRestrooms,
+		importDailyPrograms: importDailyPrograms,
+		importAttractions: importAttractions,
 	}, dispatch);
 }
 

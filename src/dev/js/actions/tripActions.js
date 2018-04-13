@@ -51,3 +51,21 @@ export function importRestrooms(restrooms) {
         payload: restrooms
     }
 }
+
+export function importDailyPrograms() {
+    return function(dispatch) {
+        dispatch({
+            type: "IMPORT_DAILY_PROGRAMS",
+            payload: axios.get("http://www.trumba.com/calendars/national-zoo-daily-zoo-activities.json?startDateTime=")
+        });
+    }
+}
+
+export function importAttractions() {
+    return function(dispatch) {
+        dispatch({
+            type: "IMPORT_ATTRACTIONS",
+            payload: axios.get("https://nationalzoo.si.edu/pyd/views/attractions?display_id=attractions")
+        });
+    }
+}
