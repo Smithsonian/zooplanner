@@ -68,7 +68,7 @@ class SimpleItem extends Component { //called in simpleitemslist
 			element = 
 				<div>
 					<div className="row" id="mapItemName">
-						<a alt={this.props.name} href={window.location.hash} title={this.props.name} onClick={() => {this.expandItem(this.props.item)}}>{this.props.name}</a>
+						<a alt={this.props.name} href={window.location.hash} title={this.props.name} onClick={() => {this.expandItem(this.props.item)}}>{this.props.name.replace(/&#039;/g, "'").replace(/&#39;/g, "'")}</a>
 						&nbsp; &nbsp; &nbsp;
 						{addOrRemoveBtn}
 					</div>

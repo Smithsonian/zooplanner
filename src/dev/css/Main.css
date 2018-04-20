@@ -390,21 +390,19 @@ input[type="checkbox"] ~ label {
 }
 
 #itemImage {
-	overflow: hidden;
+	/* overflow: hidden; */
 	height: 65px;
-	display: flex;
+	width: 65px;
 	justify-content: center;
 	margin: 0 auto;
-	left: 8px;
 	top:6px;
-/*	border: 1px solid #BAC4D6;*/
 }
 #itemImage img {
-	width: 150%;
+	/* width: 200%; */
 	height: 100%;
-	position: absolute;
-	left: -25px;
-	display: inline-block;
+	/* position: absolute; */
+	/* left: -25px; */
+	/* display: inline-block; */
 }
 #itemInfo {
 	padding:5px;
@@ -462,7 +460,7 @@ input[type="checkbox"] ~ label {
 }
 #expandedItemImage {
 	/* overflow: hidden; */
-	height: 180px;
+	height: 150px;
 	float:left;
 	padding-left: 20px;
 }

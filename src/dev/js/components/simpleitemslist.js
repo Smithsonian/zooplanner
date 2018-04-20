@@ -48,7 +48,8 @@ class SimpleItemsList extends Component { //called in categories
 							key = {item[1].title}
 							origin="exploreBar"
 							name={item[1].title}
-							img={item[1].image}
+							img={item[1].image_small}
+							imgLrg={item[1].image_large}
 							location={null}
 							coordinates={item[1].coordinates}
 							type={this.props.type}
@@ -67,7 +68,8 @@ class SimpleItemsList extends Component { //called in categories
 							key = {item[1].title}
 							origin="exploreBar"
 							name={item[1].title}
-							img={item[1].image}
+							img={item[1].image_small}
+							imgLrg={item[1].image_large}
 							location={null}
 							cost={item[1].cost}
 							coordinates={item[1].coordinates}

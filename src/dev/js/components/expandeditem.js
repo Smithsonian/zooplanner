@@ -49,6 +49,7 @@ class ExpandedItem extends Component { //called in explorebar
 		var description = <p></p>
 		var image = null;
 		var extraDetails;
+		var exhibit_name = null;
 		if (this.props.trip.includes(this.props.item)) { //to change button type
 			addOrRemoveBtn = <button type="button" title='REMOVE' className="btn btn-remove-lrg" onClick={() => this.removeFromTrip(this.props.item)}><i className="glyphicon glyphicon-remove"></i> REMOVE FROM TRIP</button>
 		} else {
@@ -64,7 +65,7 @@ class ExpandedItem extends Component { //called in explorebar
 						<div key={item.title}>
 							<div className="smallImage">
 								<img alt={item.title.replace(/&#039;/g, "'")} src={item.image_small}/>
-								<a href="#topper" title={item.title.replace(/&#039;/g, "'").replace(/&#39;/g, "'")} alt={item.title} className="smallImageTitle" onClick={() => this.expandItem(item)}>{item.title.replace(/&#039;/g, "'").replace(/&#39;/g, "'")}</a>
+								<a href={window.location} title={item.title.replace(/&#039;/g, "'").replace(/&#39;/g, "'")} alt={item.title} className="smallImageTitle" onClick={() => this.expandItem(item)}>{item.title.replace(/&#039;/g, "'").replace(/&#39;/g, "'")}</a>
 							</div>
 						</div>
 					)
@@ -80,13 +81,16 @@ class ExpandedItem extends Component { //called in explorebar
 		}
 		switch (this.props.item.type) { //to change image variable
 			case "Exhibit": {
-				image = this.props.item.image
+				image = this.props.item.image_large
 				break;
 			} case "Attraction": {
-				image = this.props.item.image
+				image = this.props.item.image_large
 				break;
 			} case "Animal": {
 				image = this.props.item.image_large
+				exhibit_name = <div className="row">
+								<p id="expandedItemExhibit">{this.props.item.exhibit_name.replace(/&#039;/g, "'").replace(/&#39;/g, "'")}</p>
+							</div>
 				break;
 			} case undefined: {
 				if (this.props.item.eventImage !== undefined){
@@ -111,16 +115,13 @@ class ExpandedItem extends Component { //called in explorebar
 
 		return (
 			<div className="expandedItem">
-  				<p id="topper"></p>
 				<button className="btn btn-link" onClick={() => {this.unexpand()}}> &larr; BACK</button>
 				<br/>
 				<br/>
 				<div className="row">
-					<p id="expandedItemTitle">{this.props.item.title.replace(/&#039;/g, "'").replace(/&#39;/g, "'")}</p>
+					<p id="expandedItemTitle"><a name="top">{this.props.item.title.replace(/&#039;/g, "'").replace(/&#39;/g, "'")}</a></p>
 				</div>
-				<div className="row">
-					<p id="expandedItemExhibit">{this.props.item.exhibit_name}</p>
-				</div>
+				{exhibit_name}
 				<br/>
 				<div className="row">
 					<div className="col-6" id="expandedItemImage">

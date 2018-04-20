@@ -58,10 +58,10 @@ class Trip extends Component {
                     var image;
                     switch (item.type) { //to change image variable
                         case "Exhibit": {
-                            image = item.image
+                            image = item.image_small
                             break;
                         } case "Attraction": {
-                            image = item.image
+                            image = item.image_small
                             break;
                         } case "Animal": {
                             image = item.image_small
