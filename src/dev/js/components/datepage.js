@@ -7,9 +7,10 @@ import {bindActionCreators} from 'redux';
 import {setDate} from '../actions/dateActions'
 import {fetchHours} from '../actions/dateActions'
 import {fetchEvent} from '../actions/dateActions'
+import DatePicker from 'react-date-picker'
 
 
-export class Date extends Component {
+export class DatePage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {formfilled: false, page1:true};
@@ -19,8 +20,14 @@ export class Date extends Component {
 	}
 
 	handleChange(event) { // set the state.date to event.target.value and the props.date to a nicely parsed one (which is this.state.tripDate in Main)
+		if (event == null){
+			return;
+		}
 		this.setState({formfilled: true}) //this specific date format needed for calandar input
-		this.props.setDate(event.target.value)
+		var dateSplit = event.toString().split(" ");
+		var mdy = ""
+		mdy += dateSplit[1] + " " + dateSplit[2] + " " + dateSplit[3]
+		this.props.setDate(mdy)
 	}
 
 	handleClick(event) { //change page, adds date parameters to HoursAPI url, call HoursAPI
@@ -39,17 +46,19 @@ export class Date extends Component {
 	}
 
 	formatDateForQuery() {
-		var timearr = this.props.date.split("-");
-		const year = timearr[0];
-		const month = timearr[1].replace(/^0+/, '');
-		const day = timearr[2]; 
-		var monthArr = ['none', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'May.', 'Jun.', 'Jul.', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
-		this.props.setDate(monthArr[month] + " " + day + ", " + year);
-		return monthArr[month] + "+" + day + "%2C+" + year;
+		console.log(this.props.date);
+		var timearr = this.props.date.split(" ");
+		const year = timearr[2];
+		const month = timearr[0] + ".";
+		const day = timearr[1]; 
+		this.props.setDate(month + " " + day + ", " + year);
+		return month + "+" + day + "%2C+" + year;
 	}
 
-	minDate() {
-		return moment().format("YYYY-MM-DD").toString();
+	maxDate() {
+		var yearFromNow = new Date();
+		yearFromNow.setFullYear(yearFromNow.getFullYear() + 1);
+		return yearFromNow;
 	}
 
 	render () {
@@ -57,12 +66,10 @@ export class Date extends Component {
 			<div className='container-fluid' id='date-body'>
 				<h1 id='welcome-title'>WELCOME TO THE<br/> ZOO PLANNER!</h1>
 				<p id='visit-date'>Date of Visit</p>
-				<form>
-					<div className='form-group'>
-						<input type='date' className='form-control' min= {this.minDate()} max='2018-12-12' id='calendar' onChange={this.handleChange}/>
-					</div>
-					<button type='button' className='btn btn-default' disabled={!this.state.formfilled} onClick={this.handleClick}>NEXT</button>
-				</form>
+				<DatePicker minDate={new Date()} maxDate={this.maxDate()} value={this.props.date} onChange={this.handleChange}/>
+				<div>
+					<button type='button' className='btn btn-default' id='dateButton' disabled={!this.state.formfilled} onClick={this.handleClick}>NEXT</button>
+				</div>
 			</div>
 		);
 		var datePage2;
@@ -143,4 +150,4 @@ function matchDispatchToProps(dispatch) {
 	}, dispatch);
 }
 
-export default connect(mapStateToProps, matchDispatchToProps)(Date);
+export default connect(mapStateToProps, matchDispatchToProps)(DatePage);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../../css/Main.css';
-import Date from './date.js'
+import DatePage from './datepage.js'
 import Main from './main.js'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -20,7 +20,7 @@ class App extends Component {
 
 	renderOverlay() { //later change this so it passes in a parameter ie: date, searchbyanimal, preplan... then use it for the switch statement
 		switch(this.props.page) {
-			case 'date': return <Date onClick={this.closeOverlay} />
+			case 'date': return <DatePage onClick={this.closeOverlay} />
 			case 'main': return <Main />
 			default: return <div></div>
 		}

@@ -27,6 +27,13 @@ export function updateTrip(newTrip) {
     }
 }
 
+export function optimizeTrip() {
+    return {
+        type: "OPTIMIZE_TRIP",
+        payload: null
+    }
+}
+
 export function importAnimals() {
     return function(dispatch) {
         dispatch ({

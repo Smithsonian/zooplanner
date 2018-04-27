@@ -33,6 +33,7 @@ class TripBar extends Component { //called in Main
 		} else {
 			hours = "loading"
 		}
+		
 		return (
 			<div>
 				<p className='title'>YOUR TRIP <button type="button" className="btn btn-link" id="clearTrip" onClick={() => this.clearTrip()}>CLEAR TRIP</button></p>

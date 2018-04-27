@@ -190,6 +190,11 @@ html, body {
 	font-weight: normal;
 }
 
+#dateButton {
+	margin: auto;
+	margin-top: 85px;
+}
+
 #calendar {
 	text-align: center;
 	width: auto;
@@ -570,4 +575,19 @@ input[type="checkbox"] ~ label {
 }
 #finishButton {
 	margin:auto;
+}
+#optimizeButton {
+	margin:auto;
+	font-size: 14px;
+	text-align: center;
+	padding: 4px;
+	background-color: #BFE45F;
+}
+#unOptimizeButton {
+	margin:auto;
+	font-size: 14px;
+	text-align: center;
+	padding: 4px;
+	width: 130px;
+	background-color: #FE8300;
 }

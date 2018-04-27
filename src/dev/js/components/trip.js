@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../../css/Main.css';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux'
-import {removeFromTrip, updateTrip, addToTrip} from '../actions/tripActions'
+import {removeFromTrip, updateTrip, addToTrip, optimizeTrip} from '../actions/tripActions'
 import Reorder, { reorder } from 'react-reorder';
 
 class Trip extends Component {
@@ -29,7 +29,7 @@ class Trip extends Component {
 
     render() {
         var listItem = <p></p>
-        console.log(this.props.trip ,this.props.trip.length, "MY TRIP")
+        var optimizeButton;
         
         if (this.props.importAnimalsPending || this.props.importExhibitsPending) {
             listItem= (
@@ -90,9 +90,18 @@ class Trip extends Component {
                     )
                 });
             } else {
-                // if (this.props.trip.length == 2) {
-                //     this.dragAlert();
-                // }
+                if (this.props.trip.length > 2) {
+                    if (this.props.optimized === true) {
+                        optimizeButton = <div className='row'>
+                                        <button type='submit' className='btn btn-default' id='unOptimizeButton' onClick={() => this.props.optimizeTrip()}>UNOPTIMIZE</button>
+                                    </div>
+                    }
+                    else {
+                        optimizeButton = <div className='row'>
+                                        <button type='submit' className='btn btn-default' id='optimizeButton' onClick={() => this.props.optimizeTrip()}>OPTIMIZE</button>
+                                    </div>
+                    }
+            }
                 let passedList = this.convertToArray(this.props.trip);
 
                 listItem = <Reorder
@@ -118,10 +127,10 @@ class Trip extends Component {
                                     var image;
                                     switch (item.type) { //to change image variable
                                         case "Exhibit": {
-                                            image = item.image
+                                            image = item.image_small
                                             break;
                                         } case "Attraction": {
-                                            image = item.image
+                                            image = item.image_small
                                             break;
                                         } case "Animal": {
                                             image = item.image_small
@@ -156,6 +165,7 @@ class Trip extends Component {
         return (
             <div id="tripList">
                 {listItem}
+                {optimizeButton}
             </div>   
         )
     }
@@ -166,6 +176,7 @@ function mapStateToProps(state) {
         trip: state.trip.trip,
         importAnimalsPending: state.trip.importAnimalsPending,
         importExhibitsPending: state.trip.importExhibitsPending,
+        optimized: state.trip.optimized,
     }
 }
 function matchDispatchToProps(dispatch) {
@@ -174,6 +185,7 @@ function matchDispatchToProps(dispatch) {
         removeFromTrip: removeFromTrip,
         updateTrip: updateTrip,
         addToTrip: addToTrip,
+        optimizeTrip: optimizeTrip,
 	}, dispatch);
 }
 export default connect(mapStateToProps, matchDispatchToProps)(Trip);

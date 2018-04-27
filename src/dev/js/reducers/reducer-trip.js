@@ -3,6 +3,7 @@ const initialState = {
     trip: [],
     tripFromHash: stringToArr(),
     tripHash: window.location.hash.substring(23),
+    optimized: false,
     importAnimalsPending: false,
     importAnimalsFulfilled: false,
     importExhibitsPending: false,
@@ -58,6 +59,9 @@ export default function(state=initialState, action) {
             const newTrip = action.payload
             stateToString(newTrip)
             return {...state, trip: newTrip}
+        }
+        case "OPTIMIZE_TRIP": {
+            return {...state, optimized: !state.optimized}
         }
         case "IMPORT_ANIMALS_PENDING": {
             return {...state, importAnimalsPending: true}
