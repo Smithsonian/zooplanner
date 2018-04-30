@@ -8,6 +8,7 @@ import {setDate} from '../actions/dateActions'
 import {fetchHours} from '../actions/dateActions'
 import {fetchEvent} from '../actions/dateActions'
 import DatePicker from 'react-date-picker'
+import ReactLoading from 'react-loading';
 
 
 export class DatePage extends Component {
@@ -61,6 +62,10 @@ export class DatePage extends Component {
 		return yearFromNow;
 	}
 
+	backButton() {
+		this.props.setDate(null);
+		this.setState({page1:true, formfilled: false});
+	}
 	render () {
 		const datePage1 = (
 			<div className='container-fluid' id='date-body'>
@@ -80,7 +85,7 @@ export class DatePage extends Component {
 					<div className='date-scrn-2'>
 						<h1 id='welcome-title'>WELCOME TO THE<br/> ZOO PLANNER!</h1>
 						<div id='event-date'>
-							loading...
+							<ReactLoading type={"spinningBubbles"} color={"#00C5AB"}/>
 						</div>
 						<button type='button' className='btn btn-default' disabled={!this.props.hoursFetched || !this.props.eventFetched} onClick={this.props.onClick}>START</button>
 					</div>
@@ -112,7 +117,7 @@ export class DatePage extends Component {
 					<div className='date-scrn-2'>
 						<h1 id='welcome-title'>WELCOME TO THE<br/> ZOO PLANNER!</h1>
 						<div id='event-date'>
-							<button type="button" className="btn btn-link" onClick={() => this.setState({page1:true, formfilled: false})}>&larr; BACK</button>
+							<button type="button" className="btn btn-link" onClick={() => this.backButton()}>&larr; BACK</button>
 							<br/>
 							<div id="event-date-details">
 								TRIP DATE:&nbsp;<span className='detail-date'>{this.props.date}</span><br/>

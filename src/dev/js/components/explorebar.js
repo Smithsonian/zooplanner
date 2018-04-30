@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../../css/Main.css';
 import Categories from './categories.js';
 import ExpandedItem from './expandeditem.js';
+import SearchBar from './searchbar.js';
 import Filter from './filter';
 import {connect} from 'react-redux';
 
@@ -109,9 +110,7 @@ class ExploreBar extends Component { //filters in order of ammenities, attractio
 				<div id='searchBox'>
 					<p className='title'>SEARCH BOX HERE</p>
 					<hr/>
-					<br/>
-					<br/>
-					<br/>
+					<SearchBar/>
 				</div>
 				{this.renderDisplay()}
 			</div>

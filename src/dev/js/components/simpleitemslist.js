@@ -5,6 +5,7 @@ import SimpleItem from './simpleitem.js'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {addToTrip} from '../actions/tripActions'
+import ReactLoading from 'react-loading';
 
 
 class SimpleItemsList extends Component { //called in categories
@@ -20,7 +21,7 @@ class SimpleItemsList extends Component { //called in categories
 		var listItem;
 		if (this.props.type === "animal") {
 			if (this.props.animalsFetched === false) {
-				listItem = <p>loading...</p>
+				listItem = <ReactLoading type={"bubbles"} color={"#00C5AB"}/>
 			} else {
 				let passedList = this.convertToArray(this.props.animals);
 				listItem = passedList.map((item) => {
@@ -39,7 +40,7 @@ class SimpleItemsList extends Component { //called in categories
 			}
 		} else if (this.props.type === "exhibit") {
 			if (this.props.exhibitsFetched === false) {
-				listItem = <p>loading...</p>
+				listItem = <ReactLoading type={"bubbles"} color={"#00C5AB"}/>
 			} else {
 				let passedList = this.convertToArray(this.props.exhibits);
 				listItem = passedList.map((item) => {
@@ -59,7 +60,7 @@ class SimpleItemsList extends Component { //called in categories
 			}
 		} else if (this.props.type === "attraction") {
 			if (this.props.attractionsFetched === false) {
-				listItem = <p>loading...</p>
+				listItem = <ReactLoading type={"bubbles"} color={"#00C5AB"}/>
 			} else {
 				let passedList = this.convertToArray(this.props.attractions);
 				listItem = passedList.map((item) => {
@@ -87,7 +88,7 @@ class SimpleItemsList extends Component { //called in categories
 						key= {item.title}
 						origin="exploreBar"
 						name={item.title}
-						img={null}
+						img={item.image}
 						location={item.location}
 						coordinates={item.coordinates}
 						type={this.props.type}
@@ -96,7 +97,7 @@ class SimpleItemsList extends Component { //called in categories
 			});
 		} else if (this.props.type === "dailyProgram") {
 			if (this.props.dailyProgramsFetched === false) {
-				listItem = <p>loading...</p>
+				listItem = <ReactLoading type={"bubbles"} color={"#00C5AB"}/>
 			} else {
 				let passedList = this.convertToArray(this.props.dailyPrograms);
 				listItem = passedList.map((item) => {
@@ -117,7 +118,7 @@ class SimpleItemsList extends Component { //called in categories
 							key = {item[1].eventID}
 							origin="exploreBar"
 							name={item[1].title}
-							img={image}
+							img={"/../../demo-icon.png"}
 							location={item[1].location}
 							cost={time}
 							type="dailyProgram"

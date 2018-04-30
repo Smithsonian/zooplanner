@@ -6,12 +6,16 @@ const initialState = {
     optimized: false,
     importAnimalsPending: false,
     importAnimalsFulfilled: false,
+    animalsImport: [],
     importExhibitsPending: false,
     importExhibitsFulfilled: false,
+    exhibitsImport: [],
     importDailyProgramsPending: false,
     importDailyProgramsFulfilled: false,
+    dailyProgramsImport: [],
     importAttractionsPending: false,
     importAttractionsFulfilled: false,
+    attractionsImport: [],
 }
 
 function stateToString(newTrip) {
@@ -87,7 +91,7 @@ export default function(state=initialState, action) {
                 }
             }
             const updatedTrip = state.trip.concat(currTrip);
-            return {...state, trip: updatedTrip, tripFromHash: tripFromHash, importAnimalsPending: false, importAnimalsFulfilled: true}
+            return {...state, trip: updatedTrip, tripFromHash: tripFromHash, importAnimalsPending: false, importAnimalsFulfilled: true, animalsImport: action.payload.data}
         }
         case "IMPORT_EXHIBITS_PENDING": {
             return {...state, importExhibitsPending: true}
@@ -113,7 +117,7 @@ export default function(state=initialState, action) {
                 }
             }
             const updatedTrip = state.trip.concat(currTrip);
-            return {...state, trip: updatedTrip, tripFromHash: tripFromHash, importExhibitsPending: false, importExhibitsFulfilled: true}
+            return {...state, trip: updatedTrip, tripFromHash: tripFromHash, importExhibitsPending: false, importExhibitsFulfilled: true, exhibitsImport: action.payload.data}
         }
         case "IMPORT_RESTROOMS": {
             glossary = {};
@@ -163,7 +167,7 @@ export default function(state=initialState, action) {
                 }
             }
             const updatedTrip = state.trip.concat(currTrip);
-            return {...state, trip: updatedTrip, tripFromHash: tripFromHash, importDailyProgramsPending: false, importDailyProgramsFulfilled: true}
+            return {...state, trip: updatedTrip, tripFromHash: tripFromHash, importDailyProgramsPending: false, importDailyProgramsFulfilled: true, dailyProgramsImport: action.payload.data}
         }
         case "IMPORT_ATTRACTIONS_PENDING": {
             return {...state, importAttractionsPending: true}
@@ -189,7 +193,7 @@ export default function(state=initialState, action) {
                 }
             }
             const updatedTrip = state.trip.concat(currTrip);
-            return {...state, trip: updatedTrip, tripFromHash: tripFromHash, importAttractionsPending: false, importAttractionsFulfilled: true}
+            return {...state, trip: updatedTrip, tripFromHash: tripFromHash, importAttractionsPending: false, importAttractionsFulfilled: true, attractionsImport: action.payload.data}
         }
         
         default: {

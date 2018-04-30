@@ -5,9 +5,16 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux'
 import {removeFromTrip, updateTrip, addToTrip, optimizeTrip} from '../actions/tripActions'
 import Reorder, { reorder } from 'react-reorder';
+import Snackbar from 'material-ui/Snackbar';
+import ReactLoading from 'react-loading';
 
 class Trip extends Component {
-
+    constructor(props) {
+		super(props);
+        this.state = {snackBar: false};
+        this.dragAlert = this.dragAlert.bind(this);
+    }
+    
     convertToArray(object) {
 		var result = Object.keys(object).map(function(key) {
 			return [Number(key), object[key]];
@@ -24,7 +31,15 @@ class Trip extends Component {
     }
 
     dragAlert() {
-        alert("you can now drag to move around")
+        this.setState({snackBar: true});
+    }
+
+    componentDidUpdate(){
+        if(this.props.trip.length === 2 && this.state.snackBar === false) {
+            this.dragAlert();
+        } else if (this.props.trip.length > 2 && this.state.snackBar === true) {
+            this.setState({snackBar: false});
+        }
     }
 
     render() {
@@ -34,7 +49,7 @@ class Trip extends Component {
         if (this.props.importAnimalsPending || this.props.importExhibitsPending) {
             listItem= (
                 <div className='row' id='emptyTripContainer'>
-                    <p id='emptyTripText'>loading...</p>
+                    <ReactLoading type={"spinningBubbles"} color={"#00C5AB"}/>
                 </div>
             );   
         }
@@ -166,6 +181,7 @@ class Trip extends Component {
             <div id="tripList">
                 {listItem}
                 {optimizeButton}
+                <Snackbar open={this.state.snackBar} message="You can now drag items in YOUR TRIP to reorder them" autoHideDuration={4000}/>
             </div>   
         )
     }
