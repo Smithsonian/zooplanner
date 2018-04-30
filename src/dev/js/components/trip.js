@@ -151,9 +151,7 @@ class Trip extends Component {
                                             image = item.image_small
                                             break;
                                         } case undefined: {
-                                            if (item.eventImage !== undefined){
-                                                image = item.eventImage.url
-                                            }
+                                            image = "http://i245.photobucket.com/albums/gg45/peachberryaili/demo-icon_3.png"
                                             break;
                                         } default: break;
                                     }

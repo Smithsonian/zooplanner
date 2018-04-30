@@ -118,7 +118,7 @@ class SimpleItemsList extends Component { //called in categories
 							key = {item[1].eventID}
 							origin="exploreBar"
 							name={item[1].title}
-							img={"/../../demo-icon.png"}
+							img={"http://i245.photobucket.com/albums/gg45/peachberryaili/demo-icon_3.png"}
 							location={item[1].location}
 							cost={time}
 							type="dailyProgram"
