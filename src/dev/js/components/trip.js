@@ -73,18 +73,19 @@ class Trip extends Component {
                     var image;
                     switch (item.type) { //to change image variable
                         case "Exhibit": {
-                            image = item.image_small
+                            image = item.image_small;
                             break;
                         } case "Attraction": {
-                            image = item.image_small
+                            image = item.image_small;
                             break;
                         } case "Animal": {
-                            image = item.image_small
+                            image = item.image_small;
+                            break;
+                        } case "Restroom": {
+                            image = item.image;
                             break;
                         } case undefined: {
-                            if (item.eventImage !== undefined){
-                                image = item.eventImage.url
-                            }
+                            image = "https://farm1.staticflickr.com/956/27940952588_0296bce9a3_m.jpg"
                             break;
                         } default: break;
                     }        
@@ -150,8 +151,11 @@ class Trip extends Component {
                                         } case "Animal": {
                                             image = item.image_small
                                             break;
+                                        } case "Restroom": {
+                                            image = item.image
+                                            break;
                                         } case undefined: {
-                                            image = "http://i245.photobucket.com/albums/gg45/peachberryaili/demo-icon_3.png"
+                                            image = "https://farm1.staticflickr.com/956/27940952588_0296bce9a3_m.jpg"
                                             break;
                                         } default: break;
                                     }

@@ -92,10 +92,12 @@ class ExpandedItem extends Component { //called in explorebar
 								<p id="expandedItemExhibit">{this.props.item.exhibit_name.replace(/&#039;/g, "'").replace(/&#39;/g, "'")}</p>
 							</div>
 				break;
+			}
+			case "Restroom": {
+				image = this.props.item.image
+				break;
 			} case undefined: {
-				if (this.props.item.eventImage !== undefined){
-					image = this.props.item.eventImage.url
-				}
+				image = "http://i245.photobucket.com/albums/gg45/peachberryaili/demo-icon_3.png"
 				break;
 			} default: break;
 		}

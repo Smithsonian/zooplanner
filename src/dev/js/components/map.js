@@ -48,7 +48,7 @@ const style = [
       "elementType": "geometry.fill",
       "stylers": [
         {
-          "color": "#42ff22"
+          "color": "#C1D8DC"
         }
       ]
     },
@@ -73,7 +73,7 @@ const style = [
       "elementType": "geometry.fill",
       "stylers": [
         {
-          "color": "#c3f7c3"
+          "color": "#CBEBB0"
         }
       ]
     },
@@ -321,7 +321,7 @@ class MyMapComponent extends Component {
                             <SimpleItem
                                 key = {item.title}
                                 name={item.title}
-                                img={item.image_small}
+                                img={item.image}
                                 location={item.exhibit_name}
                                 type={this.props.type}
                                 item={item}/>
@@ -345,7 +345,7 @@ class MyMapComponent extends Component {
                 {exhibitMarker}
                 {attractionMarker}
                 {restroomMarker}
-                <DirectionsRenderer directions={this.state.directions} optimizeWaypoints={true}/>
+                <DirectionsRenderer directions={this.state.directions} options={{suppressMarkers: true}}/>
             </GoogleMapsWrapper>
 
         )
