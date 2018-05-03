@@ -345,7 +345,7 @@ class MyMapComponent extends Component {
                 {exhibitMarker}
                 {attractionMarker}
                 {restroomMarker}
-                <DirectionsRenderer directions={this.state.directions} options={{suppressMarkers: true}}/>
+                <DirectionsRenderer directions={this.state.directions}/>
             </GoogleMapsWrapper>
 
         )
