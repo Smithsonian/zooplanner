@@ -4,6 +4,7 @@ const initialState = {
     tripFromHash: stringToArr(),
     tripHash: window.location.hash.substring(23),
     optimized: false,
+    searchBarSource: [],
     importAnimalsPending: false,
     importAnimalsFulfilled: false,
     animalsImport: [],
@@ -78,10 +79,12 @@ export default function(state=initialState, action) {
             var currTrip = [];
             var tripFromHash = state.tripFromHash;
             var hash = state.tripHash;
+            var searchBarSource = state.searchBarSource;
 
             for (var i = 0; i < action.payload.data.length; i++) {
                 if (action.payload.data[i].type === "Animal") {
                     glossary[action.payload.data[i].title] = action.payload.data[i];
+                    searchBarSource.push(action.payload.data[i].title);
                 }
             }
             if (hash === "") {
@@ -94,7 +97,7 @@ export default function(state=initialState, action) {
                 }
             }
             const updatedTrip = state.trip.concat(currTrip);
-            return {...state, trip: updatedTrip, tripFromHash: tripFromHash, importAnimalsPending: false, importAnimalsFulfilled: true, animalsImport: action.payload.data}
+            return {...state, trip: updatedTrip, tripFromHash: tripFromHash, importAnimalsPending: false, importAnimalsFulfilled: true, animalsImport: action.payload.data, searchBarSource: searchBarSource}
         }
         case "IMPORT_EXHIBITS_PENDING": {
             return {...state, importExhibitsPending: true}
@@ -104,10 +107,12 @@ export default function(state=initialState, action) {
             currTrip = [];
             tripFromHash = state.tripFromHash;
             hash = state.tripHash;
+            var searchBarSource = state.searchBarSource;
 
             for (i = 0; i < action.payload.data.length; i++) {
                 if (action.payload.data[i].type === "Exhibit") {
                     glossary[action.payload.data[i].title] = action.payload.data[i];
+                    searchBarSource.push(action.payload.data[i].title);
                 }
             }
             if (hash === "") {
@@ -120,17 +125,19 @@ export default function(state=initialState, action) {
                 }
             }
             const updatedTrip = state.trip.concat(currTrip);
-            return {...state, trip: updatedTrip, tripFromHash: tripFromHash, importExhibitsPending: false, importExhibitsFulfilled: true, exhibitsImport: action.payload.data}
+            return {...state, trip: updatedTrip, tripFromHash: tripFromHash, importExhibitsPending: false, importExhibitsFulfilled: true, exhibitsImport: action.payload.data, searchBarSource: searchBarSource}
         }
         case "IMPORT_RESTROOMS": {
             glossary = {};
             currTrip = [];
             tripFromHash = state.tripFromHash;
             hash = state.tripHash;
+            var searchBarSource = state.searchBarSource;
 
             for (i = 0; i < action.payload.length; i++) {
                 if (action.payload[i].type === "Restroom") {
                     glossary[action.payload[i].title] = action.payload[i];
+                    searchBarSource.push(action.payload[i].title);
                 }
             }
             if (hash === "") {
@@ -143,7 +150,7 @@ export default function(state=initialState, action) {
                 }
             }
             const updatedTrip = state.trip.concat(currTrip);
-            return {...state, trip: updatedTrip, tripFromHash: tripFromHash}
+            return {...state, trip: updatedTrip, tripFromHash: tripFromHash, searchBarSource: searchBarSource}
 
         }
         case "IMPORT_DAILY_PROGRAMS_PENDING": {
@@ -154,10 +161,12 @@ export default function(state=initialState, action) {
             currTrip = [];
             tripFromHash = state.tripFromHash;
             hash = state.tripHash;
+            var searchBarSource = state.searchBarSource;
 
             for (i = 0; i < action.payload.data.length; i++) {
                 if (action.payload.data[i].type === undefined) {
                     glossary[action.payload.data[i].eventID] = action.payload.data[i];
+                    searchBarSource.push(action.payload.data[i].title);
                 }
             }
             if (hash === "") {
@@ -170,7 +179,7 @@ export default function(state=initialState, action) {
                 }
             }
             const updatedTrip = state.trip.concat(currTrip);
-            return {...state, trip: updatedTrip, tripFromHash: tripFromHash, importDailyProgramsPending: false, importDailyProgramsFulfilled: true, dailyProgramsImport: action.payload.data}
+            return {...state, trip: updatedTrip, tripFromHash: tripFromHash, importDailyProgramsPending: false, importDailyProgramsFulfilled: true, dailyProgramsImport: action.payload.data, searchBarSource: searchBarSource}
         }
         case "IMPORT_ATTRACTIONS_PENDING": {
             return {...state, importAttractionsPending: true}
@@ -180,10 +189,12 @@ export default function(state=initialState, action) {
             currTrip = [];
             tripFromHash = state.tripFromHash;
             hash = state.tripHash;
+            var searchBarSource = state.searchBarSource;
 
             for (i = 0; i < action.payload.data.length; i++) {
                 if (action.payload.data[i].type === "Attraction") {
                     glossary[action.payload.data[i].title] = action.payload.data[i];
+                    searchBarSource.push(action.payload.data[i].title);
                 }
             }
             if (hash === "") {
@@ -196,7 +207,7 @@ export default function(state=initialState, action) {
                 }
             }
             const updatedTrip = state.trip.concat(currTrip);
-            return {...state, trip: updatedTrip, tripFromHash: tripFromHash, importAttractionsPending: false, importAttractionsFulfilled: true, attractionsImport: action.payload.data}
+            return {...state, trip: updatedTrip, tripFromHash: tripFromHash, importAttractionsPending: false, importAttractionsFulfilled: true, attractionsImport: action.payload.data, searchBarSource: searchBarSource}
         }
         
         default: {
