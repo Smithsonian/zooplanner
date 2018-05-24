@@ -131,8 +131,7 @@ class Trip extends Component {
                                     <div className="simpleItemShadow" /> // Custom placeholder element (optional), defaults to clone of dragged element
                                 }
                             >
-                                
-                                {passedList.map((item) => {
+                                {passedList.filter(function(val){ return val!==undefined; }).map((item) => {
                                     item = item[1];
                                     var itemLocation;
                                     if (item.exhibit_name == null) {

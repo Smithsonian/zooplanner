@@ -21,7 +21,10 @@ const initialState = {
 function stateToString(newTrip) {
     var str = window.location.hash.substring(0, 23) + "!trip=&&";
     for (var i = 0; i < newTrip.length; i++) {
-        if (newTrip[i].type === undefined) {
+        if (newTrip[i] === undefined) {
+            continue;
+        }
+        else if (newTrip[i].type === undefined) {
             str += newTrip[i].eventID
         } else {
             str += newTrip[i].title

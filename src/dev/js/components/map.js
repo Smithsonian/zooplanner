@@ -183,10 +183,11 @@ class MyMapComponent extends Component {
       if (this.props.trip.length < 2) {
         start = null;
         end = null;
-        console.log("should not execute route");
       } else {
         for (var i = 0; i < this.props.trip.length; i++) {
-          if (this.props.trip[i].type === "Animal") {
+          if (this.props.trip[i] === undefined) {
+            continue;
+          } else if (this.props.trip[i].type === "Animal") {
             for (var j = 0; j < exhibitList.length; j++) {
               if (exhibitList[j][1].title === this.props.trip[i].exhibit_name) {
                 if (i === 0) {
@@ -196,7 +197,6 @@ class MyMapComponent extends Component {
                 } else if (i === this.props.trip.length - 1) {
                   // end = this.parseCoords(exhibitList[j][1].coordinates);
                   end = exhibitList[j][1].coordinates
-                  console.log(exhibitList[j][1].title)
                   // this.setState({end: end})
                 } else {
                   waypoints.push({location: exhibitList[j][1].coordinates});
@@ -335,7 +335,7 @@ class MyMapComponent extends Component {
         //actual APIkey: https://maps.googleapis.com/maps/api/js?key=AIzaSyC0DrCZRqF-G8hmIbh8_1Y6K71qub3uPhY
         return(
             <GoogleMapsWrapper
-                googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0DrCZRqF-G8hmIbh8_1Y6K71qub3uPhY"
+                googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places"
                 loadingElement={<div style={{ height: `100%` }} />}
                 containerElement={<div style={{ height: `100%` }} />}
                 mapElement={<div style={{ height: `100%` }} />}
