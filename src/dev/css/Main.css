@@ -7,6 +7,7 @@ html, body {
 	max-height: 100%;
 	-webkit-font-smoothing: antialiased !important;
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+	background-color: gainsboro;
 	/* overflow-x: hidden;
 	margin-left: 20px; */
 }
@@ -589,4 +590,69 @@ input[type="checkbox"] ~ label {
 	padding: 4px;
 	width: 130px;
 	background-color: #FE8300;
+}
+
+/* document */
+@media print {
+    body {
+		visibility: hidden;
+		overflow:visible;
+	}
+	#printTrigger {
+		visibility: hidden;
+	}
+    #divname, #divname * {
+		visibility: visible;
+		overflow:visible;
+		background-color: white;
+		width:210mm;
+    }
+    #divname {
+        left: 0px;
+        top: 0px;
+		position:absolute;
+		overflow:visible;
+    }
+    p {
+		page-break-before: always;
+		page-break-after: always;
+	}
+	#overlay {
+		overflow: visible;
+		display:block;
+		height:100%;
+	}
+	#root {
+		overflow: visible;
+		display:block;
+   		height:100%;
+
+	}
+}
+#divname {
+	background-color: white;
+	width:210mm;
+	margin: auto;
+	min-height: 297mm;
+}
+#printButton {
+	margin: auto;
+	font-size: 14px;
+	text-align: center;
+	padding: 4px;
+}
+#printButtonContainer {
+	padding-left: 70px;
+}
+#printBackButton {
+	font-size: 1.2em;
+}
+#backButtonContainer {
+	margin: auto;
+}
+#printTopBar {
+	background-color: rgb(197, 197, 197);
+	margin-bottom: 10px;
+	padding: 10px 10px 10px 10px;
+
 }

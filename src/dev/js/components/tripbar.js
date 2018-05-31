@@ -6,6 +6,7 @@ import {bindActionCreators} from 'redux';
 import Trip from "./trip.js"
 import {clearTrip} from "../actions/tripActions"
 import {fetchHours} from "../actions/dateActions"
+import {setPage} from "../actions/AppActions"
 
 class TripBar extends Component { //called in Main
 	clearTrip() {
@@ -20,6 +21,10 @@ class TripBar extends Component { //called in Main
 			const date = hash.substring(0,4) + "+" + hash.substring(7,9) + "%2C+" + hash.substring(13);
 			this.props.fetchHours("https://nationalzoo.si.edu/pyd/views/homepage_card?display_id=hours&date[value][date]=" + date);
 		}
+	}
+
+	generateDoc() {
+		this.props.setPage("document")
 	}
 
 	componentWillMount() {
@@ -44,7 +49,7 @@ class TripBar extends Component { //called in Main
 				</div>
 				<Trip />
 				<div className='row' id='finishTripBar'>
-					<button type='submit' className='btn btn-default' id='finishButton'>FINISH</button>
+					<button type='submit' className='btn btn-default' id='finishButton' onClick={() => this.generateDoc()}>FINISH</button>
 				</div>
 			</div>
 		);
@@ -62,6 +67,7 @@ function matchDispatchToProps(dispatch) {
 	return bindActionCreators({
 		clearTrip: clearTrip,
 		fetchHours: fetchHours,
+		setPage: setPage,
 	}, dispatch);
 }
 export default connect(mapStateToProps, matchDispatchToProps)(TripBar);

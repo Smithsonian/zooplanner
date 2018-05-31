@@ -3,10 +3,13 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../../css/Main.css';
 import DatePage from './datepage.js'
 import Main from './main.js'
+import Document from './document.js'
+import 'regenerator-runtime/runtime';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {setPage} from '../actions/AppActions';
 import {importAnimals, importExhibits, importRestrooms, importDailyPrograms, importAttractions} from '../actions/tripActions';
+
 
 class App extends Component {
 	constructor(props) {
@@ -22,6 +25,7 @@ class App extends Component {
 		switch(this.props.page) {
 			case 'date': return <DatePage onClick={this.closeOverlay} />
 			case 'main': return <Main />
+			case 'document': return <Document/>
 			default: return <div></div>
 		}
 	}
