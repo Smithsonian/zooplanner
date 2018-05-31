@@ -107,7 +107,7 @@ export class DatePage extends Component {
 					notes += ", " + this.props.notes[2].note
 				}
 			}
-			var eventTag = <span className="detail-date">No event scheduled</span>
+			var eventTag = <span className="detail-date">Nothing scheduled</span>
 			if (this.props.event[0] != null) {
 				const eventURL = "https://nationalzoo.si.edu" + this.props.event[0].path;
 				eventTag = <span className='detail-date'><a target="_blank" href={eventURL}>{this.props.event[0].title} <i className="glyphicon glyphicon-new-window"></i></a></span>
@@ -122,7 +122,7 @@ export class DatePage extends Component {
 							<div id="event-date-details">
 								TRIP DATE:&nbsp;<span className='detail-date'>{this.props.date}</span><br/>
 								ZOO HOURS:&nbsp;<span className='detail-date'>{this.props.hours[2].time}</span><br/>
-								EVENTS:&nbsp;{eventTag}<br/>
+								SPECIAL EVENTS:&nbsp;{eventTag}<br/>
 								PLEASE NOTE:&nbsp;<span className='detail-date'>{notes}</span>
 							</div>
 						</div>

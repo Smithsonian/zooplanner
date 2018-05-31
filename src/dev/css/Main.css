@@ -85,7 +85,7 @@ html, body {
 	padding: 0px;
 	padding-bottom: 3px;
 	min-height: 100vh;
-	max-width: 300px;
+	/*max-width: 300px;*/
 	max-height: 100vh;
 	overflow-y: auto;
 	overflow-x: hidden;
@@ -101,7 +101,7 @@ html, body {
 	bottom: 0;
 	padding: 3px;
 	background-color: #F4F5F4;
-	max-width: 300px;
+	/*max-width: 300px;*/
 	max-height: 100%;
 }
 
