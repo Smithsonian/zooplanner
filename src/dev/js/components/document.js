@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {setPage} from "../actions/AppActions"
+import MyMapComponent from "./map.js"
 
 
 class MyDocument extends Component {
@@ -17,9 +18,9 @@ class MyDocument extends Component {
                         <button type='submit' className='btn btn-default' id='printButton' onClick={() => window.print()}>PRINT</button>
                     </div>
                 </div>
+                <MyMapComponent/>
                 <div id="divname">
-                    Page 1 with no content
-                    Page 2 with no content 
+					
                 </div>
             </div>
             

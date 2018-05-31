@@ -223,6 +223,7 @@ class MyMapComponent extends Component {
 
         const DirectionsDisplay = new google.maps.DirectionsRenderer();
         const DirectionsService = new google.maps.DirectionsService();
+        
 
         DirectionsService.route({
           origin: start,
@@ -339,7 +340,7 @@ class MyMapComponent extends Component {
                 loadingElement={<div style={{ height: `100%` }} />}
                 containerElement={<div style={{ height: `100%` }} />}
                 mapElement={<div style={{ height: `100%` }} />}
-                onGoogleApiLoaded={ this.getDirections()}
+                onGoogleApiLoaded={this.getDirections()}
                 // onMapMounted={this.getDirections()}
             >
                 {exhibitMarker}
