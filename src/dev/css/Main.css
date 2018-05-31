@@ -628,6 +628,15 @@ input[type="checkbox"] ~ label {
    		height:100%;
 
 	}
+	#printMapContainer {
+		position: absolute;
+		z-index: 0;
+		height: 50%;
+	}
+	#printListItem {
+		position: relative;
+		top: 1000px;
+	}
 }
 #divname {
 	background-color: white;
@@ -654,5 +663,18 @@ input[type="checkbox"] ~ label {
 	background-color: rgb(197, 197, 197);
 	margin-bottom: 10px;
 	padding: 10px 10px 10px 10px;
+	z-index: 100;
 
+}
+#printMapContainer {
+	position: absolute;
+    top: 140px;
+    z-index: 0;
+    width: inherit;
+    height: 50%;
+}
+#printListItem {
+	position: relative;
+	top: 400px;
+	background-color: white;
 }
