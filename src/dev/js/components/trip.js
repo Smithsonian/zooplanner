@@ -118,8 +118,8 @@ class Trip extends Component {
                                     </div>
                     }
             }
+                var counter = -1;
                 let passedList = this.convertToArray(this.props.trip);
-
                 listItem = <Reorder
                                 reorderId="my-list" 
                                 placeholderClassName="placeholder"
@@ -131,8 +131,9 @@ class Trip extends Component {
                                     <div className="simpleItemShadow" /> // Custom placeholder element (optional), defaults to clone of dragged element
                                 }
                             >
-                                {passedList.filter(function(val){ return val!==undefined; }).map((item) => {
+                                {passedList.filter(Boolean).map((item) => {
                                     item = item[1];
+                                    counter += 1;
                                     var itemLocation;
                                     if (item.exhibit_name == null) {
                                         itemLocation = <p id="itemLocation"></p>
@@ -160,17 +161,23 @@ class Trip extends Component {
                                     }
                                     
                                     return (
-                                        <div className='simpleItemTrip' key={item.title}>
-                                            <div className="row">
-                                                <div className="col-3" id="itemImage">
-                                                    <a href={window.location.hash} alt={item.title}><img alt={item.title} src={image}/></a>
+                                        <div key={item.title}>
+                                            <div className='simpleItemTrip'>
+                                                <div className="row">
+                                                    <div className="col-3" id="itemImage">
+                                                        <a href={window.location.hash} alt={item.title}><img alt={item.title} src={image}/></a>
+                                                    </div>
+                                                    <div className='col-8' id="itemInfo">
+                                                        <button type="button" title='REMOVE' className="btn btn-remove" onClick={() => this.removeFromTrip(item)}><i className="glyphicon glyphicon-remove"></i></button>
+                                                        <a id='itemName' alt={item.title} href={window.location.hash} title={item.title}>{item.title.replace(/&#039;/g, "'")}</a>
+                                                        <br/>
+                                                        {itemLocation}
+                                                    </div>
                                                 </div>
-                                                <div className='col-8' id="itemInfo">
-                                                    <button type="button" title='REMOVE' className="btn btn-remove" onClick={() => this.removeFromTrip(item)}><i className="glyphicon glyphicon-remove"></i></button>
-                                                    <a id='itemName' alt={item.title} href={window.location.hash} title={item.title}>{item.title.replace(/&#039;/g, "'")}</a>
-                                                    <br/>
-                                                    {itemLocation}
-                                                </div>
+                                            </div>
+                                            <div>
+                                                {this.props.distances[counter]}
+                                                {this.props.durations[counter]}
                                             </div>
                                         </div>
                                     )
@@ -194,6 +201,8 @@ function mapStateToProps(state) {
         importAnimalsPending: state.trip.importAnimalsPending,
         importExhibitsPending: state.trip.importExhibitsPending,
         optimized: state.trip.optimized,
+        distances: state.trip.waypointDistances,
+        durations: state.trip.waypointDurations,
     }
 }
 function matchDispatchToProps(dispatch) {

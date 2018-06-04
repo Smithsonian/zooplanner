@@ -34,6 +34,20 @@ export function optimizeTrip() {
     }
 }
 
+export function updateDistances(distances) {
+    return {
+        type: "UPDATE_DISTANCES",
+        payload: distances
+    }
+}
+
+export function updateDurations(durations) {
+    return {
+        type: "UPDATE_DURATIONS",
+        payload: durations
+    }
+}
+
 export function importAnimals() {
     return function(dispatch) {
         dispatch ({

@@ -17,6 +17,8 @@ const initialState = {
     importAttractionsPending: false,
     importAttractionsFulfilled: false,
     attractionsImport: [],
+    waypointDistances: [],
+    waypointDurations: [],
 }
 
 function stateToString(newTrip) {
@@ -67,6 +69,12 @@ export default function(state=initialState, action) {
             const newTrip = action.payload
             stateToString(newTrip)
             return {...state, trip: newTrip}
+        }
+        case "UPDATE_DISTANCES": {
+            return {...state, waypointDistances: action.payload}
+        }
+        case "UPDATE_DURATIONS": {
+            return {...state, waypointDurations: action.payload}
         }
         case "OPTIMIZE_TRIP": {
             return {...state, optimized: !state.optimized}

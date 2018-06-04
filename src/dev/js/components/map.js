@@ -4,7 +4,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow, DirectionsR
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux'
 import SimpleItem from './simpleitem.js'
-import {updateTrip} from '../actions/tripActions'
+import {updateTrip, updateDistances, updateDurations} from '../actions/tripActions'
 
 // const google = window.google;
 
@@ -237,6 +237,15 @@ class MyMapComponent extends Component {
               directions: result,
             });
             // DirectionsDisplay.setDirections(result);
+            var durations = [];
+            var distances = [];
+            for (var j = 0; j < result.routes[0].legs.length; j++) {
+              durations.push(result.routes[0].legs[j].duration.text);
+              distances.push(result.routes[0].legs[j].distance.text);
+            }
+            this.props.updateDistances(distances);
+            this.props.updateDurations(durations);
+
             var newTrip = [];
             for (var i = 0; i < result.routes[0].waypoint_order.length; i++) {
               newTrip[result.routes[0].waypoint_order[i]] = this.props.trip[i+1];
@@ -245,7 +254,8 @@ class MyMapComponent extends Component {
             newTrip.push(this.props.trip[this.props.trip.length - 1]);
             this.props.updateTrip(newTrip);
           } else {
-            console.error(`error fetching directions ${result}`);
+            // console.error(`error fetching directions ${result}`);
+            return;
           }
         });
       }
@@ -371,6 +381,8 @@ function mapStateToProps(state) {
 function matchDispatchToProps(dispatch) {
 	return bindActionCreators({
         updateTrip: updateTrip,
+        updateDistances: updateDistances,
+        updateDurations: updateDurations,
 	}, dispatch);
 }
 

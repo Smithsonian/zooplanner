@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import {setPage} from "../actions/AppActions"
 import MyMapComponent from "./map.js"
 import Trip from "./trip.js"
+import ReactToPrint from "react-to-print";
 
 
 class MyDocument extends Component {
@@ -84,6 +85,20 @@ class MyDocument extends Component {
         )
     }
   
+}
+
+class Example extends React.Component {
+    render() {
+        return (
+            <div>
+                <ReactToPrint
+                    trigger={() => <a href="#">Print this out!</a>}
+                    content={() => this.componentRef}
+                />
+                <MyDocument ref={el => (this.componentRef = el)} />
+            </div>
+        )
+    }
 }
 
 function mapStateToProps(state) {
