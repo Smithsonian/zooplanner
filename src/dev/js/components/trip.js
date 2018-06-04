@@ -159,6 +159,16 @@ class Trip extends Component {
                                             break;
                                         } default: break;
                                     }
+                                    var distance = <div></div>
+                                    if (counter < this.props.distances.length) {
+                                        distance = <div className="tripDistance">
+                                                    <i class="material-icons md-18">directions_walk</i> &nbsp;
+                                                    {this.props.distances[counter]}
+                                                    &nbsp;&nbsp;&nbsp;
+                                                    <i class="material-icons md-18">access_time</i> &nbsp;
+                                                    {this.props.durations[counter]}
+                                                </div>
+                                    }
                                     
                                     return (
                                         <div key={item.title}>
@@ -175,10 +185,7 @@ class Trip extends Component {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div>
-                                                {this.props.distances[counter]}
-                                                {this.props.durations[counter]}
-                                            </div>
+                                            {distance}
                                         </div>
                                     )
                                 })}

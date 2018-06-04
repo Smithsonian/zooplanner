@@ -77,7 +77,6 @@ class MyDocument extends Component {
                     </div>
                     <div id="printListItem">
                         {listItem}
-                        <p id="tester">HIIII</p>
                     </div>
 					
                 </div>

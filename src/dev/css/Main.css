@@ -568,6 +568,10 @@ input[type="checkbox"] ~ label {
 	max-width: 77vh;
 	overflow: scroll;
 }
+.tripDistance {
+	margin: auto;
+	text-align: center;
+}
 #finishTripBar {
 	margin:auto;
 	text-align: center;
@@ -627,19 +631,16 @@ input[type="checkbox"] ~ label {
 	}
 	#printMapContainer {
 		position: absolute !important;
-		top: 140px !important;
+		/* top: 140px !important; */
 		z-index: 0 !important;
 		width: 100% !important;
-		height: 30% !important;
+		height: 55% !important;
 	}
 	#printListItem {
 		position: relative !important;
-		top: 700px !important;
+		top: 630px !important;
 		background-color: white !important;
 		width: 100% !important;
-	}
-	#tester {
-		color: red !important;
 	}
 }
 #divname {
@@ -672,17 +673,15 @@ input[type="checkbox"] ~ label {
 }
 #printMapContainer {
 	position: absolute;
-    top: 140px;
+    /* top: 140px; */
     z-index: 0;
     width: inherit;
-    height: 50%;
+    height: 75%;
 }
 #printListItem {
 	position: relative;
-	top: 400px;
+	top: 600px;
 	background-color: white;
 }
 
-#tester {
-	color: red;
-}
+.material-icons.md-18 { font-size: 18px; }
