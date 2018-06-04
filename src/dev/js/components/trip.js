@@ -6,6 +6,7 @@ import {bindActionCreators} from 'redux'
 import {removeFromTrip, updateTrip, addToTrip, optimizeTrip} from '../actions/tripActions'
 import Reorder, { reorder } from 'react-reorder';
 import Snackbar from 'material-ui/Snackbar';
+import Toggle from 'material-ui/Toggle';
 import ReactLoading from 'react-loading';
 
 class Trip extends Component {
@@ -35,7 +36,7 @@ class Trip extends Component {
     }
 
     componentDidUpdate(){
-        if(this.props.trip.length === 2 && this.state.snackBar === false) {
+        if(this.props.trip.length === 2 && this.state.snackBar === false && this.props.optimized === false) {
             this.dragAlert();
         } else if (this.props.trip.length > 2 && this.state.snackBar === true) {
             this.setState({snackBar: false});
@@ -45,6 +46,7 @@ class Trip extends Component {
     render() {
         var listItem = <p></p>
         var optimizeButton;
+        var snackBar;
         
         if (this.props.importAnimalsPending || this.props.importExhibitsPending) {
             listItem= (
@@ -106,18 +108,53 @@ class Trip extends Component {
                     )
                 });
             } else {
-                if (this.props.trip.length > 2) {
-                    if (this.props.optimized === true) {
-                        optimizeButton = <div className='row'>
-                                        <button type='submit' className='btn btn-default' id='unOptimizeButton' onClick={() => this.props.optimizeTrip()}>UNOPTIMIZE</button>
+                // if (this.props.trip.length > 2) {
+                //     if (this.props.optimized === true) {
+                //         optimizeButton = <div className='row'>
+                //                         <button type='submit' className='btn btn-default' id='unOptimizeButton' onClick={() => this.props.optimizeTrip()}>UNOPTIMIZE</button>
+                //                     </div>
+                //     }
+                //     else {
+                //         optimizeButton = <div className='row'>
+                //                         <button type='submit' className='btn btn-default' id='optimizeButton' onClick={() => this.props.optimizeTrip()}>OPTIMIZE</button>
+                //                     </div>
+                //     }
+                // }
+                const styles = {
+                    block: {
+                      maxWidth: 200,
+                    },
+                    toggle: {
+                      marginBottom: 16,
+                    },
+                    thumbOff: {
+                      backgroundColor: '#d3dae8',
+                    },
+                    trackOff: {
+                      backgroundColor: '#BAC4D6',
+                    },
+                    thumbSwitched: {
+                      backgroundColor: '#bfe45f',
+                    },
+                    trackSwitched: {
+                      backgroundColor: '#e6f2c6',
+                    },
+                    labelStyle: {
+                      color: '#27708F',
+                    },
+                  };
+                optimizeButton = <div id="optimize" style={styles.block}> 
+                                        <Toggle
+                                            label="OPTIMIZE TRIP"
+                                            thumbStyle={styles.thumbOff}
+                                            trackStyle={styles.trackOff}
+                                            thumbSwitchedStyle={styles.thumbSwitched}
+                                            trackSwitchedStyle={styles.trackSwitched}
+                                            labelStyle={styles.labelStyle}
+                                            onToggle={() => this.props.optimizeTrip()}
+                                        />
                                     </div>
-                    }
-                    else {
-                        optimizeButton = <div className='row'>
-                                        <button type='submit' className='btn btn-default' id='optimizeButton' onClick={() => this.props.optimizeTrip()}>OPTIMIZE</button>
-                                    </div>
-                    }
-            }
+                
                 var counter = -1;
                 let passedList = this.convertToArray(this.props.trip);
                 listItem = <Reorder
@@ -194,8 +231,8 @@ class Trip extends Component {
         }
         return (
             <div id="tripList">
-                {listItem}
                 {optimizeButton}
+                {listItem}
                 <Snackbar open={this.state.snackBar} message="You can now drag items in YOUR TRIP to reorder them" autoHideDuration={4000}/>
             </div>   
         )
