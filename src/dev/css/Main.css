@@ -49,15 +49,15 @@ html, body {
 }*/
 
 #zooplanner {
-	font-size: 30px;
-	font-weight: bold;
-	color: #287190;
-	padding-left: 10px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	width: 100%;
-	box-shadow: 0px 1px 4px #888888;
-	background-color: white;
+	font-size: 30px !important;
+	font-weight: bold !important;
+	color: #287190 !important;
+	padding-left: 10px !important;
+	padding-top: 5px !important;
+	padding-bottom: 5px !important;
+	width: 100% !important;
+	box-shadow: 0px 1px 4px #888888 !important;
+	background-color: white !important;
 }
 
 #content {
@@ -397,15 +397,15 @@ input[type="checkbox"] ~ label {
 
 #itemImage {
 	/* overflow: hidden; */
-	height: 65px;
-	width: 65px;
+	height: 65px !important;
+	width: 65px !important;
 	justify-content: center;
 	margin: 0 auto;
 	top:6px;
 }
 #itemImage img {
-	/* width: 200%; */
-	height: 100%;
+	width: initial;
+	height: 100% !important;
 	/* position: absolute; */
 	/* left: -25px; */
 	/* display: inline-block; */
@@ -415,6 +415,7 @@ input[type="checkbox"] ~ label {
 	padding-right: 7px;
 }
 #itemName {
+	color: #337ab7 !important;
 	font-size: 1em;
 	font-weight: bold;
 	display: inline;
@@ -445,8 +446,8 @@ input[type="checkbox"] ~ label {
 	margin: 0px 0px 0px 0px;
 }
 #itemLocation {
-	font-size: 0.9em;
-	color:#616666;
+	font-size: 0.9em !important;
+	color:#616666 !important;
 	text-overflow: ellipsis;
 }
 /*SIMPLE ITEM END*/
@@ -605,7 +606,7 @@ input[type="checkbox"] ~ label {
 		visibility: visible;
 		overflow:visible;
 		background-color: white;
-		width:210mm;
+		width: 100%;
     }
     #divname {
         left: 0px;
@@ -613,29 +614,32 @@ input[type="checkbox"] ~ label {
 		position:absolute;
 		overflow:visible;
     }
-    p {
-		page-break-before: always;
-		page-break-after: always;
-	}
 	#overlay {
-		overflow: visible;
-		display:block;
-		height:100%;
+		overflow: visible !important;
+		display:block !important;
+		height:100% !important;
 	}
 	#root {
-		overflow: visible;
-		display:block;
-   		height:100%;
+		overflow: visible !important;
+		display:block !important;
+   		height:100% !important;
 
 	}
 	#printMapContainer {
-		position: absolute;
-		z-index: 0;
-		height: 50%;
+		position: absolute !important;
+		top: 140px !important;
+		z-index: 0 !important;
+		width: 100% !important;
+		height: 50% !important;
 	}
 	#printListItem {
-		position: relative;
-		top: 1000px;
+		position: relative !important;
+		top: 700px !important;
+		background-color: white !important;
+		width: 100% !important;
+	}
+	#tester {
+		color: red !important;
 	}
 }
 #divname {
@@ -677,4 +681,8 @@ input[type="checkbox"] ~ label {
 	position: relative;
 	top: 400px;
 	background-color: white;
+}
+
+#tester {
+	color: red;
 }

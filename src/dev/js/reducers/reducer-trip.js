@@ -92,7 +92,7 @@ export default function(state=initialState, action) {
             for (var i = 0; i < action.payload.data.length; i++) {
                 if (action.payload.data[i].type === "Animal") {
                     glossary[action.payload.data[i].title] = action.payload.data[i];
-                    searchBarSource.push(action.payload.data[i].title);
+                    searchBarSource.push({text: action.payload.data[i].title, type: "Animal"});
                 }
             }
             if (hash === "") {
@@ -120,7 +120,7 @@ export default function(state=initialState, action) {
             for (i = 0; i < action.payload.data.length; i++) {
                 if (action.payload.data[i].type === "Exhibit") {
                     glossary[action.payload.data[i].title] = action.payload.data[i];
-                    searchBarSource.push(action.payload.data[i].title);
+                    searchBarSource.push({text: action.payload.data[i].title, type: "Exhibit"});
                 }
             }
             if (hash === "") {
@@ -145,7 +145,7 @@ export default function(state=initialState, action) {
             for (i = 0; i < action.payload.length; i++) {
                 if (action.payload[i].type === "Restroom") {
                     glossary[action.payload[i].title] = action.payload[i];
-                    searchBarSource.push(action.payload[i].title);
+                    searchBarSource.push({text: action.payload[i].title, type: "Restroom"});
                 }
             }
             if (hash === "") {
@@ -174,7 +174,7 @@ export default function(state=initialState, action) {
             for (i = 0; i < action.payload.data.length; i++) {
                 if (action.payload.data[i].type === undefined) {
                     glossary[action.payload.data[i].eventID] = action.payload.data[i];
-                    searchBarSource.push(action.payload.data[i].title);
+                    searchBarSource.push({text: action.payload.data[i].title, type: "DailyProgram"});
                 }
             }
             if (hash === "") {
@@ -202,7 +202,7 @@ export default function(state=initialState, action) {
             for (i = 0; i < action.payload.data.length; i++) {
                 if (action.payload.data[i].type === "Attraction") {
                     glossary[action.payload.data[i].title] = action.payload.data[i];
-                    searchBarSource.push(action.payload.data[i].title);
+                    searchBarSource.push({text: action.payload.data[i].title, type: "Attraction"});
                 }
             }
             if (hash === "") {

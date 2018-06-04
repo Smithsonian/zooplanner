@@ -77,6 +77,7 @@ class MyDocument extends Component {
                     </div>
                     <div id="printListItem">
                         {listItem}
+                        <p id="tester">HIIII</p>
                     </div>
 					
                 </div>
@@ -85,20 +86,6 @@ class MyDocument extends Component {
         )
     }
   
-}
-
-class Example extends React.Component {
-    render() {
-        return (
-            <div>
-                <ReactToPrint
-                    trigger={() => <a href="#">Print this out!</a>}
-                    content={() => this.componentRef}
-                />
-                <MyDocument ref={el => (this.componentRef = el)} />
-            </div>
-        )
-    }
 }
 
 function mapStateToProps(state) {

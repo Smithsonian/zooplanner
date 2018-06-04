@@ -60,7 +60,7 @@ class Trip extends Component {
                         <p id='emptyTripText'>You have not added anything yet <br/><br/><br/> Need help planning?<br/> See pre-planned trips</p>
                     </div>
                 );   
-            } else if (this.props.trip.length == 1) {
+            } else if (this.props.trip.length === 1) {
                 let passedList = this.convertToArray(this.props.trip);
                 listItem = passedList.map((item) => {
                     item = item[1];
