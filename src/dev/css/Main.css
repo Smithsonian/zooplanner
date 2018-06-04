@@ -599,9 +599,15 @@ input[type="checkbox"] ~ label {
 
 /* document */
 @media print {
+	div{
+        page-break-inside: avoid !important;
+	}
     body {
 		visibility: hidden;
 		overflow:visible;
+	}
+	.simpleItem {
+		page-break-inside: avoid !important;
 	}
 	#printTrigger {
 		visibility: hidden;
