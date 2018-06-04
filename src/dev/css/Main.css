@@ -630,7 +630,7 @@ input[type="checkbox"] ~ label {
 		top: 140px !important;
 		z-index: 0 !important;
 		width: 100% !important;
-		height: 50% !important;
+		height: 30% !important;
 	}
 	#printListItem {
 		position: relative !important;
