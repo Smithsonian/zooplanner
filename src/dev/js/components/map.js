@@ -252,6 +252,7 @@ class MyMapComponent extends Component {
             }
             newTrip.unshift(this.props.trip[0]);
             newTrip.push(this.props.trip[this.props.trip.length - 1]);
+            console.log(newTrip, "From map")
             this.props.updateTrip(newTrip);
           } else {
             // console.error(`error fetching directions ${result}`);
@@ -346,7 +347,7 @@ class MyMapComponent extends Component {
         //actual APIkey: https://maps.googleapis.com/maps/api/js?key=AIzaSyC0DrCZRqF-G8hmIbh8_1Y6K71qub3uPhY
         return(
             <GoogleMapsWrapper
-                googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0DrCZRqF-G8hmIbh8_1Y6K71qub3uPhY"
+                googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places"
                 loadingElement={<div style={{ height: `100%` }} />}
                 containerElement={<div style={{ height: `100%` }} />}
                 mapElement={<div style={{ height: `100%` }} />}
