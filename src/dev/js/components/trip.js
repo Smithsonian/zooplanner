@@ -18,7 +18,7 @@ class Trip extends Component {
     
     convertToArray(object) {
 		var result = Object.keys(object).map(function(key) {
-			return [Number(key), object[key]];
+			return [Number(key), object[key]].filter(item => item !== undefined);
 		});
 		return result;
     }
@@ -46,7 +46,6 @@ class Trip extends Component {
     render() {
         var listItem = <p></p>
         var optimizeButton;
-        var snackBar;
         
         if (this.props.importAnimalsPending || this.props.importExhibitsPending) {
             listItem= (
@@ -168,7 +167,7 @@ class Trip extends Component {
                                     <div className="simpleItemShadow" /> // Custom placeholder element (optional), defaults to clone of dragged element
                                 }
                             >
-                                {passedList.filter(Boolean).map((item) => {
+                                {passedList.map((item) => {
                                     item = item[1];
                                     counter += 1;
                                     var itemLocation;

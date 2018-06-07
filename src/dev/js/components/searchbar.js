@@ -107,7 +107,7 @@ class SearchBar extends Component {
 function mapStateToProps(state) {
 	return {
         animalsImport: state.trip.animalsImport,
-        exhibitsImport: state.trip.exhibitImport,
+        exhibitsImport: state.trip.exhibitsImport,
         attractionsImport: state.trip.attractionsImport,
         dailyProgramsImport: state.trip.dailyProgramsImport,
         restroomsImport: state.restrooms.restrooms,
