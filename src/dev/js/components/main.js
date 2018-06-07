@@ -11,17 +11,17 @@ class Main extends Component { //called in App
 			<div id="content">
 		    	<div className='container-fluid'>
 			    	<div className='row'>
-			    		<aside className='col-sm' id='exploreBar'>
+			    		<div className='col-sm clearfix' id='exploreBar'>
 							<ExploreBar/>
-						</aside>
+						</div>
 
-						<div className='col-sm-7' id='mapContainer'>
+						<div className='col-sm-7 clearfix' id='mapContainer'>
 							<MyMapComponent />
 						</div>
 
-						<aside className='col-sm' id='tripBar'>
+						<div className='col-sm clearfix' id='tripBar'>
 							<TripBar getDate={this.props.getDate} getHours={this.props.getHours}/>
-						</aside>
+						</div>
 			    	</div> 
 			    </div>
 		    </div> 

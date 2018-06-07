@@ -246,17 +246,20 @@ class MyMapComponent extends Component {
             this.props.updateDistances(distances);
             this.props.updateDurations(durations);
 
-            var newTrip = [];
-            for (var i = 0; i < result.routes[0].waypoint_order.length; i++) {
-              newTrip[result.routes[0].waypoint_order[i]] = this.props.trip[i+1];
+            if (this.props.optimized) {
+              var newTrip = [];
+              for (var i = 0; i < result.routes[0].waypoint_order.length; i++) {
+                newTrip[result.routes[0].waypoint_order[i]] = this.props.trip[i+1];
+              }
+              newTrip.unshift(this.props.trip[0]);
+              newTrip.push(this.props.trip[this.props.trip.length - 1]);
+              this.props.updateTrip(newTrip);
             }
-            newTrip.unshift(this.props.trip[0]);
-            newTrip.push(this.props.trip[this.props.trip.length - 1]);
-            console.log(newTrip, "From map")
-            this.props.updateTrip(newTrip);
+            
           } else {
-            // console.error(`error fetching directions ${result}`);
+            console.error(`error fetching directions ${result}`);
             return;
+            
           }
         });
       }

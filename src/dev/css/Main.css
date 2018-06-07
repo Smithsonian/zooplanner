@@ -65,7 +65,7 @@ html, body {
 	z-index: 0;
 	overflow: auto;
 	overflow-x: hidden;
-	/* position: absolute; */
+	position: absolute;
 	bottom: 0;
 	max-height: 100%;
 	min-height: 100%;
@@ -114,12 +114,13 @@ html, body {
 }
 
 #mapContainer {
-	float: left;
-	height: auto;
-	top:0;
-	bottom: 0;
-	max-width: 100%;
-	max-height: 100%;
+	/* float: left; */
+	/* height: auto; */
+	/* top:0;
+	bottom: 0; */
+	/* max-width: 100%;
+	max-height: 100%; */
+	/* min-width: fit-content; */
 	min-height: 100%;
 	background-color: #CDD7E7;
 	padding: 0px;
@@ -565,7 +566,7 @@ input[type="checkbox"] ~ label {
 }
 #tripList {
 	height: 77vh;
-	max-width: 77vh;
+	max-width: inherit;
 	overflow: scroll;
 }
 .tripDistance {
