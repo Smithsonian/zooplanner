@@ -98,9 +98,10 @@ export default function(state=initialState, action) {
             if (hash === "") {
                 return [];
             } else {
-                for (var j = 0; j < tripFromHash.length; j++) {
+                for (var j = 0; j < tripFromHash.length; ) {
                     if (glossary[tripFromHash[j]] !== undefined) {
                         currTrip[j] = glossary[tripFromHash[j]];
+                        j++
                     }
                 }
             }
@@ -126,9 +127,10 @@ export default function(state=initialState, action) {
             if (hash === "") {
                 return [];
             } else {
-                for (j = 0; j < tripFromHash.length; j++) {
+                for (j = 0; j < tripFromHash.length; ) {
                     if (glossary[tripFromHash[j]] !== undefined) {
                         currTrip[j] = glossary[tripFromHash[j]];
+                        j++
                     }
                 }
             }
@@ -151,9 +153,10 @@ export default function(state=initialState, action) {
             if (hash === "") {
                 return [];
             } else {
-                for (j = 0; j < tripFromHash.length; j++) {
+                for (j = 0; j < tripFromHash.length; ) {
                     if (glossary[tripFromHash[j]] !== undefined) {
                         currTrip[j] = glossary[tripFromHash[j]];
+                        j++
                     }
                 }
             }
@@ -180,9 +183,10 @@ export default function(state=initialState, action) {
             if (hash === "") {
                 return [];
             } else {
-                for (j = 0; j < tripFromHash.length; j++) {
+                for (j = 0; j < tripFromHash.length; ) {
                     if (glossary[tripFromHash[j]] !== undefined) {
                         currTrip[j] = glossary[tripFromHash[j]];
+                        j++
                     }
                 }
             }
@@ -208,9 +212,10 @@ export default function(state=initialState, action) {
             if (hash === "") {
                 return [];
             } else {
-                for (j = 0; j < tripFromHash.length; j++) {
+                for (j = 0; j < tripFromHash.length; ) {
                     if (glossary[tripFromHash[j]] !== undefined) {
                         currTrip[j] = glossary[tripFromHash[j]];
+                        j++
                     }
                 }
             }
