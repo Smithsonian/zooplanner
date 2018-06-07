@@ -98,10 +98,11 @@ export default function(state=initialState, action) {
             if (hash === "") {
                 return [];
             } else {
-                for (var j = 0; j < tripFromHash.length; ) {
+                var k = 0;
+                for (var j = 0; j < tripFromHash.length; j++) {
                     if (glossary[tripFromHash[j]] !== undefined) {
-                        currTrip[j] = glossary[tripFromHash[j]];
-                        j++
+                        currTrip[k] = glossary[tripFromHash[j]];
+                        k++
                     }
                 }
             }
@@ -127,10 +128,11 @@ export default function(state=initialState, action) {
             if (hash === "") {
                 return [];
             } else {
-                for (j = 0; j < tripFromHash.length; ) {
+                k = 0;
+                for (j = 0; j < tripFromHash.length; j++) {
                     if (glossary[tripFromHash[j]] !== undefined) {
-                        currTrip[j] = glossary[tripFromHash[j]];
-                        j++
+                        currTrip[k] = glossary[tripFromHash[j]];
+                        k++
                     }
                 }
             }
@@ -153,10 +155,11 @@ export default function(state=initialState, action) {
             if (hash === "") {
                 return [];
             } else {
-                for (j = 0; j < tripFromHash.length; ) {
+                k = 0;
+                for (j = 0; j < tripFromHash.length; j++) {
                     if (glossary[tripFromHash[j]] !== undefined) {
-                        currTrip[j] = glossary[tripFromHash[j]];
-                        j++
+                        currTrip[k] = glossary[tripFromHash[j]];
+                        k++
                     }
                 }
             }
@@ -183,10 +186,11 @@ export default function(state=initialState, action) {
             if (hash === "") {
                 return [];
             } else {
-                for (j = 0; j < tripFromHash.length; ) {
+                k = 0;
+                for (j = 0; j < tripFromHash.length; j++) {
                     if (glossary[tripFromHash[j]] !== undefined) {
-                        currTrip[j] = glossary[tripFromHash[j]];
-                        j++
+                        currTrip[k] = glossary[tripFromHash[j]];
+                        k++
                     }
                 }
             }
@@ -212,10 +216,11 @@ export default function(state=initialState, action) {
             if (hash === "") {
                 return [];
             } else {
-                for (j = 0; j < tripFromHash.length; ) {
+                k = 0;
+                for (j = 0; j < tripFromHash.length; j++) {
                     if (glossary[tripFromHash[j]] !== undefined) {
-                        currTrip[j] = glossary[tripFromHash[j]];
-                        j++
+                        currTrip[k] = glossary[tripFromHash[j]];
+                        k++
                     }
                 }
             }
