@@ -550,6 +550,7 @@ input[type="checkbox"] ~ label {
 	height: 70px;
 	max-height: 500px;
 }
+
 #dateHoursText {
 	color: #27708F;
 	font-weight: bold;
@@ -566,12 +567,21 @@ input[type="checkbox"] ~ label {
 }
 #tripList {
 	height: 77vh;
-	max-width: inherit;
+	max-width: 80vh;
 	overflow: scroll;
 }
 .tripDistance {
 	margin: auto;
 	text-align: center;
+}
+#tripStats {
+	background-color: rgba(0, 0, 0, .075);
+	margin: 5px;
+	padding: 2px;
+	border-radius: 5px;
+	padding-bottom: 5px;
+	height: 70px;
+	max-height: 500px;
 }
 #finishTripBar {
 	margin:auto;

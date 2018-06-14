@@ -3,8 +3,6 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {setPage} from "../actions/AppActions"
 import MyMapComponent from "./map.js"
-import Trip from "./trip.js"
-import ReactToPrint from "react-to-print";
 
 
 class MyDocument extends Component {

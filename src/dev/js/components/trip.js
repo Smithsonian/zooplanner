@@ -35,6 +35,35 @@ class Trip extends Component {
         this.setState({snackBar: true});
     }
 
+    calculateDistance(distances) {
+        var total = 0;
+        var feet = 0;
+        var mi = 0;
+        for (var i = 0; i < distances.length; i++) {
+            if (distances[i].includes("mi")) {
+                mi += parseFloat(distances[i]);
+            } else if (distances[i].includes("ft")) {
+                feet += parseFloat(distances[i]);
+            }
+        }
+        feet += mi * 5280;
+        if (feet < 1000) {
+            total = feet + " feet"
+        } else {
+            total = (feet * 0.000189394).toFixed(3);
+            total += " mi";
+        }
+        return total;
+    }
+
+    calculateDuration(durations) {
+        var total = 0;
+        for (var i = 0; i < durations.length; i++) {
+            total += parseInt(durations[i]);
+        }
+        return total;
+    }
+
     componentDidUpdate(){
         if(this.props.trip.length === 2 && this.state.snackBar === false && this.props.optimized === false) {
             this.dragAlert();
@@ -46,6 +75,8 @@ class Trip extends Component {
     render() {
         var listItem = <p></p>
         var optimizeButton;
+        var totalDistance = this.calculateDistance(this.props.distances);
+        var totalDuration = this.calculateDuration(this.props.durations);
         
         if (this.props.importAnimalsPending || this.props.importExhibitsPending) {
             listItem= (
@@ -232,6 +263,9 @@ class Trip extends Component {
             <div id="tripList">
                 {optimizeButton}
                 {listItem}
+                <div className="row" id="tripStats">
+					<p id="dateHoursText">TOTAL DISTANCE: {totalDistance} <br/> TOTAL DURATION: {totalDuration} mins</p>
+				</div>
                 <Snackbar open={this.state.snackBar} message="You can now drag items in YOUR TRIP to reorder them" autoHideDuration={4000}/>
             </div>   
         )

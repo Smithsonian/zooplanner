@@ -237,6 +237,8 @@ class MyMapComponent extends Component {
               directions: result,
             });
             // DirectionsDisplay.setDirections(result);
+
+            console.log(result.routes[0], "Routes");
             var durations = [];
             var distances = [];
             for (var j = 0; j < result.routes[0].legs.length; j++) {
@@ -271,80 +273,87 @@ class MyMapComponent extends Component {
         let attractionsList = this.convertToArray(this.props.attractions);
         let restroomsList = this.props.restrooms;
 
-        const exhibitMarker = exhibitList.map((item) => {
-            return (
-                <Marker 
-                    key={item[1].title}
-                    position={{lat: this.parseCoords(item[1].coordinates)[0], lng: this.parseCoords(item[1].coordinates)[1]}}
-                    icon='https://www.google.com.au/maps/vt/icon/name=assets/icons/spotlight/spotlight_pin_v2_shadow-1-small.png,assets/icons/spotlight/spotlight_pin_v2-1-small.png,assets/icons/spotlight/spotlight_pin_v2_dot-1-small.png,assets/icons/spotlight/spotlight_pin_v2_accent-1-small.png&highlight=93FF95,C34D57,960a0a,ffffff&color=93FF95?scale=0.7'    
-                    onClick={() => this.showMapWindow(item[1].title)}
-                    zIndex={-100}
-                >
-                    {this.state.mapWindowState[item[1].title] && 
-                      <InfoWindow onCloseClick={() => this.showMapWindow(item[1].title)}>
-                        <div>
-                            <SimpleItem
-                                key = {item[1].title}
-                                name={item[1].title}
-                                img={item[1].image_small}
-                                location={item[1].exhibit_name}
-                                type={this.props.type}
-                                item={item[1]}/>
-                        </div>
-                    </InfoWindow>}
-                </Marker>
-            );
-        });
-
-        const attractionMarker = attractionsList.map((item) => {
-            return (
-                <Marker
-                    key={item[1].title}
-                    position={{lat: this.parseCoords(item[1].coordinates)[0], lng: this.parseCoords(item[1].coordinates)[1]}}
-                    icon='https://www.google.com.au/maps/vt/icon/name=assets/icons/spotlight/spotlight_pin_v2_shadow-1-small.png,assets/icons/spotlight/spotlight_pin_v2-1-small.png,assets/icons/spotlight/spotlight_pin_v2_dot-1-small.png,assets/icons/spotlight/spotlight_pin_v2_accent-1-small.png&highlight=93FF95,F18B30,960a0a,ffffff&color=93FF95?scale=0.7'
-                    onClick={() => this.showMapWindow(item[1].title)}
-                    zIndex={-1}
-                >
-                    {this.state.mapWindowState[item[1].title] && 
-                      <InfoWindow onCloseClick={() => this.showMapWindow(item[1].title)}>
-                        <div>
-                            <SimpleItem
-                                key = {item[1].title}
-                                name={item[1].title}
-                                img={item[1].image_small}
-                                location={item[1].exhibit_name}
-                                type={this.props.type}
-                                item={item[1]}/>
-                        </div>
-                    </InfoWindow>}
-                </Marker>
-            );
-        });
-
-        const restroomMarker = restroomsList.map((item) => {
-            return (
-                <Marker
-                    key={item.title}
-                    position={{lat: this.parseCoords(item.coordinates)[0], lng: this.parseCoords(item.coordinates)[1]}}
-                    icon='https://www.google.com.au/maps/vt/icon/name=assets/icons/spotlight/spotlight_pin_v2_shadow-1-small.png,assets/icons/spotlight/spotlight_pin_v2-1-small.png,assets/icons/spotlight/spotlight_pin_v2_dot-1-small.png,assets/icons/spotlight/spotlight_pin_v2_accent-1-small.png&highlight=93FF95,617D9B,3E5066,ffffff&color=93FF95?scale=0.7'
-                    onClick={() => this.showMapWindow(item.title)}
-                    zIndex={-1}
-                >
-                  {this.state.mapWindowState[item.title] && 
-                    <InfoWindow onCloseClick={() => this.showMapWindow(item.title)}>
-                        <div>
-                            <SimpleItem
-                                key = {item.title}
-                                name={item.title}
-                                img={item.image}
-                                location={item.exhibit_name}
-                                type={this.props.type}
-                                item={item}/>
-                        </div>
-                    </InfoWindow>}
-                </Marker>
-            );
-        });
+        var exhibitMarker;
+        var attractionMarker;
+        var restroomMarker;
+        if ((this.props.exhibitsChecked === false && this.props.attractionsChecked === false && this.props.restroomsChecked === false) || this.props.exhibitsChecked === true) {
+          exhibitMarker = exhibitList.map((item) => {
+              return (
+                  <Marker 
+                      key={item[1].title}
+                      position={{lat: this.parseCoords(item[1].coordinates)[0], lng: this.parseCoords(item[1].coordinates)[1]}}
+                      icon='https://www.google.com.au/maps/vt/icon/name=assets/icons/spotlight/spotlight_pin_v2_shadow-1-small.png,assets/icons/spotlight/spotlight_pin_v2-1-small.png,assets/icons/spotlight/spotlight_pin_v2_dot-1-small.png,assets/icons/spotlight/spotlight_pin_v2_accent-1-small.png&highlight=93FF95,C34D57,960a0a,ffffff&color=93FF95?scale=0.7'    
+                      onClick={() => this.showMapWindow(item[1].title)}
+                      zIndex={-100}
+                  >
+                      {this.state.mapWindowState[item[1].title] && 
+                        <InfoWindow onCloseClick={() => this.showMapWindow(item[1].title)}>
+                          <div>
+                              <SimpleItem
+                                  key = {item[1].title}
+                                  name={item[1].title}
+                                  img={item[1].image_small}
+                                  location={item[1].exhibit_name}
+                                  type={this.props.type}
+                                  item={item[1]}/>
+                          </div>
+                      </InfoWindow>}
+                  </Marker>
+              );
+          });
+        }
+        if ((this.props.exhibitsChecked === false && this.props.attractionsChecked === false && this.props.restroomsChecked === false) || this.props.attractionsChecked === true) {
+          attractionMarker = attractionsList.map((item) => {
+              return (
+                  <Marker
+                      key={item[1].title}
+                      position={{lat: this.parseCoords(item[1].coordinates)[0], lng: this.parseCoords(item[1].coordinates)[1]}}
+                      icon='https://www.google.com.au/maps/vt/icon/name=assets/icons/spotlight/spotlight_pin_v2_shadow-1-small.png,assets/icons/spotlight/spotlight_pin_v2-1-small.png,assets/icons/spotlight/spotlight_pin_v2_dot-1-small.png,assets/icons/spotlight/spotlight_pin_v2_accent-1-small.png&highlight=93FF95,F18B30,960a0a,ffffff&color=93FF95?scale=0.7'
+                      onClick={() => this.showMapWindow(item[1].title)}
+                      zIndex={-1}
+                  >
+                      {this.state.mapWindowState[item[1].title] && 
+                        <InfoWindow onCloseClick={() => this.showMapWindow(item[1].title)}>
+                          <div>
+                              <SimpleItem
+                                  key = {item[1].title}
+                                  name={item[1].title}
+                                  img={item[1].image_small}
+                                  location={item[1].exhibit_name}
+                                  type={this.props.type}
+                                  item={item[1]}/>
+                          </div>
+                      </InfoWindow>}
+                  </Marker>
+              );
+          });
+        }
+        if ((this.props.exhibitsChecked === false && this.props.attractionsChecked === false && this.props.restroomsChecked === false) || this.props.restroomsChecked === true) {
+          restroomMarker = restroomsList.map((item) => {
+              return (
+                  <Marker
+                      key={item.title}
+                      position={{lat: this.parseCoords(item.coordinates)[0], lng: this.parseCoords(item.coordinates)[1]}}
+                      icon='https://www.google.com.au/maps/vt/icon/name=assets/icons/spotlight/spotlight_pin_v2_shadow-1-small.png,assets/icons/spotlight/spotlight_pin_v2-1-small.png,assets/icons/spotlight/spotlight_pin_v2_dot-1-small.png,assets/icons/spotlight/spotlight_pin_v2_accent-1-small.png&highlight=93FF95,617D9B,3E5066,ffffff&color=93FF95?scale=0.7'
+                      onClick={() => this.showMapWindow(item.title)}
+                      zIndex={-1}
+                  >
+                    {this.state.mapWindowState[item.title] && 
+                      <InfoWindow onCloseClick={() => this.showMapWindow(item.title)}>
+                          <div>
+                              <SimpleItem
+                                  key = {item.title}
+                                  name={item.title}
+                                  img={item.image}
+                                  location={item.exhibit_name}
+                                  type={this.props.type}
+                                  item={item}/>
+                          </div>
+                      </InfoWindow>}
+                  </Marker>
+              );
+          });
+        }
       
         //google maps link to use when in development https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places
         //actual APIkey: https://maps.googleapis.com/maps/api/js?key=AIzaSyC0DrCZRqF-G8hmIbh8_1Y6K71qub3uPhY
@@ -371,12 +380,15 @@ class MyMapComponent extends Component {
 function mapStateToProps(state) {
 	return {
 		animals: state.animals.animals,
-		animalsFetched: state.animals.fetched,
+    animalsFetched: state.animals.fetched,
 		exhibits: state.exhibits.exhibits,
-		exhibitsFetched: state.exhibits.fetched,
+    exhibitsFetched: state.exhibits.fetched,
+    exhibitsChecked: state.filters.exhibits,
 		attractions: state.attractions.attractions,
     attractionsFetched: state.attractions.fetched,
+    attractionsChecked: state.filters.attractions,
     restrooms: state.restrooms.restrooms,
+    restroomsChecked: state.filters.restrooms,
     trip: state.trip.trip,
     optimized: state.trip.optimized,
 	};
