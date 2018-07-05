@@ -75,6 +75,7 @@ class Trip extends Component {
     render() {
         var listItem = <p></p>
         var optimizeButton;
+        var tripStats;
         var totalDistance = this.calculateDistance(this.props.distances);
         var totalDuration = this.calculateDuration(this.props.durations);
         
@@ -150,6 +151,9 @@ class Trip extends Component {
                 //                     </div>
                 //     }
                 // }
+                tripStats = <div className="row" id="tripStats">
+                <p id="dateHoursText">TOTAL DISTANCE: {totalDistance} <br/> TOTAL DURATION: {totalDuration} mins</p>
+            </div>
                 const styles = {
                     block: {
                       maxWidth: 200,
@@ -263,9 +267,7 @@ class Trip extends Component {
             <div id="tripList">
                 {optimizeButton}
                 {listItem}
-                <div className="row" id="tripStats">
-					<p id="dateHoursText">TOTAL DISTANCE: {totalDistance} <br/> TOTAL DURATION: {totalDuration} mins</p>
-				</div>
+                {tripStats}
                 <Snackbar open={this.state.snackBar} message="You can now drag items in YOUR TRIP to reorder them" autoHideDuration={4000}/>
             </div>   
         )

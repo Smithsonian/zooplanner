@@ -40,7 +40,6 @@ function stateToString(newTrip) {
 function stringToArr() {
     var currTrip = [];
     var hash = window.location.hash.substring(23);
-    console.log(hash, "HASHH");
     hash = hash.split("&&");
     for (var i = 1; i < hash.length - 1; i++) {
         currTrip[i-1] = hash[i].replace(/%20/g, " ")

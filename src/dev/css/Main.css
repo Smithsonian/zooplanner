@@ -571,15 +571,15 @@ input[type="checkbox"] ~ label {
 	overflow: scroll;
 }
 .tripDistance {
-	margin: auto;
-	text-align: center;
+	margin: auto !important;
+	text-align: center !important;
 }
 #tripStats {
 	background-color: rgba(0, 0, 0, .075);
 	margin: 5px;
+	margin-top: 8px;
 	padding: 2px;
 	border-radius: 5px;
-	padding-bottom: 5px;
 	height: 70px;
 	max-height: 500px;
 }

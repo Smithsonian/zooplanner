@@ -13,9 +13,42 @@ class MyDocument extends Component {
 		return result;
     }
 
+    calculateDistance(distances) {
+        var total = 0;
+        var feet = 0;
+        var mi = 0;
+        for (var i = 0; i < distances.length; i++) {
+            if (distances[i].includes("mi")) {
+                mi += parseFloat(distances[i]);
+            } else if (distances[i].includes("ft")) {
+                feet += parseFloat(distances[i]);
+            }
+        }
+        feet += mi * 5280;
+        if (feet < 1000) {
+            total = feet + " feet"
+        } else {
+            total = (feet * 0.000189394).toFixed(3);
+            total += " mi";
+        }
+        return total;
+    }
+
+    calculateDuration(durations) {
+        var total = 0;
+        for (var i = 0; i < durations.length; i++) {
+            total += parseInt(durations[i]);
+        }
+        return total;
+    }
+
     render() {
+        var counter = -1;
+        var totalDistance = this.calculateDistance(this.props.distances);
+        var totalDuration = this.calculateDuration(this.props.durations);
         let passedList = this.convertToArray(this.props.trip);
         var listItem = passedList.map((item) => {
+            counter += 1;
             item = item[1];
             var itemLocation;
             if (item.exhibit_name == null) {
@@ -41,22 +74,39 @@ class MyDocument extends Component {
                     image = "https://farm1.staticflickr.com/956/27940952588_0296bce9a3_m.jpg"
                     break;
                 } default: break;
-            }        
+            }
+            var distance = <div></div>
+            if (counter < this.props.distances.length) {
+                distance = <div className="tripDistance">
+                                <i class="material-icons md-18">directions_walk</i> &nbsp;
+                                {this.props.distances[counter]}
+                                &nbsp;&nbsp;&nbsp;
+                                <i class="material-icons md-18">access_time</i> &nbsp;
+                                {this.props.durations[counter]}
+                            </div>
+            }
             return (
-                <div className='simpleItem' key={item.title}>
-                    <div className="row">
-                        <div className="col-3" id="itemImage">
-                            <a href={window.location.hash} alt={item.title}><img alt={item.title} src={image}/></a>
-                        </div>
-                        <div className='col-8' id="itemInfo">
-                            <a id='itemName' alt={item.title} href={window.location.hash} title={item.title}>{item.title.replace(/&#039;/g, "'")}</a>
-                            <br/>
-                            {itemLocation}
+                <div>
+                    <div className='simpleItem' key={item.title}>
+                        <div className="row">
+                            <div className="col-3" id="itemImage">
+                                <a href={window.location.hash} alt={item.title}><img alt={item.title} src={image}/></a>
+                            </div>
+                            <div className='col-8' id="itemInfo">
+                                <a id='itemName' alt={item.title} href={window.location.hash} title={item.title}>{item.title.replace(/&#039;/g, "'")}</a>
+                                <br/>
+                                {itemLocation}
+                            </div>
                         </div>
                     </div>
+                    {distance}
                 </div>
             )
         });
+
+        var tripStats = <div className="row" id="tripStats">
+                                <p id="dateHoursText">TOTAL DISTANCE: {totalDistance} <br/> TOTAL DURATION: {totalDuration} mins</p>
+                            </div>        
 
         return (
             <div> 
@@ -74,6 +124,7 @@ class MyDocument extends Component {
                         <MyMapComponent/>
                     </div>
                     <div id="printListItem">
+                        {tripStats}
                         {listItem}
                     </div>
 					
@@ -93,6 +144,8 @@ function mapStateToProps(state) {
         dailyProgramsImport: state.trip.dailyProgramsImport,
         trip: state.trip.trip,
         source: state.trip.searchBarSource,
+        distances: state.trip.waypointDistances,
+        durations: state.trip.waypointDurations,
 	};
 }
 function matchDispatchToProps(dispatch) {

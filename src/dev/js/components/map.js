@@ -268,7 +268,8 @@ class MyMapComponent extends Component {
     }
 
     render() {
-
+      
+      if (this.props.page !== "document") {
         let exhibitList = this.convertToArray(this.props.exhibits);
         let attractionsList = this.convertToArray(this.props.attractions);
         let restroomsList = this.props.restrooms;
@@ -354,12 +355,13 @@ class MyMapComponent extends Component {
               );
           });
         }
+      }
       
         //google maps link to use when in development https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places
         //actual APIkey: https://maps.googleapis.com/maps/api/js?key=AIzaSyC0DrCZRqF-G8hmIbh8_1Y6K71qub3uPhY
         return(
             <GoogleMapsWrapper
-                googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0DrCZRqF-G8hmIbh8_1Y6K71qub3uPhY"
+                googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places"
                 loadingElement={<div style={{ height: `100%` }} />}
                 containerElement={<div style={{ height: `100%` }} />}
                 mapElement={<div style={{ height: `100%` }} />}
@@ -379,6 +381,7 @@ class MyMapComponent extends Component {
 
 function mapStateToProps(state) {
 	return {
+    page: state.App.page,
 		animals: state.animals.animals,
     animalsFetched: state.animals.fetched,
 		exhibits: state.exhibits.exhibits,
