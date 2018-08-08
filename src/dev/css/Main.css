@@ -382,6 +382,18 @@ input[type="checkbox"] ~ label {
 	background-color: #FFFFFF;
 	cursor: move;
 }
+.itemPin {
+	float: right;
+	margin-right: 13px;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	border-radius: 18px;
+	background-color: #FC0016;
+	color: #FFFFFF;
+}
 
 .simpleItemShadow {
 	height: 80px;

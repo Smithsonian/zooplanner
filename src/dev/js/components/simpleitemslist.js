@@ -33,6 +33,7 @@ class SimpleItemsList extends Component { //called in categories
 							img={item[1].image_small}
 							imgLrg={item[1].image_large}
 							location={item[1].exhibit_name}
+							coordinates={item[1].location[0]}
 							type={this.props.type}
 							item={item[1]}/>
 					);

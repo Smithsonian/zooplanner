@@ -105,8 +105,8 @@ class MyDocument extends Component {
         });
 
         var tripStats = <div className="row" id="tripStats">
-                                <p id="dateHoursText">TOTAL DISTANCE: {totalDistance} <br/> TOTAL DURATION: {totalDuration} mins</p>
-                            </div>        
+                            <p id="dateHoursText">TOTAL DISTANCE: {totalDistance} <br/> TOTAL DURATION: {totalDuration} mins</p>
+                        </div>        
 
         return (
             <div> 
