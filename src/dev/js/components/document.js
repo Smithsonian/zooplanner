@@ -42,11 +42,60 @@ class MyDocument extends Component {
         return total;
     }
 
+    retrieveAlphabet(index) {
+        switch (index) {
+            case 1: {return "A"}
+            case 2: {return "B"}
+            case 3: {return "C"}
+            case 4: {return "D"}
+            case 5: {return "E"}
+            case 6: {return "F"}
+            case 7: {return "G"}
+            case 8: {return "H"}
+            case 9: {return "I"}
+            case 10: {return "J"}
+            case 11: {return "K"}
+            case 12: {return "L"}
+            case 13: {return "M"}
+            case 14: {return "N"}
+            case 15: {return "O"}
+            case 16: {return "P"}
+            case 17: {return "Q"}
+            case 18: {return "R"}
+            case 19: {return "S"}
+            case 20: {return "T"}
+            case 21: {return "U"}
+            case 22: {return "V"}
+            case 23: {return "W"}
+            case 24: {return "X"}
+            case 25: {return "Y"}
+            case 26: {return "Z"}
+        }
+    }
+
     render() {
         var counter = -1;
         var totalDistance = this.calculateDistance(this.props.distances);
         var totalDuration = this.calculateDuration(this.props.durations);
+        var tripToAlphabet = {}
+        var alphabetCounter = 1;
+
         let passedList = this.convertToArray(this.props.trip);
+
+        passedList.forEach((item) => {
+            var coordinates;
+            item = item[1];
+            if (item.type == "Animal") {
+                coordinates = item.location[0];
+            } else {
+                coordinates = item.coordinates.replace(/\s+/g, '');
+            }
+            const letter = this.retrieveAlphabet(alphabetCounter);
+            tripToAlphabet[coordinates] = letter;
+            alphabetCounter += 1;
+            console.log("trip to Alphabet:", tripToAlphabet);
+        })
+
         var listItem = passedList.map((item) => {
             counter += 1;
             item = item[1];
@@ -56,6 +105,14 @@ class MyDocument extends Component {
             } else {
                 itemLocation = <p id="itemLocation">{item.exhibit_name.replace(/&#039;/g, "'")}</p>
             }
+            
+            var coordinates;
+            if (item.type == "Animal") {
+                coordinates = item.location[0];
+            } else {
+                coordinates = item.coordinates.replace(/\s+/g, '');
+            }
+
             var image;
             switch (item.type) { //to change image variable
                 case "Exhibit": {
@@ -96,6 +153,7 @@ class MyDocument extends Component {
                                 <a id='itemName' alt={item.title} href={window.location.hash} title={item.title}>{item.title.replace(/&#039;/g, "'")}</a>
                                 <br/>
                                 {itemLocation}
+                                <div className="itemPin">{tripToAlphabet[coordinates]}</div>
                             </div>
                         </div>
                     </div>

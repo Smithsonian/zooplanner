@@ -220,11 +220,8 @@ class MyMapComponent extends Component {
           }
         }
 
-
-        const DirectionsDisplay = new google.maps.DirectionsRenderer();
         const DirectionsService = new google.maps.DirectionsService();
-        
-
+      
         DirectionsService.route({
           origin: start,
           destination: end,
@@ -236,7 +233,6 @@ class MyMapComponent extends Component {
             this.setState({
               directions: result,
             });
-            // DirectionsDisplay.setDirections(result);
 
             console.log(result.routes[0], "Routes");
             var durations = [];
@@ -273,12 +269,25 @@ class MyMapComponent extends Component {
         let exhibitList = this.convertToArray(this.props.exhibits);
         let attractionsList = this.convertToArray(this.props.attractions);
         let restroomsList = this.props.restrooms;
+        let tripList = this.convertToArray(this.props.trip);
+
+        var tripListWithAnimals = []
+        tripList.map((tripItem) => {
+          tripListWithAnimals.push(tripItem[1].title);
+          if (tripItem[1].type === "Animal") {
+            tripListWithAnimals.push(tripItem[1].exhibit_name)
+          }
+        });
 
         var exhibitMarker;
         var attractionMarker;
         var restroomMarker;
+
         if ((this.props.exhibitsChecked === false && this.props.attractionsChecked === false && this.props.restroomsChecked === false) || this.props.exhibitsChecked === true) {
           exhibitMarker = exhibitList.map((item) => {
+            if (tripListWithAnimals.includes(item[1].title)) {
+              return <p key={item[1].title}></p>
+            } else {
               return (
                   <Marker 
                       key={item[1].title}
@@ -301,10 +310,14 @@ class MyMapComponent extends Component {
                       </InfoWindow>}
                   </Marker>
               );
+            }
           });
         }
         if ((this.props.exhibitsChecked === false && this.props.attractionsChecked === false && this.props.restroomsChecked === false) || this.props.attractionsChecked === true) {
           attractionMarker = attractionsList.map((item) => {
+            if (this.props.tripFromHash.includes(item[1].title)) {
+              return <p key={item[1].title}></p>
+            } else {
               return (
                   <Marker
                       key={item[1].title}
@@ -324,13 +337,17 @@ class MyMapComponent extends Component {
                                   type={this.props.type}
                                   item={item[1]}/>
                           </div>
-                      </InfoWindow>}
+                        </InfoWindow>}
                   </Marker>
               );
+            }
           });
         }
         if ((this.props.exhibitsChecked === false && this.props.attractionsChecked === false && this.props.restroomsChecked === false) || this.props.restroomsChecked === true) {
           restroomMarker = restroomsList.map((item) => {
+            if (this.props.tripFromHash.includes(item.title)) {
+              return <p key={item.title}></p>
+            } else {
               return (
                   <Marker
                       key={item.title}
@@ -353,6 +370,7 @@ class MyMapComponent extends Component {
                       </InfoWindow>}
                   </Marker>
               );
+            }
           });
         }
       }
@@ -371,7 +389,7 @@ class MyMapComponent extends Component {
                 {exhibitMarker}
                 {attractionMarker}
                 {restroomMarker}
-                <DirectionsRenderer directions={this.state.directions}/>
+                <DirectionsRenderer directions={this.state.directions} />
             </GoogleMapsWrapper>
 
         )
@@ -393,6 +411,7 @@ function mapStateToProps(state) {
     restrooms: state.restrooms.restrooms,
     restroomsChecked: state.filters.restrooms,
     trip: state.trip.trip,
+    tripFromHash: state.trip.tripFromHash,
     optimized: state.trip.optimized,
 	};
 }

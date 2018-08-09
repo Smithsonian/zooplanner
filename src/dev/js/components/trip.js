@@ -237,7 +237,6 @@ class Trip extends Component {
                     const letter = this.retrieveAlphabet(alphabetCounter);
                     tripToAlphabet[coordinates] = letter;
                     alphabetCounter += 1;
-                    console.log("trip to Alphabet:", tripToAlphabet);
                 })
 
                 var counter = -1;
