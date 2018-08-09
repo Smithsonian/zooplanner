@@ -315,7 +315,7 @@ class MyMapComponent extends Component {
         }
         if ((this.props.exhibitsChecked === false && this.props.attractionsChecked === false && this.props.restroomsChecked === false) || this.props.attractionsChecked === true) {
           attractionMarker = attractionsList.map((item) => {
-            if (this.props.tripFromHash.includes(item[1].title)) {
+            if (tripListWithAnimals.includes(item[1].title)) {
               return <p key={item[1].title}></p>
             } else {
               return (
@@ -345,7 +345,7 @@ class MyMapComponent extends Component {
         }
         if ((this.props.exhibitsChecked === false && this.props.attractionsChecked === false && this.props.restroomsChecked === false) || this.props.restroomsChecked === true) {
           restroomMarker = restroomsList.map((item) => {
-            if (this.props.tripFromHash.includes(item.title)) {
+            if (tripListWithAnimals.includes(item.title)) {
               return <p key={item.title}></p>
             } else {
               return (
@@ -374,6 +374,14 @@ class MyMapComponent extends Component {
           });
         }
       }
+
+      var directionsRenderer;
+      if (this.props.trip.length < 2) {
+        directionsRenderer = null;
+      } else {
+        directionsRenderer = <DirectionsRenderer directions={this.state.directions} />
+      }
+      
       
         //google maps link to use when in development https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places
         //actual APIkey: https://maps.googleapis.com/maps/api/js?key=AIzaSyC0DrCZRqF-G8hmIbh8_1Y6K71qub3uPhY
@@ -389,7 +397,8 @@ class MyMapComponent extends Component {
                 {exhibitMarker}
                 {attractionMarker}
                 {restroomMarker}
-                <DirectionsRenderer directions={this.state.directions} />
+
+                {directionsRenderer}
             </GoogleMapsWrapper>
 
         )
